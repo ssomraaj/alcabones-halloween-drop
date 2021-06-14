@@ -1,23 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
+import WebFont from "webfontloader";
 
-function App() {
-	return (
-		<div className="App">
-			<header className="App-header">
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
-	);
+import { AppLoader } from "./components/loaders";
+import { Routes } from "./routes";
+export default class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			rendered: false,
+		};
+	}
+
+	componentDidMount() {
+		WebFont.load({
+			custom: {
+				families: ["primary", "medium", "bold"],
+				urls: ["./index.css"],
+			},
+			active: () => this.setState({ rendered: true }),
+			inactive: () => this.setState({ rendered: true }),
+		});
+	}
+
+	render() {
+		const { rendered } = this.state;
+
+		if (!rendered) {
+			<AppLoader />;
+		}
+
+		return <Routes />;
+	}
 }
-
-export default App;
