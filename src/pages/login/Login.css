@@ -1,0 +1,159 @@
+.login-container {
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	align-items: flex-start;
+	height: 100vh;
+}
+
+.login-graphic {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	background: transparent url("../../assets/images/login-bg.png") no-repeat center center;
+	background-size: cover;
+}
+
+.login-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 1rem;
+}
+
+.login-footer .links {
+	font-size: 15px;
+	letter-spacing: 0.6px;
+	color: #817a61;
+	margin-right: 3rem;
+}
+
+.login-footer .links a {
+	color: #706952;
+	transition: 0.3s all ease;
+}
+
+.login-footer .socials a {
+	transition: 0.3s all ease;
+}
+
+.login-footer .socials svg {
+	margin-top: 0.5rem;
+}
+
+.login-footer .socials a:not(:last-child) {
+	margin-right: 1.25rem;
+}
+
+.login-footer .links a:hover,
+.login-footer .links a:focus,
+.login-footer .socials a:hover,
+.login-footer .socials a:focus {
+	opacity: 0.7;
+}
+
+.login-actions {
+	background-color: #fff;
+	width: 50%;
+	padding: 70px 50px 1rem 50px;
+}
+
+.actions-header {
+	margin-left: -1rem;
+}
+
+.actions-header > span {
+	position: relative;
+	top: 1.5px;
+	font-size: 15px;
+	padding-left: 5px;
+}
+
+.login-actions > h1 {
+	font-family: "primary", sans-serif;
+	color: var(--primary);
+	font-size: 4rem;
+	margin: -0.5rem 0 0.5rem;
+}
+
+.login-actions > p {
+	font-size: 15px;
+}
+
+.connect-buttons-grid {
+	max-width: 500px;
+	width: 100%;
+	padding: 1.25rem 1rem;
+	display: grid;
+	grid-auto-rows: auto;
+	row-gap: 21px;
+	transition: 0.3s all ease;
+}
+
+.actions-footer {
+	margin-top: 1.5rem;
+	text-align: center;
+	font-size: 15px;
+}
+
+.actions-footer p {
+	margin-bottom: 0;
+}
+
+.actions-footer a {
+	color: #000;
+	text-decoration: underline;
+	transition: 0.3s all ease;
+}
+
+.actions-footer a:hover,
+.actions-footer a:focus {
+	opacity: 0.6;
+}
+
+@media only screen and (max-width: 1145px) {
+	.login-footer {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.login-footer .links {
+		margin-right: 0;
+		margin-bottom: 0.5rem;
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.connect-buttons-grid {
+		padding: 1rem 0;
+	}
+}
+
+@media only screen and (max-width: 960px) {
+	.login-container {
+		flex-direction: column-reverse;
+		height: auto;
+	}
+
+	.login-graphic,
+	.login-actions {
+		width: 100%;
+	}
+
+	.login-graphic {
+		height: 600px;
+		background-size: cover;
+	}
+
+	.login-actions > h1,
+	.login-actions > p {
+		text-align: center;
+	}
+
+	.connect-buttons-grid {
+		margin: auto;
+	}
+}
