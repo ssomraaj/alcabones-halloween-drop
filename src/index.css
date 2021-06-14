@@ -13,6 +13,10 @@
 	src: url(./assets/fonts/MarkOT-Heavy.ttf);
 }
 
+:root {
+	--primary: #134670;
+}
+
 body {
 	margin: 0;
 	font-family: "medium", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
