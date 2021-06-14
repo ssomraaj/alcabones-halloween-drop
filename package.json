@@ -57,6 +57,6 @@
 		"prettier": "^2.3.1"
 	},
 	"lint-staged": {
-		"*.{js,css,md}": "prettier --write"
+		"*.{html,jsx,js,css,md}": "prettier --write"
 	}
 }
