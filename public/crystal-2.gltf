@@ -1,0 +1,271 @@
+{
+	"asset": {
+		"copyright": "2020 (c) Adobe Inc.",
+		"generator": "Adobe Dimension - 20b96ed1944f99fd310aada6a21defae413bc238",
+		"version": "2.0",
+		"extensions": {
+			"KHR_xmp": {
+				"packet": 0
+			}
+		}
+	},
+	"accessors": [
+		{
+			"bufferView": 0,
+			"componentType": 5126,
+			"count": 60,
+			"type": "VEC3",
+			"max": [0.07198082655668259, 0.16032880544662476, 0.0923069566488266],
+			"min": [-0.06519961357116699, 0.0, -0.02638222835958004]
+		},
+		{
+			"bufferView": 1,
+			"componentType": 5126,
+			"count": 60,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"componentType": 5126,
+			"count": 60,
+			"type": "VEC2"
+		},
+		{
+			"bufferView": 3,
+			"componentType": 5125,
+			"count": 60,
+			"type": "SCALAR",
+			"max": [59.0],
+			"min": [0.0]
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteOffset": 0,
+			"byteLength": 720,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 720,
+			"byteLength": 720,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 1440,
+			"byteLength": 480,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 1920,
+			"byteLength": 240,
+			"target": 34963
+		}
+	],
+	"buffers": [
+		{
+			"byteLength": 2160,
+			"uri": "crystal-2-binary.bin"
+		}
+	],
+	"cameras": [
+		{
+			"perspective": {
+				"znear": 0.000010000000656873454,
+				"yfov": 0.45782235264778139,
+				"zfar": 2.0,
+				"aspectRatio": 1.7777777910232545
+			},
+			"type": "perspective",
+			"name": "render_camera"
+		},
+		{
+			"perspective": {
+				"znear": 0.000010000000656873454,
+				"yfov": 0.45782235264778139,
+				"zfar": 2.0,
+				"aspectRatio": 1.7777777910232545
+			},
+			"type": "perspective",
+			"name": "render_camera4"
+		},
+		{
+			"perspective": {
+				"znear": 0.000010000000656873454,
+				"yfov": 0.45782235264778139,
+				"zfar": 2.0,
+				"aspectRatio": 1.7777777910232545
+			},
+			"type": "perspective",
+			"name": "render_camera5"
+		},
+		{
+			"perspective": {
+				"znear": 0.000010000000656873454,
+				"yfov": 0.45782235264778139,
+				"zfar": 2.0,
+				"aspectRatio": 1.7777777910232545
+			},
+			"type": "perspective",
+			"name": "render_camera6"
+		},
+		{
+			"perspective": {
+				"znear": 0.000010000000656873454,
+				"yfov": 0.45782235264778139,
+				"zfar": 2.0,
+				"aspectRatio": 1.7777777910232545
+			},
+			"type": "perspective",
+			"name": "render_camera7"
+		},
+		{
+			"perspective": {
+				"znear": 0.000010000000656873454,
+				"yfov": 0.45782235264778139,
+				"zfar": 2.0,
+				"aspectRatio": 1.7777777910232545
+			},
+			"type": "perspective",
+			"name": "render_camera9"
+		}
+	],
+	"images": [
+		{
+			"name": "pexels-scott-webb-430207",
+			"uri": "graphic-2.jpg",
+			"mimeType": "image/jpeg"
+		}
+	],
+	"materials": [
+		{
+			"pbrMetallicRoughness": {
+				"baseColorTexture": {
+					"index": 0
+				},
+				"roughnessFactor": 0.0
+			},
+			"emissiveTexture": {
+				"index": 0
+			},
+			"emissiveFactor": [0.05000000074505806, 0.05000000074505806, 0.05000000074505806],
+			"name": "Metal",
+			"doubleSided": true
+		}
+	],
+	"meshes": [
+		{
+			"name": "Crystal",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"TEXCOORD_0": 2
+					},
+					"indices": 3,
+					"material": 0
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"translation": [0.05888114497065544, 0.23271968960762025, 0.512371838092804],
+			"rotation": [
+				-0.0854974016547203, 0.07692546397447586, 0.0066210245713591579, 0.9933422803878784
+			],
+			"scale": [1.0, 0.9999999403953552, 1.0],
+			"camera": 0,
+			"name": "render_camera_n3d"
+		},
+		{
+			"translation": [-0.03423338755965233, 0.07438810914754868, -0.02866951934993267],
+			"rotation": [
+				-0.06042005121707916, -0.2254907488822937, -0.25166797637939455, 0.9392372369766235
+			],
+			"scale": [0.7772324085235596, 0.7772330045700073, 0.7772319912910461],
+			"mesh": 0,
+			"name": "Crystal"
+		},
+		{
+			"translation": [0.2153383046388626, 0.28121060132980349, 0.5027694702148438],
+			"rotation": [
+				-0.12018705904483795, 0.21389459073543549, 0.026527831330895425, 0.9690719246864319
+			],
+			"scale": [0.9999999403953552, 1.0, 0.9999999403953552],
+			"camera": 1,
+			"name": "View 2"
+		},
+		{
+			"translation": [0.2052094042301178, 0.2751486897468567, 0.48094218969345095],
+			"rotation": [
+				-0.12018705904483795, 0.21389459073543549, 0.026527831330895425, 0.9690719246864319
+			],
+			"scale": [0.9999999403953552, 1.0, 0.9999999403953552],
+			"camera": 2,
+			"name": "View 3"
+		},
+		{
+			"translation": [0.15508849918842317, 0.25852519273757937, 0.5050289034843445],
+			"rotation": [
+				-0.10492923855781555, 0.15923981368541718, 0.01702386513352394, 0.9815002679824829
+			],
+			"scale": [0.9999999403953552, 1.0, 1.0],
+			"camera": 3,
+			"name": "View 4"
+		},
+		{
+			"translation": [0.05888115614652634, 0.23271970450878144, 0.5123718976974487],
+			"rotation": [
+				-0.0854974016547203, 0.07692546397447586, 0.0066210245713591579, 0.9933422803878784
+			],
+			"scale": [1.0, 0.9999999403953552, 1.0],
+			"camera": 4,
+			"name": "View 5"
+		},
+		{
+			"translation": [0.031670618802309039, 0.20206859707832337, 0.33774009346961977],
+			"rotation": [
+				-0.0854974016547203, 0.07692546397447586, 0.0066210245713591579, 0.9933422803878784
+			],
+			"scale": [1.0, 0.9999999403953552, 1.0],
+			"camera": 5,
+			"name": "View 7"
+		}
+	],
+	"samplers": [{}],
+	"scenes": [
+		{
+			"nodes": [0, 1, 2, 3, 4, 5, 6],
+			"name": "scene"
+		}
+	],
+	"textures": [
+		{
+			"name": "texture49254",
+			"sampler": 0,
+			"source": 0
+		}
+	],
+	"scene": 0,
+	"extensions": {
+		"KHR_xmp": {
+			"@context": {
+				"dc": "http://purl.org/dc/elements/1.1/"
+			},
+			"packets": [
+				{
+					"dc:date": "2021-07-15T15:37:43.851+05:30",
+					"dc:format": "model/gltf+json",
+					"dc:title": "Crystal graphic.dn",
+					"xmp:CreatorTool": "Adobe Dimension"
+				}
+			]
+		}
+	},
+	"extensionsUsed": ["KHR_xmp"]
+}

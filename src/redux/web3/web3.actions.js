@@ -12,7 +12,7 @@ import {
 	connectToCoinbase,
 } from "../../utils/web3Connectors";
 
-export const connectWallet = (type) => async (dispatch) => {
+export const connectWallet = (type) => (dispatch) => {
 	dispatch({
 		type: CONNECTION_INITIATED,
 		payload: {

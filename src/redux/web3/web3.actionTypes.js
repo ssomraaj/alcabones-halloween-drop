@@ -1,6 +1,6 @@
-export const CONNECTION_INITIATED = "CONNECTION_INITIATED";
-export const CONNECTION_CANCELLED = "CONNECTION_CANCELLED";
-export const CONNECTION_SUCCESS = "CONNECTION_SUCCESS";
-export const CONNECTION_FAILURE = "CONNECTION_FAILURE";
-export const DISCONNECT_WALLET = "DISCONNECT_WALLET";
-export const CLEAR_CONNECTION_ERROR = "CLEAR_CONNECTION_ERROR";
+export const CONNECTION_INITIATED = "web3/connectionIntitiated";
+export const CONNECTION_CANCELLED = "web3/connectionCancelled";
+export const CONNECTION_SUCCESS = "web3/connectionSuccess";
+export const CONNECTION_FAILURE = "web3/connectionFailed";
+export const DISCONNECT_WALLET = "web3/walletDisconnected";
+export const CLEAR_CONNECTION_ERROR = "web3/errorCleared";
