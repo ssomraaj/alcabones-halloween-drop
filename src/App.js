@@ -14,7 +14,7 @@ export default class App extends Component {
 	componentDidMount() {
 		WebFont.load({
 			custom: {
-				families: ["primary", "medium", "bold"],
+				families: ["primary", "medium", "bold", "Poppins", "Roboto"],
 				urls: ["./index.css"],
 			},
 			active: () => this.setState({ rendered: true }),

@@ -1,0 +1,59 @@
+.component-margin {
+	margin-top: 80px;
+}
+
+.header-container {
+	display: flex;
+	justify-content: center;
+}
+
+.component-header-text {
+	display: flex;
+	flex-direction: column;
+	font-family: "Roboto";
+	font-size: 120px;
+	font-weight: 900;
+	line-height: 164px;
+}
+
+.centered-text {
+	text-align: center;
+}
+
+.stroke-text {
+	-webkit-text-stroke: 2px #1b1b1b;
+	color: #fff;
+}
+
+.filled-text {
+	color: #1b1b1b;
+}
+
+.component-section {
+	background: #f2f2f2;
+	border-radius: 12px 12px 0px 0px;
+	margin-top: -8.5rem;
+	height: 100%;
+}
+
+.poster-sec {
+	display: flex;
+	gap: 40px;
+	align-items: flex-end;
+	padding: 119px 160px 0 160px;
+	overflow-y: hidden;
+}
+
+.poster-container {
+	width: 480px;
+	height: 100%;
+}
+
+.poster-container img {
+	max-width: 100%;
+	height: auto;
+}
+
+.middle-poster {
+	margin-bottom: -40px;
+}

@@ -1,12 +1,22 @@
 import { Suspense, useEffect, useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import $ from "jquery";
+// import { Container } from "@material-ui/core";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 import { CrystalLighting } from "../../components/crystal";
+import {
+	BollycoinNft,
+	BollycoinTimeline,
+	CinematicUniverse,
+	Navbar,
+	WhatIsBollycoin,
+} from "../../components/coming-soon";
 import { Canvas } from "react-three-fiber";
 import Crystal from "./Crystal";
 import ComingText from "../../assets/images/coming.png";
 import SoonText from "../../assets/images/soon.png";
+import Mouse from "../../assets/images/Mouse.svg";
 import "./ComingSoon.css";
 
 // const Loading = () => {
@@ -27,6 +37,8 @@ import "./ComingSoon.css";
 
 const ComingSoon = () => {
 	const [hovered, setHovered] = useState(false);
+	const [navLinkActive, setNavLinkActive] = useState(false);
+	const [socialLink, setSocialLink] = useState(false);
 	// const [axes, setAxes] = useState({ x: 0, y: 0, z: 0 });
 	// const { x, y, z } = axes;
 
@@ -73,12 +85,35 @@ const ComingSoon = () => {
 		}, 15);
 	};
 
+	const changeNavLink = () => {
+		window.addEventListener("scroll", () => {
+			if (window.scrollY >= 863) {
+				setNavLinkActive(true);
+			} else {
+				setNavLinkActive(false);
+			}
+		});
+	};
+
+	const changeSocialLink = () => {
+		window.addEventListener("scroll", () => {
+			if (window.scrollY >= 410) {
+				setSocialLink(true);
+			} else {
+				setSocialLink(false);
+			}
+		});
+	};
+
 	useEffect(() => {
 		intitializeProximityRepel();
+		changeNavLink();
+		changeSocialLink();
 	}, []);
 
 	return (
 		<>
+			<Navbar navLinkActive={navLinkActive} />
 			<div className="coming-soon-outer-container" data-hovered={hovered}>
 				<div className="coming-soon-container" data-hovered={hovered}>
 					<Canvas
@@ -150,8 +185,40 @@ const ComingSoon = () => {
 					<button onClick={() => handleAxis("z", z - 1)}>-</button>
 				</div>
 			</div> */}
+					<div className="social-media-container">
+						<FaFacebookF
+							size={24}
+							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+						/>
+						<FaInstagram
+							size={24}
+							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+						/>
+						<FaTwitter
+							size={24}
+							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+						/>
+					</div>
+				</div>
+				<div className="cta-container">
+					<img src={Mouse} alt="Mouse Logo" />
+					<div className="box">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<h3 className="cta-text">scroll down</h3>
 				</div>
 			</div>
+			{/* <Container maxWidth="lg"> */}
+			<div className="main-container">
+				<CinematicUniverse />
+				<WhatIsBollycoin />
+				<BollycoinNft />
+				<BollycoinTimeline />
+			</div>
+
+			{/* </Container> */}
 		</>
 	);
 };

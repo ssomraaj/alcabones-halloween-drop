@@ -1,6 +1,12 @@
 .coming-soon-outer-container {
 	height: 100vh;
 	width: 100%;
+	background-color: #0f0931;
+	background-image: url("../../assets/images/Background-1.png"),
+		url("../../assets/images/Background-2.png"), url("../../assets/images/Background-3.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .coming-soon-container {
@@ -10,12 +16,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #0f0931;
-	background-image: url("../../assets/images/Background-1.png"),
-		url("../../assets/images/Background-2.png"), url("../../assets/images/Background-3.png");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
 	transition: 0.4s all ease;
 }
 
@@ -138,6 +138,87 @@
 .coming-soon-container img:last-child {
 	position: relative;
 	left: -3rem;
+}
+
+.social-media-container {
+	margin-right: 4rem;
+	display: flex;
+	flex-direction: column;
+	gap: 45px;
+	position: fixed;
+	right: 0;
+	z-index: 999;
+}
+
+.social-icons {
+	color: #999999;
+	cursor: pointer;
+	transition: 0.4s all ease;
+}
+
+.social-icons:hover {
+	color: #fff;
+}
+
+.social-icons-onscroll:hover {
+	color: #000;
+}
+
+.cta-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: -10rem;
+}
+
+.cta-text {
+	margin-top: 20px;
+	font-family: "Poppins";
+	font-size: 14px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #999999;
+}
+
+.box span {
+	width: 20px;
+	height: 20px;
+	display: block;
+	border-right: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	transform: rotate(45deg);
+	margin: -10px;
+	animation: animate 2s infinite;
+}
+
+.box span:nth-child(2) {
+	animation-delay: -0.2s;
+}
+
+.box span:nth-child(3) {
+	animation-delay: -0.4s;
+}
+
+.main-container {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+@keyframes animate {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		transform: rotate(45deg) translate(10px, 10px);
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 @media only screen and (max-width: 768px) {
