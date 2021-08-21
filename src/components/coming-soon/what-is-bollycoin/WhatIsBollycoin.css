@@ -1,0 +1,112 @@
+.bollycoin-sec {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	padding-bottom: 70px;
+}
+
+.crystal-container {
+	margin-top: -13rem;
+}
+
+.mask-blur {
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+	width: 400px;
+	height: 250px;
+	position: absolute;
+	top: 20.6%;
+	left: 39%;
+}
+
+.text-top {
+	z-index: 10;
+}
+
+.about-bollycoin {
+	margin-top: -20rem;
+	/* padding-bottom: 4rem; */
+	width: 100%;
+	display: flex;
+}
+
+.pageno-container {
+	flex: 1;
+	padding-left: 40px;
+}
+
+.num-active {
+	font-size: 50px;
+	cursor: pointer;
+	font-family: "Roboto";
+}
+
+.num-inactive {
+	cursor: pointer;
+	color: #1b1b1b;
+	font-size: 18px;
+}
+
+.about-bollycoin-card {
+	flex: 2;
+	z-index: 10;
+	width: 900px;
+	height: 380px;
+	background: rgba(255, 255, 255, 0.5);
+	box-shadow: 80px 80px 250px rgba(49, 37, 103, 0.2);
+	border-radius: 24px;
+	padding: 2rem;
+	padding-left: 12rem;
+	position: relative;
+}
+
+.bolly-card-poster {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: -10%;
+	left: -70px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.bolly-card-poster img {
+	max-width: 100%;
+	height: auto;
+}
+
+.about-bollycoin-card p {
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 24px;
+	color: #1a1a1a;
+}
+
+.arrow-section {
+	margin-left: 20px;
+	flex: 1;
+	align-self: flex-end;
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+}
+
+.arrow-active {
+	cursor: pointer;
+	color: #1b1b1b;
+}
+
+.arrow-inactive {
+	cursor: pointer;
+	color: #999999;
+}
+
+.verticle-line {
+	margin-top: -30px;
+	margin-bottom: 20px;
+	height: 100px;
+	width: 2px;
+	border-radius: 5px;
+	background: linear-gradient(to bottom, #1b1b1b 50%, #e5e5e5 50%);
+}

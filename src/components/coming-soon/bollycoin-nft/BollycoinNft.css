@@ -1,0 +1,32 @@
+.nft-section {
+	display: flex;
+	align-items: center;
+	margin-top: -8.5rem;
+	justify-content: space-between;
+}
+
+.paragraph-sec {
+	flex: 1;
+	align-self: flex-end;
+}
+
+.bollycoin-desc {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 300;
+	font-size: 22px;
+	color: #1a1a1a;
+	padding-left: 4rem;
+}
+
+.nft-poster-container {
+	z-index: -10;
+	flex: 1;
+	margin-left: 80px;
+}
+
+.nft-poster-container img {
+	border-radius: 0px 12px 0px 0px;
+	max-width: 100%;
+	height: auto;
+}
