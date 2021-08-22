@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import { SuspenseWithChunkError } from "../components";
 import { AppLoader } from "../components/loaders";
@@ -13,7 +13,6 @@ const Routes = () => {
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route exact path="/coming-soon" component={ComingSoon} />
-				<Redirect to="/coming-soon" />
 			</Switch>
 		</SuspenseWithChunkError>
 	);
