@@ -1,10 +1,11 @@
-import { PerspectiveCamera, useGLTF } from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
 import { useRef } from "react";
+import { useLoader } from "react-three-fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Crystal = (props) => {
-	useGLTF.preload(props.source);
 	const group = useRef();
-	const { nodes, materials } = useGLTF(props.source);
+	const { nodes, materials } = useLoader(GLTFLoader, props.source);
 	const screenWidth = window.innerWidth;
 
 	const crystalYPosition =
