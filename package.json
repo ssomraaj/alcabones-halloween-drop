@@ -11,7 +11,7 @@
 		"@walletconnect/web3-provider": "^1.4.1",
 		"antd": "^4.16.2",
 		"drei": "^2.2.17",
-		"ethers": "^5.3.1",
+		"ethers": "^5.4.5",
 		"immer": "^9.0.3",
 		"jquery": "^3.6.0",
 		"prop-types": "^15.7.2",
