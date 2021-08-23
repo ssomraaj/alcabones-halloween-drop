@@ -5,7 +5,7 @@ const BollycoinNft = () => {
 	return (
 		<div className="component-margin">
 			<div className="header-container">
-				<h1 className="component-header-text ">
+				<h1 className="component-header-text mobile-centered">
 					<span className="stroke-text">What are</span>
 					<span className="filled-text">Bollycoin NFTs?</span>
 				</h1>

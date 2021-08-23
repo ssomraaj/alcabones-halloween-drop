@@ -1,10 +1,82 @@
+import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import crystal from "../../../assets/images/Crystal.png";
 import bollyPoster from "../../../assets/images/bolly-poster.svg";
 import "./WhatIsBollycoin.css";
 
+const bollycoinDetails = [
+	{
+		pageNo: 1,
+		pageDesc:
+			"Bollywood media has over 1 billion consumers who hold sentimental value in the content and for its creators. BollyCoin is a decentralized community that uses blockchain technology to empower innovators, creators, collectors and consumers of Bollywood Media.",
+		pageImage: bollyPoster,
+	},
+	{
+		pageNo: 2,
+		pageDesc:
+			"Enabling our community to express their fandom through creating and collecting NFTs from their favorite films and by their favorite artist.",
+		pageImage: bollyPoster,
+	},
+	{
+		pageNo: 3,
+		pageDesc:
+			"Beyond NFTs BollyCoin aims to create immersive, unique and irreplaceable experiences through science, technology & our communities demands.",
+		pageImage: bollyPoster,
+	},
+	{
+		pageNo: 4,
+		pageDesc:
+			"BollyCoin is a digital marketplace that allows our community to create their own cinematic universe and rewards them from their participation and contribution to the community. The community is the heart of our platform, and the heart gets what the heart wants! Our community members vote for what they want to see on the marketplace when they want to see it and how they want to see it. Every BollyCoin community member's vote counts. Welcome to the community BollyCoiners! ",
+		pageImage: bollyPoster,
+	},
+];
+
 const WhatIsBollycoin = () => {
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postPerPage] = useState(1);
+	const [transition, setTransition] = useState(false);
+
+	const indexOfLastPost = currentPage * postPerPage;
+	const indexOfFirstPost = indexOfLastPost - postPerPage;
+	const currentPost = bollycoinDetails.slice(indexOfFirstPost, indexOfLastPost);
+
+	const pageNumbers = [];
+
+	for (let i = 1; i <= Math.ceil(bollycoinDetails.length / postPerPage); i++) {
+		pageNumbers.push(i);
+	}
+
+	const paginate = (number) => {
+		setCurrentPage(number);
+		setTimeout(() => {
+			setTransition(false);
+		}, 200);
+		setTransition(true);
+	};
+
+	const prev = () => {
+		if (pageNumbers.includes(currentPage - 1)) {
+			setCurrentPage(currentPage - 1);
+			paginate(currentPage - 1);
+			setTimeout(() => {
+				setTransition(false);
+			}, 200);
+			setTransition(true);
+		}
+	};
+
+	const next = () => {
+		if (pageNumbers.includes(currentPage + 1)) {
+			setCurrentPage(currentPage + 1);
+			paginate(currentPage + 1);
+			setTimeout(() => {
+				setTransition(false);
+			}, 200);
+			setTransition(true);
+		}
+	};
+
 	return (
 		<div className="component-margin">
 			<div className="header-container">
@@ -20,26 +92,51 @@ const WhatIsBollycoin = () => {
 				<div className="mask-blur"></div>
 				<div className="about-bollycoin">
 					<div className="pageno-container">
-						<p className="num-active stroke-text">01</p>
-						<div className="verticle-line"></div>
-						<p className="num-inactive">02</p>
-						<p className="num-inactive">03</p>
-						<p className="num-inactive">04</p>
+						{pageNumbers.map((number) => (
+							<div key={number} className="number-wrapper">
+								<p
+									className={`${
+										number === currentPage ? "num-active stroke-text" : "num-inactive"
+									} ${transition ? "inactive-transition" : "active-transition"}`}
+									onClick={() => paginate(number)}
+								>
+									<span>0{number}</span>
+								</p>
+								<div
+									className={`${number === currentPage ? "verticle-line" : ""} ${
+										transition ? "inactive-transition" : "active-transition"
+									}`}
+								></div>
+							</div>
+						))}
 					</div>
-					<div className="about-bollycoin-card">
-						<p>
-							Bollywood media has over 1 billion consumers who hold sentimental value in the content
-							and for its creators. BollyCoin is a decentralized community that uses blockchain
-							technology to empower innovators, creators, collectors and consumers of Bollywood
-							Media.{" "}
-						</p>
-						<div className="bolly-card-poster">
-							<img src={bollyPoster} alt="Bolly Poster" />
+					{currentPost.map((postItem) => (
+						<div className="about-wrapper" key={postItem.pageNo}>
+							<div data-item={`${postItem.pageNo}`} className="about-bollycoin-card">
+								<p className={`${transition ? "inactive-transition" : "active-transition"}`}>
+									{postItem.pageDesc}
+								</p>
+							</div>
+							<div className="bolly-card-poster">
+								<img
+									className={`${transition ? "inactive-transition" : "active-transition"}`}
+									src={postItem.pageImage}
+									alt="Bolly Poster"
+								/>
+							</div>
 						</div>
-					</div>
+					))}
 					<div className="arrow-section">
-						<IoIosArrowForward size={28} className="arrow-active" />
-						<IoIosArrowBack size={28} className="arrow-inactive" />
+						<IoIosArrowForward
+							onClick={next}
+							size={28}
+							className={`${currentPage < 4 ? "arrow-active" : "arrow-inactive"}`}
+						/>
+						<IoIosArrowBack
+							onClick={prev}
+							size={28}
+							className={`${currentPage > 1 ? "arrow-active" : "arrow-inactive"}`}
+						/>
 					</div>
 				</div>
 			</section>

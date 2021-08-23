@@ -1,0 +1,26 @@
+.mobile-footer {
+	display: none;
+}
+
+@media only screen and (max-width: 718px) {
+	.mobile-footer {
+		display: flex;
+		margin-top: 50px;
+		padding: 2rem;
+		background-color: #f2f2f2;
+		justify-content: center;
+		align-items: center;
+		gap: 40px;
+	}
+
+	.mobile-footer-item {
+		color: #1b1b1b;
+		cursor: pointer;
+		transition: 0.4s all ease;
+	}
+
+	.mobile-footer-item:hover,
+	.mobile-footer-item:focus {
+		color: #999;
+	}
+}
