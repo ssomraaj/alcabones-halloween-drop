@@ -133,7 +133,7 @@ const ComingSoon = () => {
 						<CrystalLighting />
 						<Suspense fallback={null}>
 							<Crystal
-								source={hovered ? "crystal-2.gltf" : "crystal-1.gltf"}
+								source={hovered ? "/crystal-2.gltf" : "/crystal-1.gltf"}
 								onMouseOver={() => setHovered(true)}
 								onMouseLeave={() => setHovered(false)}
 							/>

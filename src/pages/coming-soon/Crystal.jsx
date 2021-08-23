@@ -1,10 +1,10 @@
-import { PerspectiveCamera, useGLTF } from "@react-three/drei";
-import { useRef } from "react";
+import React, { useRef } from "react";
+import { useGLTF, PerspectiveCamera } from "@react-three/drei";
 
-const Crystal = (props) => {
-	useGLTF.preload(props.source);
+export default function Crystal(props) {
 	const group = useRef();
 	const { nodes, materials } = useGLTF(props.source);
+
 	const screenWidth = window.innerWidth;
 
 	const crystalYPosition =
@@ -17,7 +17,6 @@ const Crystal = (props) => {
 			: screenWidth > 768
 			? [10, 10, 10]
 			: [6, 6, 6];
-
 	return (
 		<group
 			onPointerOver={props.onMouseOver}
@@ -76,7 +75,6 @@ const Crystal = (props) => {
 				rotation={[-0.17, 0.15, 0.03]}
 			/>
 			<mesh
-				castShadow
 				geometry={nodes.Crystal.geometry}
 				material={materials.Metal}
 				position={[-0.45, crystalYPosition, -0.2]}
@@ -85,6 +83,6 @@ const Crystal = (props) => {
 			/>
 		</group>
 	);
-};
+}
 
-export default Crystal;
+useGLTF.preload("/crystal-1.gltf");
