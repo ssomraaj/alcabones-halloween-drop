@@ -118,7 +118,7 @@ const ComingSoon = () => {
 				<div className="coming-soon-container" data-hovered={hovered}>
 					<Canvas
 						style={{ position: "absolute", zIndex: 5 }}
-						camera={{ fov: 75, castShadow: true }}
+						camera={{ fov: 75, castShadow: true, zoom: 1.5 }}
 					>
 						<OrbitControls
 							position={[0, 0, 0]}
