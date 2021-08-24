@@ -117,12 +117,12 @@ const WhatIsBollycoin = () => {
 									{postItem.pageDesc}
 								</p>
 							</div>
-							<div className="bolly-card-poster">
-								<img
-									className={`${transition ? "inactive-transition" : "active-transition"}`}
-									src={postItem.pageImage}
-									alt="Bolly Poster"
-								/>
+							<div
+								className={`bolly-card-poster ${
+									transition ? "inactive-transition" : "active-transition"
+								}`}
+							>
+								<img src={postItem.pageImage} alt="Bolly Poster" />
 							</div>
 						</div>
 					))}
