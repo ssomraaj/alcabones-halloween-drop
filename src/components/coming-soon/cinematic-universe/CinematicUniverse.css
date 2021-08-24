@@ -57,3 +57,35 @@
 .middle-poster {
 	margin-bottom: -40px;
 }
+
+@media only screen and (max-width: 968px) {
+	.component-header-text {
+		font-size: 50px;
+		line-height: unset;
+	}
+
+	.poster-sec {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 30px;
+		overflow-y: visible;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.middle-poster {
+		margin-bottom: 0;
+	}
+
+	.component-section {
+		margin-top: -4rem;
+	}
+}
+
+@media only screen and (max-width: 551px) {
+	.poster-container {
+		width: 100%;
+	}
+}

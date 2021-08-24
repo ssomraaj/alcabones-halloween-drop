@@ -231,3 +231,15 @@
 		left: 3rem;
 	}
 }
+
+@media only screen and (max-width: 1077px) {
+	.social-media-container {
+		margin-right: 2rem;
+	}
+}
+
+@media only screen and (max-width: 718px) {
+	.social-media-container {
+		display: none;
+	}
+}

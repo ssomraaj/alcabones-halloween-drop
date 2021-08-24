@@ -1,7 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import $ from "jquery";
-// import { Container } from "@material-ui/core";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 import { CrystalLighting } from "../../components/crystal";
@@ -11,6 +10,7 @@ import {
 	CinematicUniverse,
 	Navbar,
 	WhatIsBollycoin,
+	Footer,
 } from "../../components/coming-soon";
 import { Canvas } from "react-three-fiber";
 import Crystal from "./Crystal";
@@ -210,15 +210,13 @@ const ComingSoon = () => {
 					<h3 className="cta-text">scroll down</h3>
 				</div>
 			</div>
-			{/* <Container maxWidth="lg"> */}
 			<div className="main-container">
 				<CinematicUniverse />
 				<WhatIsBollycoin />
 				<BollycoinNft />
 				<BollycoinTimeline />
 			</div>
-
-			{/* </Container> */}
+			<Footer />
 		</>
 	);
 };

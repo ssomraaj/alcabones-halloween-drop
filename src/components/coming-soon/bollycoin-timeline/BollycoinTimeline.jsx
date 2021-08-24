@@ -10,7 +10,7 @@ const BollycoinTimeline = () => {
 	return (
 		<div className="component-margin">
 			<div className="header-container">
-				<h1 className="component-header-text">
+				<h1 className="component-header-text ready-text">
 					<span className="stroke-text">We are ready to</span>
 					<span>
 						<span className="filled-text">G0000000!</span> <span className="almost">(almost)</span>
@@ -25,6 +25,9 @@ const BollycoinTimeline = () => {
 					<div className="timeline-text-box">
 						<h3>BollyCoin Presale & Auction</h3>
 						<p>between September & October 2021</p>
+					</div>
+					<div className="vector-line">
+						<img src={Line} alt="vector line" />
 					</div>
 				</div>
 				<div className="timeline-sec">
@@ -53,9 +56,6 @@ const BollycoinTimeline = () => {
 						<h3>Bollycoin community based film & media production</h3>
 						<p>2022 onwards</p>
 					</div>
-				</div>
-				<div className="vector-line">
-					<img src={Line} alt="vector line" />
 				</div>
 			</section>
 		</div>
