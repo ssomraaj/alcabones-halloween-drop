@@ -166,10 +166,18 @@ const ComingSoon = () => {
 						{"\u00A0"}
 						{"\u00A0"}
 						{"\u00A0"}
-						<div className="letter">S</div>
-						<div className="letter">O</div>
-						<div className="letter">O</div>
-						<div className="letter">N</div>
+						<div className="letter" data-first-part={false}>
+							S
+						</div>
+						<div className="letter" data-first-part={false}>
+							O
+						</div>
+						<div className="letter" data-first-part={false}>
+							O
+						</div>
+						<div className="letter" data-first-part={false}>
+							N
+						</div>
 					</div>
 					{/* <div className="debug-controls">
 				<div>
@@ -201,8 +209,12 @@ const ComingSoon = () => {
 					</div>
 				</div>
 				<div className="cta-container">
-					<img src={Mouse} alt="Mouse Logo" />
-					<div className="box">
+					<img
+						src={Mouse}
+						alt="Mouse Logo"
+						onClick={() => window.location.replace("/coming-soon#cinematic")}
+					/>
+					<div className="box" onClick={() => window.location.replace("/coming-soon#cinematic")}>
 						<span></span>
 						<span></span>
 						<span></span>

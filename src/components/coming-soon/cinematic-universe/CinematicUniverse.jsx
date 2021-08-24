@@ -3,7 +3,7 @@ import "./CinematicUniverse.css";
 
 const CinematicUniverse = () => {
 	return (
-		<div className="component-margin">
+		<div className="component-margin" id="cinematic">
 			<div className="header-container">
 				<h1 className="component-header-text centered-text">
 					<span className="stroke-text">Bollycoin</span>

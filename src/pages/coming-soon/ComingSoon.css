@@ -17,6 +17,7 @@
 	align-items: center;
 	justify-content: center;
 	transition: 0.4s all ease;
+	transform: translate3d(0, 0, 0);
 }
 
 .coming-soon-outer-container::after {
@@ -93,7 +94,7 @@
 }
 
 .letter[data-first-part="false"] {
-	z-index: 0;
+	z-index: 2;
 }
 
 .debug-controls {
@@ -172,6 +173,7 @@
 	flex-direction: column;
 	gap: 10px;
 	margin-top: -10rem;
+	cursor: pointer;
 }
 
 .cta-text {
