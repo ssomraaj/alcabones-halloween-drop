@@ -23,7 +23,7 @@ const Navbar = ({ navLinkActive }) => {
 				<div className="mobile-navigation">
 					<div class="mobile-nav-header">
 						<button className="close--btn" onClick={onClose}>
-							<IoCloseOutline />
+							<IoCloseOutline size={25} />
 						</button>
 					</div>
 					<ul className="mobile-nav-links">
@@ -44,7 +44,7 @@ const Navbar = ({ navLinkActive }) => {
 				</ul>
 				<div className="menu-button-container">
 					<button className="menu-button" type="primary" onClick={showDrawer}>
-						<RiMenu3Fill style={{ fontSize: "2rem", color: "#FFFFFF" }} />
+						<RiMenu3Fill size={25} />
 					</button>
 				</div>
 			</div>

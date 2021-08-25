@@ -93,7 +93,7 @@
 }
 
 .letter[data-first-part="false"] {
-	z-index: 2;
+	z-index: 0;
 }
 
 .debug-controls {
