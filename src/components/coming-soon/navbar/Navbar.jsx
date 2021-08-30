@@ -6,7 +6,7 @@ import { Drawer } from "antd";
 import Logo from "../../../assets/images/Logo.svg";
 import "./Navbar.css";
 
-const Navbar = ({ navLinkActive }) => {
+const Navbar = ({ navLinkActive, hovered }) => {
 	const [visible, setVisible] = useState(false);
 
 	const showDrawer = () => {
@@ -15,6 +15,17 @@ const Navbar = ({ navLinkActive }) => {
 
 	const onClose = () => {
 		setVisible(false);
+	};
+
+	const scrollToSection = () => {
+		document.getElementById("about").scrollIntoView({
+			behavior: "smooth",
+		});
+		visible && setVisible(false);
+	};
+
+	const openLink = () => {
+		window.open("https://bollycoin.s3.us-east-1.amazonaws.com/bollycoin-whitepaper.pdf", "_blank");
 	};
 
 	return (
@@ -27,18 +38,28 @@ const Navbar = ({ navLinkActive }) => {
 						</button>
 					</div>
 					<ul className="mobile-nav-links">
-						<li>About Bollycoin</li>
-						<li>Read Whitepaper</li>
+						<li onClick={scrollToSection}>About BollyCoin</li>
+						<li onClick={openLink}>Read Whitepaper</li>
 					</ul>
 				</div>
 			</Drawer>
-			<div className="navbar-container">
+			<div className="navbar-container" data-expanded={navLinkActive}>
 				<div className="logo-container">
-					<img src={Logo} alt="Bollycoin Logo" />
+					<img src={Logo} alt="BollyCoin Logo" />
 				</div>
 				<ul className="navbar-items">
-					<li className={`nav-item ${navLinkActive ? "remove-nav-link" : ""}`}>About Bollycoin</li>
-					<li className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}>
+					<li
+						className={`nav-item ${navLinkActive ? "remove-nav-link" : ""}`}
+						data-hovered={hovered}
+						onClick={scrollToSection}
+					>
+						About BollyCoin
+					</li>
+					<li
+						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
+						data-hovered={hovered}
+						onClick={openLink}
+					>
 						Read Whitepaper
 					</li>
 				</ul>

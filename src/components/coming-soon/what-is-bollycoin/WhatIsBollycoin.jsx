@@ -2,7 +2,10 @@ import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import crystal from "../../../assets/images/Crystal.png";
-import bollyPoster from "../../../assets/images/bolly-poster.svg";
+import poster1 from "../../../assets/images/poster-4.jpg";
+import poster2 from "../../../assets/images/poster-5.jpg";
+import poster3 from "../../../assets/images/poster-6.jpg";
+import poster4 from "../../../assets/images/poster-7.jpg";
 import "./WhatIsBollycoin.css";
 
 const bollycoinDetails = [
@@ -10,25 +13,25 @@ const bollycoinDetails = [
 		pageNo: 1,
 		pageDesc:
 			"Bollywood media has over 1 billion consumers who hold sentimental value in the content and for its creators. BollyCoin is a decentralized community that uses blockchain technology to empower innovators, creators, collectors and consumers of Bollywood Media.",
-		pageImage: bollyPoster,
+		pageImage: poster1,
 	},
 	{
 		pageNo: 2,
 		pageDesc:
 			"Enabling our community to express their fandom through creating and collecting NFTs from their favorite films and by their favorite artist.",
-		pageImage: bollyPoster,
+		pageImage: poster2,
 	},
 	{
 		pageNo: 3,
 		pageDesc:
 			"Beyond NFTs BollyCoin aims to create immersive, unique and irreplaceable experiences through science, technology & our communities demands.",
-		pageImage: bollyPoster,
+		pageImage: poster3,
 	},
 	{
 		pageNo: 4,
 		pageDesc:
 			"BollyCoin is a digital marketplace that allows our community to create their own cinematic universe and rewards them from their participation and contribution to the community. The community is the heart of our platform, and the heart gets what the heart wants! Our community members vote for what they want to see on the marketplace when they want to see it and how they want to see it. Every BollyCoin community member's vote counts. Welcome to the community BollyCoiners! ",
-		pageImage: bollyPoster,
+		pageImage: poster4,
 	},
 ];
 
@@ -78,11 +81,11 @@ const WhatIsBollycoin = () => {
 	};
 
 	return (
-		<div className="component-margin">
+		<div className="component-margin" id="about">
 			<div className="header-container">
 				<h1 className="component-header-text text-top">
-					<span className="stroke-text">What is</span>
-					<span className="filled-text">Bollycoin?</span>
+					<span className="stroke-text centered-text">What is BollyCoin?</span>
+					{/* <span className="filled-text">Bollycoin?</span> */}
 				</h1>
 			</div>
 			<section className="component-section bollycoin-sec">
@@ -96,7 +99,7 @@ const WhatIsBollycoin = () => {
 							<div key={number} className="number-wrapper">
 								<p
 									className={`${
-										number === currentPage ? "num-active stroke-text" : "num-inactive"
+										number === currentPage ? "num-active stroke-number" : "num-inactive"
 									} ${transition ? "inactive-transition" : "active-transition"}`}
 									onClick={() => paginate(number)}
 								>
@@ -121,8 +124,9 @@ const WhatIsBollycoin = () => {
 								className={`bolly-card-poster ${
 									transition ? "inactive-transition" : "active-transition"
 								}`}
+								style={{ backgroundImage: `url(${postItem.pageImage})` }}
 							>
-								<img src={postItem.pageImage} alt="Bolly Poster" />
+								{/* <img src={postItem.pageImage} alt="Bolly Poster" /> */}
 							</div>
 						</div>
 					))}

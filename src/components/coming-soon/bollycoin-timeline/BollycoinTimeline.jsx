@@ -1,7 +1,7 @@
-import poster1 from "../../../assets/images/mughal-e-azam.svg";
-import poster2 from "../../../assets/images/Anand.svg";
-import poster3 from "../../../assets/images/sholay.svg";
-import poster4 from "../../../assets/images/aditya-chopra.svg";
+import poster1 from "../../../assets/images/poster-9.jpg";
+import poster2 from "../../../assets/images/poster-10.jpg";
+import poster3 from "../../../assets/images/poster-11.jpg";
+import poster4 from "../../../assets/images/poster-12.jpg";
 import Line from "../../../assets/images/VectorLine.svg";
 
 import "./BollycoinTimeline.css";
@@ -31,7 +31,7 @@ const BollycoinTimeline = () => {
 					</div>
 				</div>
 				<div className="timeline-sec">
-					<div className="timeline-sec-poster">
+					<div className="timeline-sec-poster portrait">
 						<img src={poster2} alt="timeline poster" />
 					</div>
 					<div className="timeline-text-box">
@@ -44,16 +44,16 @@ const BollycoinTimeline = () => {
 						<img src={poster3} alt="timeline poster" />
 					</div>
 					<div className="timeline-text-box">
-						<h3>Bollycoin Intital Coin Offering</h3>
+						<h3>BollyCoin Intital Coin Offering</h3>
 						<p>between September & October 2021</p>
 					</div>
 				</div>
 				<div className="timeline-sec">
-					<div className="timeline-sec-poster">
+					<div className="timeline-sec-poster portrait">
 						<img src={poster4} alt="timeline poster" />
 					</div>
 					<div className="timeline-text-box">
-						<h3>Bollycoin community based film & media production</h3>
+						<h3>BollyCoin community based film & media production</h3>
 						<p>2022 onwards</p>
 					</div>
 				</div>
