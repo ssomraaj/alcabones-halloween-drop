@@ -1,4 +1,4 @@
-import nftposter from "../../../assets/images/nft-poster.jpg";
+import nftposter from "../../../assets/images/poster-8.jpg";
 import "./BollycoinNft.css";
 
 const BollycoinNft = () => {
@@ -7,7 +7,7 @@ const BollycoinNft = () => {
 			<div className="header-container">
 				<h1 className="component-header-text mobile-centered">
 					<span className="stroke-text">What are</span>
-					<span className="filled-text">Bollycoin NFTs?</span>
+					<span className="filled-text">BollyCoin NFTs?</span>
 				</h1>
 			</div>
 			<section className="nft-section">

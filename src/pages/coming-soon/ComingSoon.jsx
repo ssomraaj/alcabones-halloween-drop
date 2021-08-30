@@ -87,7 +87,7 @@ const ComingSoon = () => {
 
 	const changeNavLink = () => {
 		window.addEventListener("scroll", () => {
-			if (window.scrollY >= 863) {
+			if (window.scrollY >= 800) {
 				setNavLinkActive(true);
 			} else {
 				setNavLinkActive(false);
@@ -113,7 +113,7 @@ const ComingSoon = () => {
 
 	return (
 		<>
-			<Navbar navLinkActive={navLinkActive} />
+			<Navbar navLinkActive={navLinkActive} hovered={hovered} />
 			<div className="coming-soon-outer-container" data-hovered={hovered}>
 				<div className="coming-soon-container" data-hovered={hovered}>
 					<Canvas
@@ -195,15 +195,15 @@ const ComingSoon = () => {
 			</div> */}
 					<div className="social-media-container">
 						<FaFacebookF
-							size={24}
+							size={22}
 							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
 						/>
 						<FaInstagram
-							size={24}
+							size={22}
 							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
 						/>
 						<FaTwitter
-							size={24}
+							size={22}
 							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
 						/>
 					</div>
