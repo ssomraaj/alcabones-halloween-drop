@@ -1,12 +1,28 @@
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
 	return (
 		<div className="mobile-footer">
-			<FaFacebookF size={24} className="mobile-footer-item" />
-			<FaInstagram size={24} className="mobile-footer-item" />
-			<FaTwitter size={24} className="mobile-footer-item" />
+			<a
+				href="https://www.facebook.com/bollycoinofficial"
+				target="_blank"
+				rel="noreferrer noopener"
+			>
+				<FaFacebookF size={20} className="mobile-footer-item" />
+			</a>
+			<a href="https://www.instagram.com/bollycoin" target="_blank" rel="noreferrer noopener">
+				<FaInstagram size={20} className="mobile-footer-item" />
+			</a>
+			<a href="https://t.me/joinchat/h8bHBUy0PRpmYTRl" target="_blank" rel="noreferrer noopener">
+				<FaTelegram size={20} className="mobile-footer-item" />
+			</a>
+			<a href="https://discord.gg/S2XxEXPj" target="_blank" rel="noreferrer noopener">
+				<FaDiscord size={20} className="mobile-footer-item" />
+			</a>
+			<a href="https://www.reddit.com/r/Bollycoin/" target="_blank" rel="noreferrer noopener">
+				<FaReddit size={20} className="mobile-footer-item" />
+			</a>
 		</div>
 	);
 };

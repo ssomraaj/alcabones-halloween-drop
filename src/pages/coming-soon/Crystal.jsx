@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useGLTF, PerspectiveCamera } from "@react-three/drei";
+import { useFrame } from "react-three-fiber";
 
 export default function Crystal(props) {
 	const group = useRef();
@@ -9,6 +10,7 @@ export default function Crystal(props) {
 
 	const crystalYPosition =
 		screenWidth > 1400 ? -1 : screenWidth > 1000 ? -0.8 : screenWidth > 768 ? -0.6 : -0.4;
+	const crystalXPosition = screenWidth > 500 ? -0.45 : -0.15;
 	const crystalSize =
 		screenWidth > 1400
 			? [15, 15, 15]
@@ -17,6 +19,11 @@ export default function Crystal(props) {
 			: screenWidth > 768
 			? [10, 10, 10]
 			: [6, 6, 6];
+
+	useFrame(() => {
+		group.current.rotation.y += 0.004;
+	});
+
 	return (
 		<group
 			onPointerOver={props.onMouseOver}
@@ -77,7 +84,7 @@ export default function Crystal(props) {
 			<mesh
 				geometry={nodes.Crystal.geometry}
 				material={materials.Metal}
-				position={[-0.45, crystalYPosition, -0.2]}
+				position={[crystalXPosition, crystalYPosition, -0.2]}
 				rotation={[-0.25, -0.4, -0.57]}
 				scale={crystalSize}
 			/>

@@ -148,7 +148,7 @@
 	margin-right: 3.25%;
 	display: flex;
 	flex-direction: column;
-	gap: 45px;
+	gap: 30px;
 	position: fixed;
 	right: 0;
 	z-index: 999;
@@ -250,5 +250,15 @@
 @media only screen and (max-width: 718px) {
 	.social-media-container {
 		display: none;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.letters-container {
+		margin-left: -0.5rem;
+	}
+
+	canvas {
+		left: 0.5rem;
 	}
 }

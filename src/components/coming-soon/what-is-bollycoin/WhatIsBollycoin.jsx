@@ -51,11 +51,13 @@ const WhatIsBollycoin = () => {
 	}
 
 	const paginate = (number) => {
-		setCurrentPage(number);
-		setTimeout(() => {
-			setTransition(false);
-		}, 200);
-		setTransition(true);
+		if (number !== currentPage) {
+			setCurrentPage(number);
+			setTimeout(() => {
+				setTransition(false);
+			}, 200);
+			setTransition(true);
+		}
 	};
 
 	const prev = () => {

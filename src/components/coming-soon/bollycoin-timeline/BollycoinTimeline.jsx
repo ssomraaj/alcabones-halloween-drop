@@ -10,7 +10,7 @@ const BollycoinTimeline = () => {
 	return (
 		<div className="component-margin">
 			<div className="header-container">
-				<h1 className="component-header-text ready-text">
+				<h1 className="component-header-text ready-text timeline-heading">
 					<span className="stroke-text">We are ready to</span>
 					<span>
 						<span className="filled-text">G0000000!</span> <span className="almost">(almost)</span>

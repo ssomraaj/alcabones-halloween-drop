@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import $ from "jquery";
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
 
 import { CrystalLighting } from "../../components/crystal";
 import {
@@ -123,8 +123,6 @@ const ComingSoon = () => {
 						<OrbitControls
 							position={[0, 0, 0]}
 							rotation={[0, 10, 0]}
-							autoRotate
-							autoRotateSpeed={1}
 							enableZoom={false}
 							enablePan={false}
 							enableRotate={false}
@@ -194,18 +192,44 @@ const ComingSoon = () => {
 				</div>
 			</div> */}
 					<div className="social-media-container">
-						<FaFacebookF
-							size={22}
-							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
-						/>
-						<FaInstagram
-							size={22}
-							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
-						/>
-						<FaTwitter
-							size={22}
-							className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
-						/>
+						<a
+							href="https://www.facebook.com/bollycoinofficial"
+							target="_blank"
+							rel="noreferrer noopener"
+						>
+							<FaFacebookF
+								size={22}
+								className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+							/>
+						</a>
+						<a href="https://www.instagram.com/bollycoin" target="_blank" rel="noreferrer noopener">
+							<FaInstagram
+								size={22}
+								className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+							/>
+						</a>
+						<a
+							href="https://t.me/joinchat/h8bHBUy0PRpmYTRl"
+							target="_blank"
+							rel="noreferrer noopener"
+						>
+							<FaTelegram
+								size={22}
+								className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+							/>
+						</a>
+						<a href="https://discord.gg/S2XxEXPj" target="_blank" rel="noreferrer noopener">
+							<FaDiscord
+								size={22}
+								className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+							/>
+						</a>
+						<a href="https://www.reddit.com/r/Bollycoin/" target="_blank" rel="noreferrer noopener">
+							<FaReddit
+								size={22}
+								className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+							/>
+						</a>
 					</div>
 				</div>
 				<div className="cta-container">
