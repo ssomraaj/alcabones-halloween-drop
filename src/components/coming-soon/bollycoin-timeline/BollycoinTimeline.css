@@ -118,6 +118,13 @@
 	}
 }
 
+@media only screen and (max-width: 500px) {
+	.timeline-heading {
+		line-height: 2rem;
+		margin-bottom: 4rem;
+	}
+}
+
 @media only screen and (max-width: 380px) {
 	.ready-text {
 		text-align: center;

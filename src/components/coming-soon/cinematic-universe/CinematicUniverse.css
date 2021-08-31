@@ -55,7 +55,6 @@
 
 .filled-text {
 	color: #dd584e;
-	animation: color-swap 5s linear infinite alternate;
 	font-size: 5.5rem;
 	margin-top: -1rem;
 }
@@ -133,6 +132,12 @@
 @media only screen and (max-width: 551px) {
 	.poster-container {
 		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.poster-sec {
+		padding-top: 1.5rem;
 	}
 }
 

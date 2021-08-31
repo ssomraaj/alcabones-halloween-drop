@@ -38,6 +38,7 @@
 .pageno-container {
 	flex: 1;
 	padding-left: 40px;
+	user-select: none;
 }
 
 .num-active {
@@ -128,6 +129,7 @@
 	display: flex;
 	gap: 20px;
 	flex-direction: column;
+	user-select: none;
 }
 
 .arrow-active {
@@ -283,6 +285,12 @@
 		top: -255px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.bollycoin-sec {
+		padding-top: 2rem;
 	}
 }
 
