@@ -30,7 +30,7 @@ const bollycoinDetails = [
 	{
 		pageNo: 4,
 		pageDesc:
-			"BollyCoin is a digital marketplace that allows our community to create their own cinematic universe and rewards them from their participation and contribution to the community. The community is the heart of our platform, and the heart gets what the heart wants! Our community members vote for what they want to see on the marketplace when they want to see it and how they want to see it. Every BollyCoin community member's vote counts. Welcome to the community BollyCoiners! ",
+			"BollyCoin is a digital marketplace that allows our community to create their own cinematic universe and rewards them from their participation and contribution to the community. The community is the heart of our platform, and the heart gets what the heart wants! Our community members vote for what they want to see on the marketplace when they want to see it and how they want to see it. Every BollyCoin community member's vote counts. Welcome to the community BollyCoiners!",
 		pageImage: poster4,
 	},
 ];

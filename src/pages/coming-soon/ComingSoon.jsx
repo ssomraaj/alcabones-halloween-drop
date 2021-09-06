@@ -5,13 +5,11 @@ import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react
 
 import { CrystalLighting } from "../../components/crystal";
 import { Navbar, Footer as MobileFooter } from "../../components/coming-soon";
+import { Timeline, Footer } from "../../components/coming-soon-v2";
 import { Canvas } from "react-three-fiber";
 import Crystal from "./Crystal";
 import Logo from "../../assets/images/logo-pink.svg";
-// import ComingText from "../../assets/images/coming.png";
-// import SoonText from "../../assets/images/soon.png";
 import Mouse from "../../assets/images/Mouse.svg";
-import { Timeline, Footer } from "../../components/coming-soon-v2";
 import "./ComingSoon.css";
 import "./TextAnimation.css";
 
@@ -280,11 +278,12 @@ const ComingSoon = () => {
 							<h1>What is BollyCoin?</h1>
 							<div className="tablet-section-1-graphic" />
 							<p>
-								BollyCoin is a community token for our NFT platform. 20% of the revenue from the
-								sale of NFT’s come back to the BollyCoin ecosystem and stakers of BollyCoin will
-								earn rewards in USDT on the basis of how much BollyCoin they have staked. Similarly,
-								on any resale of an NFT, the ecosystem along with the original owners make a 10%
-								royalty each.
+								BollyCoin is a digital marketplace that allows our community to create their own
+								cinematic universe and rewards them from their participation and contribution to the
+								community. The community is the heart of our platform, and the heart gets what the
+								heart wants! Our community members vote for what they want to see on the marketplace
+								when they want to see it and how they want to see it. Every BollyCoin community
+								member's vote counts. Welcome to the community BollyCoiners!
 							</p>
 						</div>
 					</section>
@@ -311,9 +310,19 @@ const ComingSoon = () => {
 							<h1>What are BollyCoin NFTs?</h1>
 							<div className="tablet-section-3-graphic" />
 							<p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ratione accusantium
-								facilis eveniet provident accusamus sequi aperiam, consequatur animi beatae nam ea
-								excepturi aliquam impedit, eum earum. Nam, culpa adipisci!
+								BollyCoin enables the audience to buy, fund, watch, profit and even trade ownership
+								of individual pieces of content including films, posters and exclusive NFT content
+								that they want.
+								<br />
+								<br />
+								Empowering the audience to actively shape what content is produced for them to
+								consume. What if the audience decides which script gets produced? Or even who gets
+								to be part of the cast? BollyCoin is partnering with some of Bollywood’s largest
+								production houses and celebrities to create NFTs out of films that have been
+								produced by the industry over the decades. Imagine owning your favorite scene of
+								your favorite bollywood movie? Or owning the exclusive rights of the NFTs of
+								official posters or trailers to a film you grew up on. That’s all practically
+								possible now!
 							</p>
 						</div>
 					</section>
