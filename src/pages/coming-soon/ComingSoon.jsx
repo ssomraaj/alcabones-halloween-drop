@@ -4,20 +4,16 @@ import $ from "jquery";
 import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
 
 import { CrystalLighting } from "../../components/crystal";
-import {
-	BollycoinNft,
-	BollycoinTimeline,
-	CinematicUniverse,
-	Navbar,
-	WhatIsBollycoin,
-	Footer,
-} from "../../components/coming-soon";
+import { Navbar, Footer as MobileFooter } from "../../components/coming-soon";
 import { Canvas } from "react-three-fiber";
 import Crystal from "./Crystal";
-import ComingText from "../../assets/images/coming.png";
-import SoonText from "../../assets/images/soon.png";
+import Logo from "../../assets/images/logo-pink.svg";
+// import ComingText from "../../assets/images/coming.png";
+// import SoonText from "../../assets/images/soon.png";
 import Mouse from "../../assets/images/Mouse.svg";
+import { Timeline, Footer } from "../../components/coming-soon-v2";
 import "./ComingSoon.css";
+import "./TextAnimation.css";
 
 // const Loading = () => {
 // 	return (
@@ -137,10 +133,10 @@ const ComingSoon = () => {
 							/>
 						</Suspense>
 					</Canvas>
-					<div className="coming-soon-graphics" data-hovered={hovered}>
+					{/* <div className="coming-soon-graphics" data-hovered={hovered}>
 						<img src={ComingText} alt="Coming" />
 						<img src={SoonText} alt="soon" />
-					</div>
+					</div> */}
 					<div className="letters-container" data-hovered={hovered}>
 						<div className="letter" data-first-part={true}>
 							C
@@ -246,13 +242,109 @@ const ComingSoon = () => {
 					<h3 className="cta-text">scroll down</h3>
 				</div>
 			</div>
-			<div className="main-container">
+			{/* <div className="main-container">
 				<CinematicUniverse />
 				<WhatIsBollycoin />
 				<BollycoinNft />
 				<BollycoinTimeline />
 			</div>
+			<Footer /> */}
+			<div className="landing-main">
+				<div className="main-cointainer">
+					<div className="hero">
+						<h1>The First Ever Bollywood NFT Marketplace</h1>
+						<div className="tablet-main-graphic" />
+						<p>
+							Over 1 billion people over the world are already Bollywood media consumers and a large
+							portion hold sentimental value in iconic clips and media produced by the industry over
+							the century. Allowing decentralised ownership and assigning monetary value storage of
+							the same, similar to how one may value a piece of art, could result in Bollywood NFTs
+							being valued in billions of dollars.
+						</p>
+
+						<button
+							onClick={() => {
+								window.open(
+									"https://bollycoin.s3.us-east-1.amazonaws.com/bollycoin-whitepaper.pdf",
+									"_blank"
+								);
+							}}
+						>
+							read whitepaper
+						</button>
+					</div>
+				</div>
+				<main>
+					<section className="section" id="about">
+						<div>
+							<h1>What is BollyCoin?</h1>
+							<div className="tablet-section-1-graphic" />
+							<p>
+								BollyCoin is a community token for our NFT platform. 20% of the revenue from the
+								sale of NFT’s come back to the BollyCoin ecosystem and stakers of BollyCoin will
+								earn rewards in USDT on the basis of how much BollyCoin they have staked. Similarly,
+								on any resale of an NFT, the ecosystem along with the original owners make a 10%
+								royalty each.
+							</p>
+						</div>
+					</section>
+					<section className="section invert">
+						<div>
+							<h1>Why BollyCoin?</h1>
+							<div className="tablet-section-2-graphic" />
+							<p>
+								The valuation of BollyCoin comes from it’s reward system. There will be a total
+								supply of 1,000,000 coins. 20% of the total sale proceeds of all NFT’s minted and
+								sold on the BollyCoin market place get rewarded back to the community. Hence the
+								limited supply of BollyCoin makes it a race between investors to get as many
+								BollyCoins as possible.
+								<br />
+								<br />
+								BollyCoin believes all project stakeholders are as important as each other.
+								Investment funds and communities should work side by side on projects, on the same
+								terms, towards the same goals.
+							</p>
+						</div>
+					</section>
+					<section className="section nft">
+						<div>
+							<h1>What are BollyCoin NFTs?</h1>
+							<div className="tablet-section-3-graphic" />
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ratione accusantium
+								facilis eveniet provident accusamus sequi aperiam, consequatur animi beatae nam ea
+								excepturi aliquam impedit, eum earum. Nam, culpa adipisci!
+							</p>
+						</div>
+					</section>
+					<section className="banner">
+						<h1>
+							Users call the shots and stakers earn rewards from the NFT’s sold on our marketplace.
+						</h1>
+						<p>
+							BollyCoin is partnering with the biggest media owners of the Bollywood industry to
+							receive original media that will be sold as NFTs. BollyCoin can essentially be thought
+							of as Bollywood’s official and first ever NFT partner.
+						</p>
+						<div className="tagline">
+							<img src={Logo} alt="BollyCoin" />
+							<p>Your Cinematic Universe</p>
+						</div>
+						{/* <img src={Movies} alt="showcase" /> */}
+					</section>
+					<section className="timeline-section">
+						<h1>We've got everything planned</h1>
+						<p>
+							The potential of the BollyCoin community is limitless and our vision of the ecosystem
+							stretches far beyond its current use case- to decentralise entertainment investment,
+							ownership and ROI.
+						</p>
+					</section>
+					<Timeline />
+				</main>
+			</div>
 			<Footer />
+			<MobileFooter />
 		</>
 	);
 };

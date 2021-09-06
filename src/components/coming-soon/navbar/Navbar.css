@@ -15,6 +15,7 @@
 }
 
 .logo-container {
+	position: relative;
 	flex: 1;
 	align-self: flex-start;
 	width: 173.13px;
@@ -22,8 +23,21 @@
 }
 
 .logo-container img {
-	max-width: 100%;
+	z-index: -1;
+	user-select: none;
+	position: absolute;
+	width: 100%;
+	max-width: 200px;
 	height: auto;
+	transition: opacity 0.3s ease;
+}
+
+.logo-container img:first-child {
+	max-width: 201px;
+}
+
+.logo-container img[data-visible="false"] {
+	opacity: 0;
 }
 
 .navbar-items {
