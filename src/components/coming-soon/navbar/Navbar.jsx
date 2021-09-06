@@ -4,6 +4,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { Drawer } from "antd";
 
 import Logo from "../../../assets/images/Logo.svg";
+import PinkLogo from "../../../assets/images/logo-pink.svg";
 import "./Navbar.css";
 
 const Navbar = ({ navLinkActive, hovered }) => {
@@ -45,7 +46,8 @@ const Navbar = ({ navLinkActive, hovered }) => {
 			</Drawer>
 			<div className="navbar-container" data-expanded={navLinkActive}>
 				<div className="logo-container">
-					<img src={Logo} alt="BollyCoin Logo" />
+					<img src={Logo} alt="BollyCoin Logo" data-visible={!hovered} />
+					<img src={PinkLogo} alt="BollyCoin Logo" data-visible={hovered} />
 				</div>
 				<ul className="navbar-items">
 					<li

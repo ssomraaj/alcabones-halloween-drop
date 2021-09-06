@@ -5,16 +5,15 @@
 @media only screen and (max-width: 718px) {
 	.mobile-footer {
 		display: flex;
-		margin-top: 50px;
 		padding: 2rem;
-		background-color: #f2f2f2;
+		background-color: #0f0121;
 		justify-content: center;
 		align-items: center;
 		gap: 40px;
 	}
 
 	.mobile-footer-item {
-		color: #1b1b1b;
+		color: #fff;
 		cursor: pointer;
 		transition: 0.4s all ease;
 	}
