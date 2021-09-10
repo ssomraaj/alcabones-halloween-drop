@@ -2,13 +2,20 @@
 	position: fixed;
 	display: flex;
 	align-items: flex-end;
+	align-items: center;
 	justify-content: flex-end;
-	padding: 3rem 4rem;
+	padding: 8.75vh 6vw 3rem;
 	width: 100%;
 	z-index: 999;
+	transition: all 0.4s ease;
+}
+
+.navbar-container[data-expanded="true"] {
+	padding: 3rem 4rem;
 }
 
 .logo-container {
+	position: relative;
 	flex: 1;
 	align-self: flex-start;
 	width: 173.13px;
@@ -16,8 +23,21 @@
 }
 
 .logo-container img {
-	max-width: 100%;
+	z-index: -1;
+	user-select: none;
+	position: absolute;
+	width: 100%;
+	max-width: 200px;
 	height: auto;
+	transition: opacity 0.3s ease;
+}
+
+.logo-container img:first-child {
+	max-width: 201px;
+}
+
+.logo-container img[data-visible="false"] {
+	opacity: 0;
 }
 
 .navbar-items {
@@ -26,10 +46,11 @@
 	display: flex;
 	align-items: center;
 	gap: 60px;
+	margin: 0;
 }
 
 .nav-item {
-	font-size: 24px;
+	font-size: 20px;
 	font-family: "Poppins";
 	font-weight: 400;
 	color: #999999;
@@ -41,13 +62,18 @@
 	color: #fff;
 }
 
+.nav-item[data-hovered="true"] {
+	color: #ff6cc4;
+}
+
 .nav-item-onscroll:hover {
 	cursor: pointer;
 	color: #000;
 }
 
 .remove-nav-link {
-	display: none;
+	opacity: 0;
+	visibility: hidden;
 }
 
 .menu-button-container {
@@ -57,7 +83,8 @@
 .menu-button {
 	width: 40px;
 	height: 40px;
-	background: #2882e5;
+	background: #3789e5;
+	color: #fff;
 	border-radius: 4px;
 	outline: none;
 	border: none;
@@ -78,7 +105,7 @@
 
 @media only screen and (max-width: 1077px) {
 	.navbar-container {
-		padding: 1rem 1rem;
+		padding: 1rem 1rem !important;
 	}
 
 	.nav-item {
@@ -112,14 +139,13 @@
 		width: 40px;
 		height: 40px;
 		background-color: #999;
-
+		color: #000;
 		border-radius: 6px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border: none;
 		outline: none;
-		font-size: 4rem;
 	}
 
 	.close--btn:hover,

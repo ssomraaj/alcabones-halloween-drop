@@ -1,0 +1,6 @@
+@for $i from 1 through 10 {
+	.letter:nth-child(#{$i}) {
+		background-position-x: random($limit: 100) * $i * 1% !important;
+		background-position-y: random($limit: 100) / $i * 1% !important;
+	}
+}
