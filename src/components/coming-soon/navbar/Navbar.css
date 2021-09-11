@@ -55,6 +55,7 @@
 	font-weight: 400;
 	color: #999999;
 	transition: 0.4s all ease;
+	white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -113,7 +114,7 @@
 	}
 }
 
-@media only screen and (max-width: 718px) {
+@media only screen and (max-width: 768px) {
 	.navbar-items {
 		display: none;
 	}

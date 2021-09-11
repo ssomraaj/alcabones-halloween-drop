@@ -1,0 +1,90 @@
+.navbar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding: 1.5rem 7vw;
+}
+
+.navbar > div {
+	margin: 0.5rem 0;
+}
+
+.logo {
+	width: 173.13px;
+	height: 64px;
+}
+
+.logo img {
+	max-width: 100%;
+	height: auto;
+}
+
+.connect-button {
+	margin: 0.5rem 0;
+	cursor: pointer;
+	min-width: 250px;
+	padding: 0 1rem;
+	height: 50px;
+	border: 1px solid #000;
+	background-color: #ffffffcc;
+	color: #000;
+	font-size: 16px;
+	box-shadow: none;
+	outline: none;
+	transition: 0.4s all ease;
+}
+
+.connect-button:hover,
+.connect-button:focus {
+	box-shadow: 0 5px 10px rgb(154 160 185 / 5%), 0 15px 40px rgb(166 173 201 / 20%);
+	background: rgb(238, 63, 200);
+	color: #fff;
+}
+
+.connect-button svg {
+	position: relative;
+	top: 4px;
+	margin-right: 8px;
+}
+
+@media only screen and (min-width: 1440px) {
+	.navbar {
+		padding: 1.5rem 6rem;
+		width: 100%;
+		max-width: 1500px;
+		margin: auto;
+	}
+}
+
+@media only screen and (max-width: 550px) {
+	.navbar {
+		align-items: center;
+	}
+
+	.connect-button {
+		min-width: auto;
+		padding: 0 2rem;
+		margin-top: 1.5rem;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.navbar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.connect-button {
+		padding: 0.5rem 1rem;
+		height: auto;
+		font-size: 0.75rem;
+	}
+
+	.connect-button svg {
+		height: 1rem;
+		width: 1rem;
+	}
+}
