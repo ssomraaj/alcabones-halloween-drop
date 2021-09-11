@@ -5,9 +5,9 @@ import { notification } from "antd";
 import { ConfirmModal } from "../../../components/modals";
 // prettier-ignore
 import { Account, BalanceSection, Navbar, PurchaseForm } from "../../../components/dashboard";
-// import { getWhitelistStatus, isTokenValid } from "../../../utils/service";
+import { isTokenValid } from "../../../utils/service";
 // prettier-ignore
-// import { approveToken, getAllowance, getETHBalance, isAddressWhitelisted } from "../../../utils/contractHelpers";
+import {getETHBalance, getBollyBalance} from "../../../utils/contractHelpers"
 // prettier-ignore
 // import { invest, investmentAmount, confirmTx } from "../../../utils/privateSaleHelpers";
 import "./Home.css";
@@ -37,31 +37,31 @@ class Home extends Component {
 		};
 	}
 
-	// componentDidMount() {
-	// 	const { history, walletConnected, onModalOpen } = this.props;
-	// 	const token = localStorage.getItem("AT");
-	// 	if (token) {
-	// 		this.validateToken(token);
-	// 		if (!walletConnected) {
-	// 			onModalOpen();
-	// 		} else {
-	// 			this.checkWhitelist();
-	// 			this.fetchETHBalance();
-	// 			this.fetchAllowance();
-	// 			this.fetchInvestment();
-	// 		}
-	// 	} else {
-	// 		history.replace("/login");
-	// 	}
-	// }
+	componentDidMount() {
+		const { walletConnected, onModalOpen } = this.props;
+		const token = localStorage.getItem("AT");
+		if (token) {
+			this.validateToken(token);
+			if (!walletConnected) {
+				onModalOpen();
+			} else {
+				// this.checkWhitelist();
+				this.fetchETHBalance();
+				// this.fetchAllowance();
+				// this.fetchInvestment();
+				this.fetchBollyBalance();
+			}
+		}
+	}
 
 	componentDidUpdate(prevProps) {
 		const { address } = this.props;
 		if (address !== prevProps.address && address) {
-			this.checkWhitelist();
+			// this.checkWhitelist();
 			this.fetchETHBalance();
-			this.fetchInvestment();
-			this.fetchAllowance();
+			// this.fetchInvestment();
+			// this.fetchAllowance();
+			this.fetchBollyBalance();
 		} else if (address !== prevProps.address && !address) {
 			this.setState({
 				bollyBalance: "",
@@ -111,39 +111,39 @@ class Home extends Component {
 	// 	});
 	// };
 
-	// validateToken = async (token) => {
-	// 	try {
-	// 		const isValid = await isTokenValid(token);
-	// 		if (isValid) {
-	// 			this.decodeToken(token);
-	// 		} else {
-	// 			const { history } = this.props;
-	// 			localStorage.removeItem("AT");
-	// 			notification["error"]({
-	// 				message: "Your session has been expired. Please log in again",
-	// 				onClose: () => history.replace("/login"),
-	// 			});
-	// 		}
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
+	validateToken = async (token) => {
+		try {
+			const isValid = await isTokenValid(token);
+			if (isValid) {
+				this.decodeToken(token);
+			} else {
+				// const { history } = this.props;
+				localStorage.removeItem("AT");
+				notification["error"]({
+					message: "Your session has been expired. Please log in again",
+					// onClose: () => history.replace("/login"),
+				});
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-	// decodeToken = (token) => {
-	// 	const { history } = this.props;
-	// 	try {
-	// 		const decodedToken = jwt_decode(token);
-	// 		this.setState({
-	// 			email: decodedToken.data.email,
-	// 		});
-	// 	} catch (_) {
-	// 		localStorage.removeItem("AT");
-	// 		notification["error"]({
-	// 			message: "Something went wrong. Please log in again",
-	// 			onClose: () => history.replace("/login"),
-	// 		});
-	// 	}
-	// };
+	decodeToken = (token) => {
+		// const { history } = this.props;
+		try {
+			const decodedToken = jwt_decode(token);
+			this.setState({
+				email: decodedToken.data.email,
+			});
+		} catch (_) {
+			localStorage.removeItem("AT");
+			notification["error"]({
+				message: "Something went wrong. Please log in again",
+				// onClose: () => history.replace("/login"),
+			});
+		}
+	};
 
 	// checkWhitelist = (polling = false) => {
 	// 	this.setState({ [polling ? "polling" : "loading"]: true }, async () => {
@@ -186,30 +186,48 @@ class Home extends Component {
 	// 	});
 	// };
 
-	// fetchETHBalance = (loading = true) => {
-	// 	const { address } = this.props;
-	// 	this.setState({ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: true }, () => {
-	// 		getETHBalance(address)
-	// 			.then((res) => {
-	// 				this.setState(
-	// 					{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
-	// 					() => {
-	// 						this.setState({
-	// 							ethBalance: parseFloat(res.balance),
-	// 						});
-	// 					}
-	// 				);
-	// 			})
-	// 			.catch((err) => {
-	// 				this.setState(
-	// 					{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
-	// 					() => {
-	// 						console.log("Unable to fetch ETH balance - ", err.message);
-	// 					}
-	// 				);
-	// 			});
-	// 	});
-	// };
+	fetchETHBalance = (loading = true) => {
+		const { address } = this.props;
+		this.setState({ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: true }, () => {
+			getETHBalance(address)
+				.then((res) => {
+					this.setState(
+						{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
+						() => {
+							this.setState({
+								ethBalance: parseFloat(res.balance),
+							});
+						}
+					);
+				})
+				.catch((err) => {
+					this.setState(
+						{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
+						() => {
+							console.log("Unable to fetch ETH balance - ", err.message);
+						}
+					);
+				});
+		});
+	};
+
+	// fetching bollycoin balance
+	fetchBollyBalance = () => {
+		const { address } = this.props;
+		this.setState({ fetchingBollyBalance: true }, async () => {
+			try {
+				const data = await getBollyBalance(address);
+				this.setState({
+					bollyBalance: data.balance,
+					fetchingBollyBalance: false,
+				});
+			} catch (err) {
+				this.setState({ fetchingBollyBalance: false }, () => {
+					console.log(err);
+				});
+			}
+		});
+	};
 
 	updateAmount = (e) => {
 		let {
@@ -274,9 +292,9 @@ class Home extends Component {
 	// };
 
 	render() {
-		const { onModalOpen, walletConnected, type, address, history } = this.props;
+		const { onModalOpen, walletConnected, type, address } = this.props;
 		// prettier-ignore
-		const { email, fetchingBollyBalance, bollyBalance, purchaseAmount, purchaseError, loading, ethBalance, status, confirmModalVisible, purchasing, fetchingETHBalance, refreshingETHBalance, txStatus, hash, investment, allowance, asset,
+		const { fetchingBollyBalance, bollyBalance, purchaseAmount, purchaseError, loading, ethBalance, status, confirmModalVisible, purchasing, fetchingETHBalance, refreshingETHBalance, txStatus, hash, investment, allowance, asset,
 		} = this.state;
 		const checkingPurchaseEligibility =
 			fetchingBollyBalance || loading || purchasing || fetchingETHBalance;
@@ -322,7 +340,6 @@ class Home extends Component {
 								walletConnected={walletConnected}
 								walletType={type}
 								address={address}
-								email={email}
 								fetchingETHBalance={fetchingETHBalance}
 								ethBalance={ethBalance}
 								refreshingETHBalance={refreshingETHBalance}

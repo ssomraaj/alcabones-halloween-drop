@@ -102,8 +102,6 @@ class Account extends Component {
 						)}
 					</>
 				)}
-				<p>0x626Cc.......1234 (Metamask)</p>
-				<p>Balance: 0.00000 ETH</p>
 			</div>
 		);
 	}
