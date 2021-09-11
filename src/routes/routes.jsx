@@ -6,6 +6,7 @@ import { AppLoader } from "../components/loaders";
 
 const Login = lazy(() => import("../pages/login/Login"));
 const ComingSoon = lazy(() => import("../pages/coming-soon/ComingSoon"));
+const Home = lazy(() => import("../pages/dashboard/home/Home"));
 
 const Routes = () => {
 	return (
@@ -13,6 +14,7 @@ const Routes = () => {
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route exact path="/coming-soon" component={ComingSoon} />
+				<Route exact path="/get-bollycoin" component={Home} />
 			</Switch>
 		</SuspenseWithChunkError>
 	);
