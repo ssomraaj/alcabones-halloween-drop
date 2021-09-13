@@ -2,15 +2,12 @@ import { useState } from "react";
 import { RiMenu3Fill } from "react-icons/ri";
 import { IoCloseOutline } from "react-icons/io5";
 import { Drawer } from "antd";
-// import { useHistory } from "react-router-dom";
 
 import Logo from "../../../assets/images/Logo.svg";
 import PinkLogo from "../../../assets/images/logo-pink.svg";
 import "./Navbar.css";
 
 const Navbar = ({ navLinkActive, hovered }) => {
-	// let history = useHistory();
-
 	const [visible, setVisible] = useState(false);
 
 	const showDrawer = () => {
@@ -32,10 +29,6 @@ const Navbar = ({ navLinkActive, hovered }) => {
 		window.open("https://bollycoin.s3.us-east-1.amazonaws.com/bollycoin-whitepaper.pdf", "_blank");
 	};
 
-	// const openDashboard = () => {
-	// 	history.push("/get-bollycoin");
-	// };
-
 	return (
 		<>
 			<Drawer placement="right" closable={false} onClose={onClose} visible={visible}>
@@ -48,7 +41,9 @@ const Navbar = ({ navLinkActive, hovered }) => {
 					<ul className="mobile-nav-links">
 						<li onClick={scrollToSection}>About BollyCoin</li>
 						<li onClick={openLink}>Read Whitepaper</li>
-						{/* <li onClick={openDashboard}>Get BollyCoin</li> */}
+						<li style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid #dedede" }}>
+							<a href="/get-bollycoin">Get BollyCoin</a>
+						</li>
 					</ul>
 				</div>
 			</Drawer>
@@ -72,13 +67,12 @@ const Navbar = ({ navLinkActive, hovered }) => {
 					>
 						Read Whitepaper
 					</li>
-					{/* <li
+					<li
 						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
 						data-hovered={hovered}
-						onClick={openDashboard}
 					>
-						Get BollyCoin
-					</li> */}
+						<a href="/get-bollycoin">Get BollyCoin</a>
+					</li>
 				</ul>
 				<div className="menu-button-container">
 					<button className="menu-button" type="primary" onClick={showDrawer}>

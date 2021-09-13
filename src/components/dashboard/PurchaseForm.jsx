@@ -12,10 +12,14 @@ const PurchaseForm = ({
 	onAmountUpdate,
 	formDisabled,
 	onAssetChange,
-	whitelistStatus,
 	onPurchase,
 	walletConnected,
 	onModalOpen,
+	fetchingPrice,
+	price,
+	fetchingTokenPrice,
+	tokenPrice,
+	balance,
 }) => {
 	return (
 		<div className="purchase-form-container">
@@ -49,12 +53,29 @@ const PurchaseForm = ({
 						</MenuItem>
 					</Select>
 				</div>
-				<div>1 BOLLY = $ 0.04</div>
+				{fetchingPrice || fetchingTokenPrice ? (
+					<div>
+						<CircularProgress thickness={5} size={19} style={{ color: "#000" }} />
+					</div>
+				) : (
+					<div>
+						1 BOLLY = $ {price} / {(parseFloat(tokenPrice) * parseFloat(price)).toFixed(4)} {asset}
+					</div>
+				)}
 				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
 				{walletConnected ? (
-					<button onClick={onPurchase} disabled={whitelistStatus !== "whitelisted"}>
+					<button
+						onClick={onPurchase}
+						disabled={
+							!amount || parseFloat(amount) === 0 || parseFloat(amount) > parseFloat(balance)
+						}
+					>
 						{loading ? (
 							<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
+						) : parseFloat(amount) === 0 || !amount ? (
+							"Enter amount"
+						) : parseFloat(amount) > parseFloat(balance) ? (
+							`Insufficient ${asset}`
 						) : parseFloat(allowance) >= parseFloat(amount) ? (
 							`buy now with ${asset}`
 						) : (

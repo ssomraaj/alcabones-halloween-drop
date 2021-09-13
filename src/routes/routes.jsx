@@ -43,7 +43,7 @@ class Routes extends Component {
 			connecting: true,
 		});
 		if (type === "metamask") {
-			this.metamask();
+			this.connectToMetaMask();
 		}
 	};
 
@@ -57,24 +57,33 @@ class Routes extends Component {
 	};
 
 	// temp matamask connect function
-	metamask = async () => {
+	connectToMetaMask = async () => {
 		try {
 			if (window.ethereum !== undefined) {
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				await window.ethereum.request({ method: "eth_requestAccounts" });
 				const address = await provider.listAccounts();
 				const signer = await provider.getSigner();
-				this.setState({
-					type: "Metamask",
-					address: address[0],
-					signer: signer,
-					connected: true,
-					modal: false,
-				});
+				if (provider.network.chainId === 42) {
+					this.setState({
+						type: "Metamask",
+						address: address[0],
+						signer: signer,
+						connected: true,
+						modal: false,
+					});
+				} else {
+					this.setState({ connecting: false }, () => {
+						notification["error"]({
+							message: "Wrong network detected. Please connect to Kovan Test Network",
+						});
+					});
+				}
 			} else {
 				this.setState({ connecting: false }, () => {
 					notification["error"]({
-						message: "Wrong network detected. Please connect to Kovan testnet",
+						message:
+							"Metamask is not installed. Please check if your browser has metamask installed",
 					});
 				});
 			}

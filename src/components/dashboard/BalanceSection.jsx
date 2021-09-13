@@ -6,8 +6,8 @@ const BalanceSection = ({
 	walletConnected,
 	fetchingBollyBalance,
 	bollyBalance,
-	investment,
 	onBalanceRefresh,
+	price,
 }) => {
 	return (
 		<div className="purchase-section-header">
@@ -34,7 +34,7 @@ const BalanceSection = ({
 				<div>
 					<p>
 						{walletConnected
-							? bollyBalance
+							? parseFloat(bollyBalance) > 0
 								? parseFloat(bollyBalance).toFixed(2)
 								: "0.00"
 							: "0.00"}{" "}
@@ -43,8 +43,8 @@ const BalanceSection = ({
 					{/* <span>* Whitelist to purchase</span> */}
 				</div>
 				<div>
-					{walletConnected && parseFloat(investment) > 0
-						? `Eq. Value: $ ${parseFloat(investment).toFixed(3)}`
+					{walletConnected && parseFloat(price) > 0
+						? `Eq. Value: $ ${(parseFloat(price) * parseFloat(bollyBalance)).toFixed(3)}`
 						: `Eq. Value: $ 0.000`}
 				</div>
 			</div>

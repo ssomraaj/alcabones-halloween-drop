@@ -5,7 +5,8 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import "./ConfirmModal.css";
 export default class ConfirmModal extends React.PureComponent {
 	render() {
-		const { visible, amount, onCancel, onConfirm, status, hash, asset } = this.props;
+		const { visible, amount, onCancel, onConfirm, status, hash, asset, price, tokenPrice } =
+			this.props;
 		return (
 			<Modal
 				className="confirm-modal"
@@ -27,7 +28,10 @@ export default class ConfirmModal extends React.PureComponent {
 								</div>
 								<div>
 									<div>Total</div>
-									<div>{parseFloat(amount / 0.04).toFixed(6)} BOLLY</div>
+									<div>
+										{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)}{" "}
+										BOLLY
+									</div>
 								</div>
 							</div>
 							<div className="confirm-buttons-container">
@@ -47,7 +51,10 @@ export default class ConfirmModal extends React.PureComponent {
 								style={{ color: "#000", margin: "auto" }}
 							/>
 							<p className="tx-status">Initializing</p>
-							<p className="tx-description">Purchasing {parseFloat(amount).toFixed(6)} BOLLY</p>
+							<p className="tx-description">
+								Purchasing{" "}
+								{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)} BOLLY
+							</p>
 						</div>
 					) : status === "waiting" ? (
 						<div className="tx-status-block">
@@ -57,7 +64,10 @@ export default class ConfirmModal extends React.PureComponent {
 								style={{ color: "#000", margin: "auto" }}
 							/>
 							<p className="tx-status">Transaction submitted. Waiting for upto 3 confirmations</p>
-							<p className="tx-description">Purchasing {parseFloat(amount).toFixed(6)} BOLLY</p>
+							<p className="tx-description">
+								Purchasing{" "}
+								{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)} BOLLY
+							</p>
 							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
 								View Transaction
 							</a>

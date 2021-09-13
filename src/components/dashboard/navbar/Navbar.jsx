@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { GoPrimitiveDot } from "react-icons/go";
-import "./Navbar.css";
 import Logo from "../../../assets/images/logo-pink.svg";
+import "./Navbar.css";
 export default class Navbar extends Component {
 	render() {
 		const { onModalOpen, walletConnected, type } = this.props;
 		return (
 			<nav className="navbar">
 				<div className="header">
-					<div className="logo" style={{ cursor: "default" }}>
+					<div
+						className="logo"
+						style={{ cursor: "pointer" }}
+						onClick={() => (window.location = "/coming-soon")}
+					>
 						<img src={Logo} alt="logo" />
 					</div>
 				</div>

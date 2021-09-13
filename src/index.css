@@ -43,3 +43,12 @@ body {
 ul {
 	list-style: none;
 }
+
+.MuiInputBase-input,
+.MuiListItem-root {
+	font-family: "medium", sans-serif !important;
+}
+
+.ant-notification-notice {
+	border-radius: 12px !important;
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal, Spin } from "antd";
 import Metamask from "../../../assets/images/connect-modal/icn-metamask.svg";
-import WalletConnect from "../../../assets/images/connect-modal/icn-wallet-connect.svg";
-import CoinbaseWallet from "../../../assets/images/connect-modal/icn-coinbase-wallet.svg";
+// import WalletConnect from "../../../assets/images/connect-modal/icn-wallet-connect.svg";
+// import CoinbaseWallet from "../../../assets/images/connect-modal/icn-coinbase-wallet.svg";
 import Arrow from "../../../assets/images/connect-modal/icn-build-arrows-green.svg";
 import { FiCopy } from "react-icons/fi";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -85,7 +85,7 @@ export default class ConnectModal extends React.PureComponent {
 								<h1>Metamask</h1>
 								<img src={Arrow} alt="right-arrow" />
 							</div>
-							<div
+							{/* <div
 								role="button"
 								tabIndex={-2}
 								className="connect-item"
@@ -106,7 +106,7 @@ export default class ConnectModal extends React.PureComponent {
 								<img src={CoinbaseWallet} alt="coinbase-logo" />
 								<h1>Coinbase Wallet</h1>
 								<img src={Arrow} alt="right-arrow" />
-							</div>
+							</div> */}
 						</div>
 						<p style={{ textAlign: "center" }}>By continuing, I accept the terms of use</p>
 					</div>
