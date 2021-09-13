@@ -18,7 +18,7 @@ export default class ConfirmModal extends React.PureComponent {
 				<div className="modal-container" style={{ marginTop: "1rem" }}>
 					{!status ? (
 						<>
-							<h3>Buy Bollycoin</h3>
+							<h3>Buy BollyCoin</h3>
 							<div className="confirm-grid">
 								<div>
 									<div>Amount</div>
