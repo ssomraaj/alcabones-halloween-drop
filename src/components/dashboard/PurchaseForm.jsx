@@ -24,7 +24,7 @@ const PurchaseForm = ({
 	return (
 		<div className="purchase-form-container">
 			<div className="purchase-form-wrapper">
-				<div className="heading">Buy Bollycoin</div>
+				<div className="heading">Buy BollyCoin</div>
 				<div className="purchase-form-control">
 					<FormInput
 						label={`Amount (${asset})`}

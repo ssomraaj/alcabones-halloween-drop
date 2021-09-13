@@ -12,7 +12,7 @@ const BalanceSection = ({
 	return (
 		<div className="purchase-section-header">
 			<div className="heading">
-				Bollycoin Balance{" "}
+				BollyCoin Balance{" "}
 				{fetchingBollyBalance ? (
 					<CircularProgress size={15} thickness={6} style={{ color: "#000" }} />
 				) : (
