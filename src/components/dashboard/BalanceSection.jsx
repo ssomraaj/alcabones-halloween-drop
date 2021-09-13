@@ -33,7 +33,11 @@ const BalanceSection = ({
 			<div className="balance-section">
 				<div>
 					<p>
-						{walletConnected ? (bollyBalance ? bollyBalance.toFixed(2) : "0.00") : "0.00"}{" "}
+						{walletConnected
+							? bollyBalance
+								? parseFloat(bollyBalance).toFixed(2)
+								: "0.00"
+							: "0.00"}{" "}
 						<span>BOLLY</span>
 					</p>
 					{/* <span>* Whitelist to purchase</span> */}
