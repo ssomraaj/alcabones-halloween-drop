@@ -208,7 +208,6 @@ export const approveToken = ({ asset, amount, signer }) =>
 
 export const purchaseBolly = ({ asset, amount, signer }) =>
 	new Promise(async (resolve, reject) => {
-		console.log({ asset, amount });
 		try {
 			if (!asset) {
 				reject({
@@ -227,8 +226,7 @@ export const purchaseBolly = ({ asset, amount, signer }) =>
 								data: response,
 							});
 						})
-						.catch((err) => {
-							console.log(err);
+						.catch((_) => {
 							reject({
 								error: true,
 								message: "Something went wrong. Please try again.",
@@ -277,8 +275,7 @@ export const purchaseBolly = ({ asset, amount, signer }) =>
 					});
 					break;
 			}
-		} catch (err) {
-			console.log(err);
+		} catch (_) {
 			reject({
 				error: true,
 				message: "Something went wrong. Please try again.",

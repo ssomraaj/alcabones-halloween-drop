@@ -68,7 +68,11 @@ export default class ConfirmModal extends React.PureComponent {
 								Purchasing{" "}
 								{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)} BOLLY
 							</p>
-							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
+							<a
+								href={`https://kovan.etherscan.io/tx/${hash}`}
+								target="_blank"
+								rel="noreferrer noopener"
+							>
 								View Transaction
 							</a>
 						</div>
@@ -78,7 +82,11 @@ export default class ConfirmModal extends React.PureComponent {
 								<IoIosCheckmarkCircleOutline size={90} color="#00D395" />
 							</Zoom>
 							<p className="tx-status">Transaction confirmed</p>
-							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
+							<a
+								href={`https://kovan.etherscan.io/tx/${hash}`}
+								target="_blank"
+								rel="noreferrer noopener"
+							>
 								View Transaction
 							</a>
 						</div>

@@ -1,7 +1,8 @@
 import React, { lazy, Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { ethers } from "ethers";
-// import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletLink from "walletlink";
 import { notification } from "antd";
 
 import { SuspenseWithChunkError } from "../components";
@@ -11,6 +12,12 @@ import { ConnectModal } from "../components/modals";
 const Login = lazy(() => import("../pages/login/Login"));
 const ComingSoon = lazy(() => import("../pages/coming-soon/ComingSoon"));
 const Home = lazy(() => import("../pages/dashboard/home/Home"));
+
+const walletLink = new WalletLink({
+	appName: "Bollycoin",
+	appLogoUrl: "https://bollycoin.net/favicon.ico",
+	darkMode: false,
+});
 
 class Routes extends Component {
 	constructor(props) {
@@ -44,6 +51,10 @@ class Routes extends Component {
 		});
 		if (type === "metamask") {
 			this.connectToMetaMask();
+		} else if (type === "walletconnect") {
+			this.walletconnect();
+		} else if (type === "coinbase") {
+			this.coinbase();
 		}
 	};
 
@@ -54,9 +65,13 @@ class Routes extends Component {
 			connecting: false,
 			address: "",
 		});
+		if (type === "Coinbase") {
+			walletLink.disconnect();
+		} else if (type === "WalletConnect") {
+			localStorage.removeItem("walletconnect");
+		}
 	};
 
-	// temp matamask connect function
 	connectToMetaMask = async () => {
 		try {
 			if (window.ethereum !== undefined) {
@@ -87,6 +102,101 @@ class Routes extends Component {
 					});
 				});
 			}
+		} catch (e) {
+			this.setState({
+				connecting: false,
+			});
+		}
+	};
+
+	walletconnect = async () => {
+		try {
+			const web3Provider = new WalletConnectProvider({
+				infuraId: "857fdaf932a740ffbe04a50c51aaee8e",
+				chainId: 42,
+			});
+			await web3Provider.enable().catch((_) => {
+				this.setState({
+					connecting: false,
+				});
+			});
+			const provider = new ethers.providers.Web3Provider(web3Provider);
+			const address = await provider.listAccounts();
+			const signer = provider.getSigner();
+			provider
+				.getNetwork()
+				.then(async (network) => {
+					if (network.chainId === 42) {
+						this.setState({
+							type: "WalletConnect",
+							address: address[0],
+							signer: signer,
+							connected: true,
+							connecting: false,
+							modal: false,
+						});
+					} else {
+						await web3Provider.disconnect();
+						this.setState({ connecting: false }, () => {
+							notification["error"]({
+								message: "Wrong network detected. Please connect to Kovan Test Network",
+							});
+						});
+					}
+				})
+				.catch(() => {
+					this.setState({
+						connecting: false,
+					});
+				});
+		} catch (e) {
+			this.setState({
+				connecting: false,
+			});
+		}
+	};
+
+	coinbase = async () => {
+		try {
+			const web3Provider = walletLink.makeWeb3Provider(
+				"https://kovan.infura.io/v3/857fdaf932a740ffbe04a50c51aaee8e",
+				42
+			);
+			await web3Provider.enable().catch((e) => {
+				this.setState({
+					connecting: false,
+					connected: false,
+				});
+				return;
+			});
+			const provider = new ethers.providers.Web3Provider(web3Provider);
+			const address = await provider.listAccounts();
+			const signer = provider.getSigner();
+			provider
+				.getNetwork()
+				.then(async (network) => {
+					if (network.chainId === 42) {
+						this.setState({
+							type: "Coinbase",
+							address: address[0],
+							signer: signer,
+							connected: true,
+							connecting: false,
+							modal: false,
+						});
+					} else {
+						this.setState({ connecting: false }, () => {
+							notification["error"]({
+								message: "Wrong network detected. Please connect to Kovan Test Network",
+							});
+						});
+					}
+				})
+				.catch(() => {
+					this.setState({
+						connecting: false,
+					});
+				});
 		} catch (e) {
 			this.setState({
 				connecting: false,

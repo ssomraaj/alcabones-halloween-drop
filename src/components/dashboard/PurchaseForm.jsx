@@ -58,9 +58,7 @@ const PurchaseForm = ({
 						<CircularProgress thickness={5} size={19} style={{ color: "#000" }} />
 					</div>
 				) : (
-					<div>
-						1 BOLLY = $ {price} / {(parseFloat(tokenPrice) * parseFloat(price)).toFixed(4)} {asset}
-					</div>
+					<div>1 BOLLY = $ {price}</div>
 				)}
 				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
 				{walletConnected ? (
