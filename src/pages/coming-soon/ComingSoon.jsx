@@ -1,42 +1,22 @@
-import { Suspense, useEffect, useState } from "react";
-import { OrbitControls } from "@react-three/drei";
+import { useEffect, useState } from "react";
 import $ from "jquery";
 import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
 
-import { CrystalLighting } from "../../components/crystal";
 import { Navbar, Footer as MobileFooter } from "../../components/coming-soon";
 import { Timeline, Footer } from "../../components/coming-soon-v2";
-import { Canvas } from "react-three-fiber";
-import Crystal from "./Crystal";
 import Logo from "../../assets/images/logo-pink.svg";
 import Mouse from "../../assets/images/Mouse.svg";
+import MainCrystal from "../../assets/images/crystal-1-01.png";
+import SecondaryCrystal from "../../assets/images/crystal-2-01.png";
+import ComingText from "../../assets/images/coming.png";
+import SoonText from "../../assets/images/soon.png";
 import "./ComingSoon.css";
 import "./TextAnimation.css";
-
-// const Loading = () => {
-// 	return (
-// 		<mesh rotation={[0, 0, 0]}>
-// 			<sphereGeometry attach="geometry" args={[1, 16, 16]} />
-// 			<meshStandardMaterial
-// 				attach="material"
-// 				color="white"
-// 				transparent
-// 				opacity={0.6}
-// 				roughness={1}
-// 				metalness={0}
-// 			/>
-// 		</mesh>
-// 	);
-// };
 
 const ComingSoon = () => {
 	const [hovered, setHovered] = useState(false);
 	const [navLinkActive, setNavLinkActive] = useState(false);
 	const [socialLink, setSocialLink] = useState(false);
-	// const [axes, setAxes] = useState({ x: 0, y: 0, z: 0 });
-	// const { x, y, z } = axes;
-
-	// const handleAxis = (axis, value) => setAxes({ ...axes, [axis]: parseInt(value) });
 
 	const intitializeProximityRepel = () => {
 		let mouse = { x: 0, y: 0 };
@@ -110,31 +90,18 @@ const ComingSoon = () => {
 			<Navbar navLinkActive={navLinkActive} hovered={hovered} />
 			<div className="coming-soon-outer-container" data-hovered={hovered}>
 				<div className="coming-soon-container" data-hovered={hovered}>
-					<Canvas
-						style={{ position: "absolute", zIndex: 1 }}
-						camera={{ fov: 75, castShadow: true }}
+					<div
+						className="images-container"
+						onMouseOver={() => setHovered(true)}
+						onMouseLeave={() => setHovered(false)}
 					>
-						<OrbitControls
-							position={[0, 0, 0]}
-							rotation={[0, 10, 0]}
-							enableZoom={false}
-							enablePan={false}
-							enableRotate={false}
-							enableKeys={false}
-						/>
-						<CrystalLighting />
-						<Suspense fallback={null}>
-							<Crystal
-								source={hovered ? "/crystal-2.gltf" : "/crystal-1.gltf"}
-								onMouseOver={() => setHovered(true)}
-								onMouseLeave={() => setHovered(false)}
-							/>
-						</Suspense>
-					</Canvas>
-					{/* <div className="coming-soon-graphics" data-hovered={hovered}>
+						<img src={MainCrystal} alt="crystal" data-visible={!hovered} />
+						<img src={SecondaryCrystal} alt="crystal" data-visible={hovered} />
+					</div>
+					<div className="coming-soon-graphics" data-hovered={hovered}>
 						<img src={ComingText} alt="Coming" />
 						<img src={SoonText} alt="soon" />
-					</div> */}
+					</div>
 					<div className="letters-container" data-hovered={hovered}>
 						<div className="letter" data-first-part={true}>
 							C
@@ -171,20 +138,6 @@ const ComingSoon = () => {
 							N
 						</div>
 					</div>
-					{/* <div className="debug-controls">
-				<div>
-					X ({x}): <button onClick={() => handleAxis("x", x + 1)}>+</button>
-					<button onClick={() => handleAxis("x", x - 1)}>-</button>
-				</div>
-				<div>
-					Y ({y}): <button onClick={() => handleAxis("y", y + 1)}>+</button>
-					<button onClick={() => handleAxis("y", y - 1)}>-</button>
-				</div>
-				<div>
-					Z ({z}): <button onClick={() => handleAxis("z", z + 1)}>+</button>
-					<button onClick={() => handleAxis("z", z - 1)}>-</button>
-				</div>
-			</div> */}
 					<div className="social-media-container">
 						<a
 							href="https://www.facebook.com/bollycoinofficial"
@@ -240,13 +193,6 @@ const ComingSoon = () => {
 					<h3 className="cta-text">scroll down</h3>
 				</div>
 			</div>
-			{/* <div className="main-container">
-				<CinematicUniverse />
-				<WhatIsBollycoin />
-				<BollycoinNft />
-				<BollycoinTimeline />
-			</div>
-			<Footer /> */}
 			<div className="landing-main">
 				<div className="main-cointainer">
 					<div className="hero">

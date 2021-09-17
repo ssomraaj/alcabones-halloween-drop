@@ -65,11 +65,13 @@
 	color: #fff;
 }
 
-.nav-item[data-hovered="true"] {
+.nav-item[data-hovered="true"],
+.nav-item[data-hovered="true"] a {
 	color: #ff6cc4;
 }
 
-.nav-item-onscroll:hover {
+.nav-item-onscroll:hover,
+.nav-item-onscroll:hover a {
 	cursor: pointer;
 	color: #000;
 }
