@@ -80,6 +80,7 @@
 	top: -1rem;
 	transition: all 0.5s ease;
 	opacity: 1;
+	filter: drop-shadow(0px 0px 35px rgba(255, 255, 255, 0.25));
 	animation-name: floating;
 	animation-duration: 3s;
 	animation-iteration-count: infinite;
@@ -88,6 +89,7 @@
 
 .images-container img:last-child {
 	left: 0.25rem !important;
+	filter: none;
 }
 
 .images-container img[data-visible="false"] {
