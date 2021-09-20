@@ -24,10 +24,10 @@
 	opacity: 0;
 	content: "";
 	position: absolute;
-	top: 7.5%;
+	top: 7%;
 	left: 5%;
 	width: 90%;
-	height: 84.5%;
+	height: 86%;
 	border: 1.5px solid #4b90d8;
 	box-shadow: 0px 0px 0px 1px #4b90d8, 0px 0px 60px #4b90d8, inset 0px 0px 0px 1px #4b90d8,
 		inset 0px 0px 140px #4b90d8;
@@ -41,7 +41,7 @@
 	position: absolute;
 	margin: auto;
 	width: 95%;
-	height: 92%;
+	height: 95%;
 	border: 2px solid #fff;
 	box-shadow: 0px 0px 80px 4px #d53d99, 0px 0px 30px #d53d99, inset 0px 0px 10px 4px #d53d99,
 		inset 0px 0px 30px #d53d99;
@@ -75,9 +75,11 @@
 }
 
 .images-container img {
+	pointer-events: none;
+	user-select: none;
 	position: absolute;
 	width: 14vw;
-	top: -1rem;
+	top: -0.75rem;
 	transition: all 0.5s ease;
 	opacity: 1;
 	filter: drop-shadow(0px 0px 35px rgba(255, 255, 255, 0.25));
@@ -108,12 +110,32 @@
 	}
 }
 
+.tagline-text {
+	padding: 0 1rem;
+	position: absolute;
+	z-index: 20;
+	background: linear-gradient(to right, #ed83bb 20%, #d99f11);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+	font-size: 1.15rem;
+	top: 25vh;
+	text-align: center;
+	transition: background 0.5s ease;
+}
+
+.tagline-text[data-hovered="true"] {
+	background: linear-gradient(to right, #d99f11 10%, #ed83bb);
+	background-clip: text;
+}
+
 .letters-container[data-hovered="true"] .letter {
 	opacity: 0;
 	transition: all 0.5s ease;
 }
 
 .letter {
+	opacity: 1;
 	-webkit-text-stroke: 2px #fff;
 	/* background: url(../../assets/images/text-animation.gif) !important;
 	background-clip: text !important; */
@@ -129,7 +151,7 @@
 	letter-spacing: 0;
 	color: #fff;
 	text-align: center;
-	transition: 0.5s color ease;
+	transition: 0.5s opacity ease;
 	z-index: 10;
 }
 
@@ -189,7 +211,17 @@
 
 .coming-soon-container img:last-child {
 	position: relative;
-	left: -3.5rem;
+	left: -4.5rem;
+}
+
+@-moz-document url-prefix() {
+	.coming-soon-graphics img {
+		top: -1rem;
+	}
+
+	.coming-soon-graphics img:first-child {
+		left: 0.5rem;
+	}
 }
 
 .social-media-container {
@@ -281,8 +313,8 @@
 	padding: 3.5rem 0 3.5rem 7vw;
 	min-height: 100vh;
 	overflow: hidden;
-	background: url(../../assets/images/poster-5.png) no-repeat center right;
-	background-size: 35% auto;
+	background: url(../../assets/images/rounded/poster-1.png) no-repeat center right;
+	background-size: 40% auto;
 	transition: all 0.3s ease;
 }
 
@@ -377,7 +409,7 @@
 	padding: 5rem 7vw;
 	display: flex;
 	justify-content: flex-end;
-	background: url(../../assets/images/poster-7.png) no-repeat left;
+	background: url(../../assets/images/rounded/poster-2.png) no-repeat left;
 	background-size: 35% auto;
 }
 
@@ -405,7 +437,7 @@
 
 .invert {
 	justify-content: flex-start;
-	background: url(../../assets/images/poster-12.png) no-repeat right;
+	background: url(../../assets/images/rounded/poster-3.png) no-repeat right;
 	background-size: 38%;
 }
 
@@ -415,8 +447,8 @@
 	padding: 5rem 7vw;
 	display: flex;
 	justify-content: flex-end;
-	background: url(../../assets/images/poster-13.png) no-repeat left;
-	background-size: 40% auto;
+	background: url(../../assets/images/rounded/poster-6.png) no-repeat left;
+	background-size: 35% auto;
 }
 
 /* .section-2-graphic {
@@ -612,7 +644,7 @@
 	.tablet-main-graphic {
 		height: 450px;
 		width: 100%;
-		background: url(../../assets/images/poster-5.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-1.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -644,7 +676,7 @@
 	.tablet-section-1-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/poster-7.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-2.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -655,14 +687,14 @@
 	.tablet-section-2-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/poster-12.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-3.png) no-repeat center;
 		background-size: contain;
 	}
 
 	.tablet-section-3-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/poster-13.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-6.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -716,7 +748,7 @@
 	.tablet-main-graphic {
 		height: 500px;
 		width: 100%;
-		background: url(../../assets/images/poster-5.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-1.png) no-repeat center;
 		background-size: contain;
 		margin-top: 0rem;
 		margin-bottom: -1rem;
