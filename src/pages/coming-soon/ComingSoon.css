@@ -125,13 +125,32 @@
 }
 
 .tagline-text[data-hovered="true"] {
-	background: linear-gradient(to right, #d99f11 10%, #ed83bb);
+	background: linear-gradient(to right, #d99f11 1%, #ed83bb);
 	background-clip: text;
 }
 
 .letters-container[data-hovered="true"] .letter {
 	opacity: 0;
 	transition: all 0.5s ease;
+}
+
+.bottom-tagline-text {
+	padding: 0 1rem;
+	position: absolute;
+	z-index: 20;
+	background: linear-gradient(to right, #ed83bb 20%, #d99f11);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+	font-size: 1.15rem;
+	bottom: 27.5vh;
+	text-align: center;
+	transition: all 0.5s ease;
+	opacity: 0;
+}
+
+.bottom-tagline-text[data-hovered="true"] {
+	opacity: 1;
 }
 
 .letter {
@@ -313,8 +332,8 @@
 	padding: 3.5rem 0 3.5rem 7vw;
 	min-height: 100vh;
 	overflow: hidden;
-	background: url(../../assets/images/rounded/poster-1.png) no-repeat center right;
-	background-size: 40% auto;
+	background: url(../../assets/images/rounded/poster-2.png) no-repeat center right;
+	background-size: 32% auto;
 	transition: all 0.3s ease;
 }
 
@@ -409,8 +428,8 @@
 	padding: 5rem 7vw;
 	display: flex;
 	justify-content: flex-end;
-	background: url(../../assets/images/rounded/poster-2.png) no-repeat left;
-	background-size: 35% auto;
+	background: url(../../assets/images/rounded/poster-1.png) no-repeat left;
+	background-size: 42% auto;
 }
 
 .section div {
@@ -644,7 +663,7 @@
 	.tablet-main-graphic {
 		height: 450px;
 		width: 100%;
-		background: url(../../assets/images/rounded/poster-1.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-2.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -676,7 +695,7 @@
 	.tablet-section-1-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/rounded/poster-2.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-1.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -717,6 +736,10 @@
 		width: 25vw;
 		top: -0.1rem;
 	}
+
+	.bottom-tagline-text {
+		opacity: 1;
+	}
 }
 
 @media only screen and (max-width: 500px) {
@@ -748,7 +771,7 @@
 	.tablet-main-graphic {
 		height: 500px;
 		width: 100%;
-		background: url(../../assets/images/rounded/poster-1.png) no-repeat center;
+		background: url(../../assets/images/rounded/poster-2.png) no-repeat center;
 		background-size: contain;
 		margin-top: 0rem;
 		margin-bottom: -1rem;

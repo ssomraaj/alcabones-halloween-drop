@@ -177,6 +177,9 @@ const ComingSoon = () => {
 								N
 							</div>
 						</div>
+						<div className="bottom-tagline-text" data-hovered={hovered}>
+							In November
+						</div>
 						<div className="social-media-container">
 							<a
 								href="https://www.facebook.com/bollycoinofficial"
@@ -276,18 +279,7 @@ const ComingSoon = () => {
 									community to express their fandom through creating and collecting NFTs from their
 									favorite films and by their favorite artist. Beyond NFTs BollyCoin aims to create
 									Immersive, Unique and Irreplaceable Experiences through using Science, Technology
-									& our communities demands. BollyCoin is a digital marketplace that allows our
-									community to create their own cinematic universe and rewards them from their
-									participation and contribution to the community. The community is the heart of our
-									platform, and the heart gets what the heart wants! Our community members vote for
-									what they want to see on the marketplace when they want to see it and how they
-									want to see it.
-									<br />
-									<br />
-									Every BollyCoin community member's vote counts.
-									<br />
-									<br />
-									Welcome to the BollyCoin Community!
+									& our communities demands.
 								</p>
 							</div>
 						</section>
@@ -296,16 +288,17 @@ const ComingSoon = () => {
 								<h1>Why BollyCoin?</h1>
 								<div className="tablet-section-2-graphic" />
 								<p>
-									The valuation of BollyCoin comes from it’s reward system. There will be a total
-									supply of 1,000,000 coins. 20% of the total sale proceeds of all NFT’s minted and
-									sold on the BollyCoin market place get rewarded back to the community. Hence the
-									limited supply of BollyCoin makes it a race between investors to get as many
-									BollyCoins as possible.
+									BollyCoin is a digital marketplace that allows our community to create their own
+									cinematic universe and rewards them from their participation and contribution to
+									the community. The community is the heart of our platform, and the heart gets what
+									the heart wants! Our community members vote for what they want to see on the
+									marketplace when they want to see it and how they want to see it.
 									<br />
 									<br />
-									BollyCoin believes all project stakeholders are as important as each other.
-									Investment funds and communities should work side by side on projects, on the same
-									terms, towards the same goals.
+									Every BollyCoin community member's vote counts.
+									<br />
+									<br />
+									Welcome to the BollyCoin Community!
 								</p>
 							</div>
 						</section>

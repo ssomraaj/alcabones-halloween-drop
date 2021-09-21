@@ -7,29 +7,49 @@ const timeline = [
 	{
 		name: "item1",
 		// year: '2021',
-		events: [<li>BollyCoin Presale & Auction</li>, <li>- between September & October 2021</li>],
+		events: [
+			<li>
+				BollyCoin Launches its <br /> "Coming Soon Website"
+			</li>,
+			<li>
+				- 20<sup>th</sup> September 2021
+			</li>,
+		],
 	},
 	{
 		name: "item2",
 		// year: '2021',
-		events: [
-			<li>
-				BollyCoin NFT Platform goes live
-				<br />
-				with some of the biggest films in Bollywood
-			</li>,
-			<li>- between September & October 2021</li>,
-		],
+		events: [<li>BollyCoin presale & auction will go live</li>, <li>- October 2021</li>],
 	},
 	{
 		name: "item3",
 		// year: '2021',
-		events: [<li>BollyCoin Intital Coin Offering</li>, <li>- between September & October 2021</li>],
+		events: [
+			<li>
+				Actual allotment of BollyCoin
+				<br />
+				to Presale/Private round Investors
+			</li>,
+			<li>- October 2021</li>,
+		],
 	},
 	{
 		name: "item4",
 		// year: '2021',
-		events: [<li>BollyCoin community based film & media production</li>, <li>- 2022 onwards</li>],
+		events: [<li>BollyCoin initial coin offering</li>, <li>- November 2021</li>],
+	},
+	{
+		name: "item5",
+		events: [<li>BollyCoin NFT Platform goes live</li>, <li>- November 2021</li>],
+	},
+	{
+		name: "item6",
+		events: [
+			<li>
+				BollyCoin community-based NFTs <br /> and media production
+			</li>,
+			<li>- 2022 onwards</li>,
+		],
 	},
 ];
 
