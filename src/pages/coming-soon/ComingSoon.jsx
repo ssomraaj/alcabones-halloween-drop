@@ -325,8 +325,7 @@ const ComingSoon = () => {
 						</section>
 						<section className="banner">
 							<h1>
-								Users call the shots and stakers earn rewards from the NFT’s sold on our
-								marketplace.
+								Users call the shots and stakers earn rewards from the NFTs sold on our marketplace.
 							</h1>
 							<p>
 								BollyCoin is partnering with the biggest media owners of the Bollywood industry to
