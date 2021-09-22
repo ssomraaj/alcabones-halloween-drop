@@ -1,6 +1,7 @@
 import { CircularProgress, TextField } from "@material-ui/core";
 import React, { Component } from "react";
 import { API } from "../../../utils/service";
+import { FiExternalLink } from "react-icons/fi";
 // import { FaTwitter } from 'react-icons/fa'
 // import Discord from '../../../assets/icons/discord.svg'
 import "./Footer.css";
@@ -149,7 +150,15 @@ export default class Footer extends Component {
 					</div>
 					<div className="copyrights">
 						<div>&copy; 2021 Bollycoin</div>
-						<div>Alpha V1.0</div>
+						<div>
+							<a
+								href="https://etherscan.io/token/0x6bd361e10c1afed0d95259e7c0115f3a60e4ea99"
+								target="_blank"
+								rel="noreferrer noopener"
+							>
+								View Smart Contract <FiExternalLink style={{ position: "relative", top: "2px" }} />
+							</a>
+						</div>
 					</div>
 				</div>
 			</footer>
