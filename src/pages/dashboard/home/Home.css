@@ -290,6 +290,11 @@
 	margin-top: -0.2rem;
 }
 
+.no-connection {
+	text-align: center;
+	padding: 50% 0;
+}
+
 @media only screen and (min-width: 2400px) {
 	.purchase-section-header,
 	.purchase-form-container,
@@ -407,6 +412,11 @@
 	.purchase-form-input {
 		max-width: 35vw;
 	}
+
+	.no-connection {
+		text-align: left;
+		padding: 1rem 0;
+	}
 }
 
 @media only screen and (max-width: 1230px) {
@@ -477,11 +487,6 @@
 		margin-right: 0;
 	}
 
-	.account-section > div:last-child {
-		width: 60%;
-		margin: 2.5rem auto 0;
-	}
-
 	.balance-section {
 		flex-direction: column;
 		align-items: flex-start;
@@ -494,10 +499,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-	.account-section > div:last-child {
-		width: 70%;
-	}
-
 	.purchase-form-input {
 		max-width: 22%;
 	}

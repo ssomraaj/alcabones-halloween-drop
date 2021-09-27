@@ -13,6 +13,7 @@
 .logo {
 	width: 173.13px;
 	height: 64px;
+	transition: 0.3s all ease;
 }
 
 .logo img {
@@ -65,14 +66,17 @@
 	.connect-button {
 		min-width: auto;
 		padding: 0 2rem;
-		margin-top: 1.5rem;
 	}
 }
 
-@media only screen and (max-width: 500px) {
-	.navbar {
-		flex-direction: column;
-		align-items: flex-start;
+@media only screen and (max-width: 450px) {
+	.logo {
+		width: 120px;
+		height: auto;
+	}
+
+	.connect-button {
+		padding: 0 1rem;
 	}
 }
 

@@ -178,7 +178,7 @@ const ComingSoon = () => {
 							</div>
 						</div>
 						<div className="bottom-tagline-text" data-hovered={hovered}>
-							In November
+							November 2021
 						</div>
 						<div className="social-media-container">
 							<a
@@ -211,7 +211,7 @@ const ComingSoon = () => {
 									className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
 								/>
 							</a>
-							<a href="https://discord.gg/S2XxEXPj" target="_blank" rel="noreferrer noopener">
+							<a href="https://discord.gg/Ngx7kaGw4c" target="_blank" rel="noreferrer noopener">
 								<FaDiscord
 									size={22}
 									className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
@@ -242,6 +242,10 @@ const ComingSoon = () => {
 						</div>
 						<h3 className="cta-text">scroll down</h3>
 					</div>
+				</div>
+				<div className="tagline">
+					<img src={Logo} alt="BollyCoin" />
+					<p>Your Cinematic Universe</p>
 				</div>
 				<div className="landing-main">
 					<div className="main-cointainer">
@@ -332,10 +336,6 @@ const ComingSoon = () => {
 								receive original media that will be sold as NFTs. BollyCoin can essentially be
 								thought of as Bollywood’s official and first ever NFT partner.
 							</p>
-							<div className="tagline">
-								<img src={Logo} alt="BollyCoin" />
-								<p>Your Cinematic Universe</p>
-							</div>
 							{/* <img src={Movies} alt="showcase" /> */}
 						</section>
 						<section className="timeline-section">

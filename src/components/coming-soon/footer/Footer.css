@@ -2,14 +2,15 @@
 	display: none;
 }
 
-@media only screen and (max-width: 718px) {
+@media only screen and (max-width: 768px) {
 	.mobile-footer {
 		display: flex;
 		padding: 2rem;
 		background-color: #0f0121;
 		justify-content: center;
 		align-items: center;
-		gap: 40px;
+		gap: 60px;
+		flex-wrap: wrap;
 	}
 
 	.mobile-footer-item {

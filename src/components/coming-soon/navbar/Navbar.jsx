@@ -31,7 +31,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 
 	return (
 		<>
-			<Drawer placement="right" closable={false} onClose={onClose} visible={visible}>
+			<Drawer placement="right" closable={false} onClose={onClose} visible={visible} width="300px">
 				<div className="mobile-navigation">
 					<div class="mobile-nav-header">
 						<button className="close--btn" onClick={onClose}>
@@ -39,7 +39,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 						</button>
 					</div>
 					<ul className="mobile-nav-links">
-						<li onClick={scrollToSection}>About BollyCoin</li>
+						<li onClick={scrollToSection}>What is BollyCoin?</li>
 						<li onClick={openLink}>Read Whitepaper</li>
 						<li style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid #dedede" }}>
 							<a href="/get-bollycoin">Get BollyCoin</a>
@@ -58,7 +58,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 						data-hovered={hovered}
 						onClick={scrollToSection}
 					>
-						About BollyCoin
+						What is BollyCoin?
 					</li>
 					<li
 						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}

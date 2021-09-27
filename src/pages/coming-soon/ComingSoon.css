@@ -499,7 +499,7 @@
 	opacity: 0.8;
 	font-size: calc(0.8em + 1vmin);
 	line-height: 2.15rem;
-	margin: 3rem auto;
+	margin: 2rem auto;
 	width: 90%;
 }
 
@@ -526,13 +526,21 @@
 	margin: 3rem auto 0;
 }
 
-.banner .tagline img {
+.tagline {
+	padding: 0 1.75rem;
+	margin-top: 4.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.tagline img {
 	width: 100%;
 	height: auto;
 	max-width: 320px;
+	margin: auto;
 }
 
-.banner .tagline p {
+.tagline p {
 	margin: 1rem auto 0;
 	text-align: center !important;
 	font-size: 2rem;
@@ -556,7 +564,7 @@
 	opacity: 0.8;
 	font-size: calc(0.8em + 1vmin);
 	line-height: 2.15rem;
-	margin: 3rem 0;
+	margin: 2rem 0;
 	text-align: center;
 }
 
@@ -631,9 +639,18 @@
 
 	.main-cointainer,
 	.section,
-	.banner,
+	.section.nft {
+		padding: 2rem 2rem;
+		margin: 0;
+	}
+
+	.banner {
+		padding: 2rem 2rem 0;
+		margin: 0;
+	}
+
 	.timeline-section {
-		padding: 3rem 2rem;
+		padding: 2rem;
 		margin: 0;
 	}
 
@@ -657,7 +674,7 @@
 		width: 100%;
 		font-size: calc(2.5em + 1vmin);
 		line-height: 3.25rem;
-		margin-bottom: 2.5rem;
+		margin-bottom: 2.75rem;
 	}
 
 	.tablet-main-graphic {
@@ -683,11 +700,11 @@
 	.section h1 {
 		font-size: calc(2.5em + 1vmin);
 		line-height: 3.25rem;
-		margin-bottom: 2rem;
+		margin-bottom: 2.75rem;
 	}
 
 	.section p {
-		margin-top: 2rem;
+		margin: 3rem 0 0;
 		font-size: calc(0.8em + 1vmin);
 		line-height: 2.15rem;
 	}
@@ -700,7 +717,7 @@
 	}
 
 	.invert h1 {
-		margin-bottom: 2.5rem;
+		margin-bottom: 2.75rem;
 	}
 
 	.tablet-section-2-graphic {
@@ -769,7 +786,7 @@
 	}
 
 	.tablet-main-graphic {
-		height: 500px;
+		height: 400px;
 		width: 100%;
 		background: url(../../assets/images/rounded/poster-2.png) no-repeat center;
 		background-size: contain;
@@ -793,22 +810,26 @@
 		width: 25vw;
 		top: -0.1rem;
 	}
-}
 
-@media only screen and (max-width: 425px) {
-	.section h1 {
-		margin-bottom: 0;
+	.main-cointainer,
+	.section,
+	.section.nft {
+		padding: 1.5rem 2rem;
+		margin: 0;
 	}
 
 	.section p {
-		margin-top: 0rem;
+		margin: 2rem 0 0;
 	}
 }
 
-@media only screen and (max-width: 375px) {
-	.tablet-main-graphic {
-		margin-top: -4rem;
-		margin-bottom: -4rem;
+@media only screen and (max-width: 425px) {
+	.section p {
+		margin-top: 1.5rem;
+	}
+
+	.section.nft p {
+		margin-top: 2rem;
 	}
 }
 
@@ -846,5 +867,17 @@
 
 	canvas {
 		left: 0.5rem;
+	}
+
+	.tablet-section-3-graphic {
+		height: 500px;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.tablet-section-1-graphic,
+	.tablet-section-2-graphic,
+	.tablet-section-3-graphic {
+		height: 300px;
 	}
 }

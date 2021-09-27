@@ -8,10 +8,10 @@ const timeline = [
 		name: "item1",
 		// year: '2021',
 		events: [
-			<li>
+			<li key="desc-1">
 				BollyCoin Launches its <br /> "Coming Soon Website"
 			</li>,
-			<li>
+			<li key="time-1">
 				- 20<sup>th</sup> September 2021
 			</li>,
 		],
@@ -19,36 +19,45 @@ const timeline = [
 	{
 		name: "item2",
 		// year: '2021',
-		events: [<li>BollyCoin presale & auction will go live</li>, <li>- October 2021</li>],
+		events: [
+			<li key="desc-2">BollyCoin presale & auction will go live</li>,
+			<li key="time-2">- October 2021</li>,
+		],
 	},
 	{
 		name: "item3",
 		// year: '2021',
 		events: [
-			<li>
+			<li key="desc-3">
 				Actual allotment of BollyCoin
 				<br />
 				to Presale/Private round Investors
 			</li>,
-			<li>- October 2021</li>,
+			<li key="time-3">- October 2021</li>,
 		],
 	},
 	{
 		name: "item4",
 		// year: '2021',
-		events: [<li>BollyCoin initial coin offering</li>, <li>- November 2021</li>],
+		events: [
+			<li key="desc-4">BollyCoin initial coin offering</li>,
+			<li key="time-4">- November 2021</li>,
+		],
 	},
 	{
 		name: "item5",
-		events: [<li>BollyCoin NFT Platform goes live</li>, <li>- November 2021</li>],
+		events: [
+			<li key="desc-5">BollyCoin NFT Platform goes live</li>,
+			<li key="time-5">- November 2021</li>,
+		],
 	},
 	{
 		name: "item6",
 		events: [
-			<li>
+			<li key="desc-6">
 				BollyCoin community-based NFTs <br /> and media production
 			</li>,
-			<li>- 2022 onwards</li>,
+			<li key="time-6">- 2022 onwards</li>,
 		],
 	},
 ];
@@ -135,7 +144,6 @@ export default class Timeline extends Component {
 					scrollBy={false}
 					translate={10}
 				/>
-				{/* <div className="line" /> */}
 			</div>
 		);
 	}

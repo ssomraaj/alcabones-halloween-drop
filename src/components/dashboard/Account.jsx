@@ -65,7 +65,7 @@ class Account extends Component {
 						)}
 					</>
 				) : (
-					<p style={{ textAlign: "center", padding: "50% 0" }}>Connect your wallet</p>
+					<p className="no-connection">Connect your wallet</p>
 				)}
 			</div>
 		);
