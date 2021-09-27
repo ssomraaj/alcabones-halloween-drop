@@ -528,7 +528,7 @@
 
 .tagline {
 	padding: 0 1.75rem;
-	margin-top: 4.5rem;
+	margin: 7rem 0 0.5rem;
 	display: flex;
 	flex-direction: column;
 }
@@ -536,7 +536,7 @@
 .tagline img {
 	width: 100%;
 	height: auto;
-	max-width: 320px;
+	max-width: 520px;
 	margin: auto;
 }
 

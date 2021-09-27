@@ -292,10 +292,10 @@ const ComingSoon = () => {
 								<h1>Why BollyCoin?</h1>
 								<div className="tablet-section-2-graphic" />
 								<p>
-									BollyCoin is a digital marketplace that allows our community to create their own
-									cinematic universe and rewards them from their participation and contribution to
-									the community. The community is the heart of our platform, and the heart gets what
-									the heart wants! Our community members vote for what they want to see on the
+									Our digital marketplace allows our community to create their own cinematic
+									universe and rewards them from their participation and contribution to the
+									community. The community is the heart of our platform, and the heart gets what the
+									heart wants! Our community members vote for what they want to see on the
 									marketplace when they want to see it and how they want to see it.
 									<br />
 									<br />
@@ -334,7 +334,7 @@ const ComingSoon = () => {
 							<p>
 								BollyCoin is partnering with the biggest media owners of the Bollywood industry to
 								receive original media that will be sold as NFTs. BollyCoin can essentially be
-								thought of as Bollywood’s official and first ever NFT partner.
+								thought of as a Bollywood NFT partner.
 							</p>
 							{/* <img src={Movies} alt="showcase" /> */}
 						</section>
