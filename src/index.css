@@ -1,16 +1,19 @@
 @font-face {
 	font-family: "primary";
 	src: url(./assets/fonts/Calcula-Std-Solid.ttf);
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "medium";
 	src: url(./assets/fonts/MarkOT-Medium.ttf);
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "bold";
 	src: url(./assets/fonts/MarkOT-Heavy.ttf);
+	font-display: swap;
 }
 
 @font-face {
@@ -19,11 +22,13 @@
 		url("./assets/fonts/poppins-regular-webfont.woff") format("woff");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "Roboto";
 	src: url(./assets/fonts/Roboto-Bold.ttf);
+	font-display: swap;
 }
 
 :root {

@@ -250,7 +250,7 @@ const ComingSoon = () => {
 				<div className="landing-main">
 					<div className="main-cointainer">
 						<div className="hero">
-							<h1>The First Ever Bollywood NFT Marketplace</h1>
+							<h1>The Bollywood NFT Marketplace</h1>
 							<div className="tablet-main-graphic" />
 							<p>
 								Over 1 billion people over the world are already Bollywood media consumers and a
@@ -278,12 +278,10 @@ const ComingSoon = () => {
 								<h1>What is BollyCoin?</h1>
 								<div className="tablet-section-1-graphic" />
 								<p>
-									BollyCoin is a decentralized community that uses blockchain technology to empower
-									Innovators, Creators, Collectors and Consumers of Bollywood Media. Enabling our
-									community to express their fandom through creating and collecting NFTs from their
-									favorite films and by their favorite artist. Beyond NFTs BollyCoin aims to create
-									Immersive, Unique and Irreplaceable Experiences through using Science, Technology
-									& our communities demands.
+									BollyCoin is a decentralized community that uses blockchain technology to give
+									artists, producers and fans of Bollywood media a chance to express their fandom by
+									creating & collecting NFTs from their favourite films and by their favourite
+									artists.
 								</p>
 							</div>
 						</section>
@@ -292,17 +290,13 @@ const ComingSoon = () => {
 								<h1>Why BollyCoin?</h1>
 								<div className="tablet-section-2-graphic" />
 								<p>
-									Our digital marketplace allows our community to create their own cinematic
-									universe and rewards them from their participation and contribution to the
-									community. The community is the heart of our platform, and the heart gets what the
-									heart wants! Our community members vote for what they want to see on the
-									marketplace when they want to see it and how they want to see it.
-									<br />
-									<br />
-									Every BollyCoin community member's vote counts.
-									<br />
-									<br />
-									Welcome to the BollyCoin Community!
+									Our marketplace enables the community to buy, trade and profit through the NFTs on
+									our platform! The marketplace allows users to create their own cinematic universes
+									and rewards them from their participation & contribution to the community. We want
+									the audience to actively be a part in shaping what content we release to them. The
+									community is the heart of our platform, and the heart gets what the heart wants!
+									Our community members vote for what NFTs they want to see on the marketplace when
+									they want to see them.
 								</p>
 							</div>
 						</section>
@@ -311,19 +305,14 @@ const ComingSoon = () => {
 								<h1>What are BollyCoin NFTs?</h1>
 								<div className="tablet-section-3-graphic" />
 								<p>
-									BollyCoin enables the audience to buy, fund, watch, profit and even trade
-									ownership of individual pieces of content including films, posters and exclusive
-									NFT content that they want.
-									<br />
-									<br />
-									Empowering the audience to actively shape what content is produced for them to
-									consume. What if the audience decides which script gets produced? Or even who gets
-									to be part of the cast? BollyCoin is partnering with some of Bollywood’s largest
-									production houses and celebrities to create NFTs out of films that have been
-									produced by the industry over the decades. Imagine owning your favorite scene of
-									your favorite bollywood movie? Or owning the exclusive rights of the NFTs of
-									official posters or trailers to a film you grew up on. That’s all practically
-									possible now!
+									We are collaborating with some of Bollywood’s largest production houses and
+									celebrities to bring you Blockbuster NFTs! Dialogues, posters & stills from your
+									favourite films! Along with Tweets, posts & more straight from your favourite
+									stars! Beyond NFTs we aim to create immersive, unique and irreplaceable
+									experiences through technology, media & most importantly, our communities’
+									demands. Imagine owning your favorite scene of your favorite Bollywood movie? Or
+									owning the exclusive rights of the NFTs of official posters or trailers to a film
+									you grew up on. That’s all practically possible now!
 								</p>
 							</div>
 						</section>
@@ -334,7 +323,7 @@ const ComingSoon = () => {
 							<p>
 								BollyCoin is partnering with the biggest media owners of the Bollywood industry to
 								receive original media that will be sold as NFTs. BollyCoin can essentially be
-								thought of as a Bollywood NFT partner.
+								thought of as a Bollywood's NFT partner.
 							</p>
 							{/* <img src={Movies} alt="showcase" /> */}
 						</section>

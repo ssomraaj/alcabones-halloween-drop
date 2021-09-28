@@ -33,7 +33,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 		<>
 			<Drawer placement="right" closable={false} onClose={onClose} visible={visible} width="300px">
 				<div className="mobile-navigation">
-					<div class="mobile-nav-header">
+					<div className="mobile-nav-header">
 						<button className="close--btn" onClick={onClose}>
 							<IoCloseOutline size={25} />
 						</button>
@@ -73,6 +73,12 @@ const Navbar = ({ navLinkActive, hovered }) => {
 					>
 						<a href="/get-bollycoin">Get BollyCoin</a>
 					</li>
+					{/* <li
+						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
+						data-hovered={hovered}
+					>
+						<a href="##">Contact Us</a>
+					</li> */}
 				</ul>
 				<div className="menu-button-container">
 					<button className="menu-button" type="primary" onClick={showDrawer}>
