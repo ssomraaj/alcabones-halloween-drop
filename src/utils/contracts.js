@@ -350,7 +350,7 @@ export const ERC_20_ABI = [
 	},
 ];
 
-export const SALE_ADDRESS = "0x03Aa2C58EdFDa4f4a76984f2528eA9d888f2f933";
+export const SALE_ADDRESS = "0xCAc81dEc553B500daC5cC0214609D3149cAd74F3";
 
 export const SALE_ABI = [
 	{
@@ -359,7 +359,7 @@ export const SALE_ABI = [
 			{ internalType: "address", name: "_usdcAddress", type: "address" },
 			{ internalType: "address", name: "_busdAddress", type: "address" },
 			{ internalType: "address", name: "_bollyAddress", type: "address" },
-			{ internalType: "address", name: "_settlementWallet", type: "address" },
+			{ internalType: "address", name: "_settlementAddress", type: "address" },
 		],
 		stateMutability: "nonpayable",
 		type: "constructor",
@@ -368,6 +368,7 @@ export const SALE_ABI = [
 		anonymous: false,
 		inputs: [
 			{ indexed: true, internalType: "address", name: "buyer", type: "address" },
+			{ indexed: false, internalType: "string", name: "uid", type: "string" },
 			{ indexed: false, internalType: "uint256", name: "amount", type: "uint256" },
 			{ indexed: false, internalType: "uint256", name: "usdValue", type: "uint256" },
 			{ indexed: false, internalType: "bytes32", name: "currency", type: "bytes32" },
@@ -404,21 +405,30 @@ export const SALE_ABI = [
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+		inputs: [
+			{ internalType: "uint256", name: "_amount", type: "uint256" },
+			{ internalType: "string", name: "uid", type: "string" },
+		],
 		name: "purchaseWithBUSD",
 		outputs: [{ internalType: "bool", name: "", type: "bool" }],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+		inputs: [
+			{ internalType: "uint256", name: "_amount", type: "uint256" },
+			{ internalType: "string", name: "uid", type: "string" },
+		],
 		name: "purchaseWithUSDC",
 		outputs: [{ internalType: "bool", name: "", type: "bool" }],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+		inputs: [
+			{ internalType: "uint256", name: "_amount", type: "uint256" },
+			{ internalType: "string", name: "uid", type: "string" },
+		],
 		name: "purchaseWithUSDT",
 		outputs: [{ internalType: "bool", name: "", type: "bool" }],
 		stateMutability: "nonpayable",

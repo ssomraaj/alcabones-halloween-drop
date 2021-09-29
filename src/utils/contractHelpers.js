@@ -206,7 +206,7 @@ export const approveToken = ({ asset, amount, signer }) =>
 		}
 	});
 
-export const purchaseBolly = ({ asset, amount, signer }) =>
+export const purchaseBolly = ({ asset, amount, signer, uid }) =>
 	new Promise(async (resolve, reject) => {
 		try {
 			if (!asset) {
@@ -219,7 +219,7 @@ export const purchaseBolly = ({ asset, amount, signer }) =>
 			switch (asset) {
 				case "USDT":
 					saleContract
-						.purchaseWithUSDT(parseFloat(amount))
+						.purchaseWithUSDT(parseFloat(amount), uid)
 						.then((response) => {
 							resolve({
 								error: false,
@@ -236,7 +236,7 @@ export const purchaseBolly = ({ asset, amount, signer }) =>
 
 				case "USDC":
 					saleContract
-						.purchaseWithUSDC(parseFloat(amount))
+						.purchaseWithUSDC(parseFloat(amount), uid)
 						.then((response) => {
 							resolve({
 								error: false,
@@ -253,7 +253,7 @@ export const purchaseBolly = ({ asset, amount, signer }) =>
 
 				case "BUSD":
 					saleContract
-						.purchaseWithBUSD(parseFloat(amount))
+						.purchaseWithBUSD(parseFloat(amount), uid)
 						.then((response) => {
 							resolve({
 								error: false,

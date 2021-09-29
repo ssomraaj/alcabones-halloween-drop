@@ -12,6 +12,10 @@ import MainCrystal from "../../assets/images/crystal-1-01.png";
 import SecondaryCrystal from "../../assets/images/crystal-2-01.png";
 import ComingText from "../../assets/images/coming.png";
 import SoonText from "../../assets/images/soon.png";
+import ReelLife from "../../assets/images/partners/rlp.jpg";
+import ArbaazKhan from "../../assets/images/partners/akp.jpg";
+import SalmanKhan from "../../assets/images/partners/skf.jpg";
+import SohailKhan from "../../assets/images/partners/skp.jpg";
 import "./ComingSoon.css";
 import "./TextAnimation.css";
 
@@ -149,7 +153,7 @@ const ComingSoon = () => {
 							<img src={SoonText} alt="soon" />
 						</div>
 						<div className="tagline-text" data-hovered={hovered}>
-							Salman Khan Films and Salman Khan static NFTs
+							Salman Khan Films NFTs and Salman Khan static NFTs
 						</div>
 						<div className="letters-container" data-hovered={hovered}>
 							<div className="letter" data-first-part={true}>
@@ -358,6 +362,23 @@ const ComingSoon = () => {
 								>
 									Buy BollyCoin
 								</button>
+							</div>
+						</section>
+						<section className="timeline-section partners">
+							<h1>Our Partners</h1>
+							<div className="partners-grid">
+								<div className="partner-card">
+									<img src={ReelLife} alt="Reel life Productions" data-name="rlp" />
+								</div>
+								<div className="partner-card">
+									<img src={ArbaazKhan} alt="Arbaaz Khan Productions" data-name="akp" />
+								</div>
+								<div className="partner-card">
+									<img src={SalmanKhan} alt="Salman Khan Films" data-name="skf" />
+								</div>
+								<div className="partner-card">
+									<img src={SohailKhan} alt="Sohail Khan Productions" data-name="skp" />
+								</div>
 							</div>
 						</section>
 						<Timeline />

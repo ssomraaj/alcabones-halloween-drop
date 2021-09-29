@@ -16,6 +16,7 @@ import {
 } from "../../../utils/contractHelpers";
 import { PURCHASE_TOKENS } from "../../../utils/contracts";
 import "./Home.css";
+import { API } from "../../../utils/service";
 
 class Home extends Component {
 	constructor(props) {
@@ -210,77 +211,99 @@ class Home extends Component {
 	};
 
 	handlePurchase = () => {
-		let { purchaseAmount, allowance, asset } = this.state;
+		let { purchaseAmount, allowance, asset, availableBolly } = this.state;
 		const { signer } = this.props;
 		purchaseAmount = purchaseAmount.trim();
-		if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
-			this.setState({ approving: true }, () => {
-				approveToken({ asset, amount: parseFloat(purchaseAmount).toFixed(10), signer })
-					.then(async (response) => {
-						notification["info"]({
-							key: "approval-processing-notification",
-							message: "Transaction processing",
-							description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
-							btn: (
-								<a
-									href={`https://kovan.etherscan.io/tx/${response.data.hash}`}
-									target="_blank"
-									rel="noreferrer noopener"
-								>
-									View on Etherscan
-								</a>
-							),
-							duration: 0,
+		if (parseFloat(purchaseAmount) <= parseFloat(availableBolly)) {
+			if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
+				this.setState({ approving: true }, () => {
+					approveToken({ asset, amount: parseFloat(purchaseAmount).toFixed(10), signer })
+						.then(async (response) => {
+							notification["info"]({
+								key: "approval-processing-notification",
+								message: "Transaction processing",
+								description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
+								btn: (
+									<a
+										href={`https://kovan.etherscan.io/tx/${response.data.hash}`}
+										target="_blank"
+										rel="noreferrer noopener"
+									>
+										View on Etherscan
+									</a>
+								),
+								duration: 0,
+							});
+							await response.data.wait();
+							notification.close("approval-processing-notification");
+							notification["success"]({
+								message: "Transaction successful",
+								description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
+								btn: (
+									<a
+										href={`https://kovan.etherscan.io/tx/${response.data.hash}`}
+										target="_blank"
+										rel="noreferrer noopener"
+									>
+										View on Etherscan
+									</a>
+								),
+								duration: 3,
+							});
+							this.setState({ approving: false, allowance: purchaseAmount });
+						})
+						.catch((err) => {
+							notification["error"]({
+								message: "Transaction error",
+								description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Something went wrong. Please try again`,
+							});
+							this.setState({ approving: false }, console.log(err));
 						});
-						await response.data.wait();
-						notification.close("approval-processing-notification");
-						notification["success"]({
-							message: "Transaction successful",
-							description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
-							btn: (
-								<a
-									href={`https://kovan.etherscan.io/tx/${response.data.hash}`}
-									target="_blank"
-									rel="noreferrer noopener"
-								>
-									View on Etherscan
-								</a>
-							),
-							duration: 3,
-						});
-						this.setState({ approving: false, allowance: purchaseAmount });
-					})
-					.catch((err) => {
-						notification["error"]({
-							message: "Transaction error",
-							description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Something went wrong. Please try again`,
-						});
-						this.setState({ approving: false }, console.log(err));
-					});
-			});
+				});
+			} else {
+				this.setState({ confirmModalVisible: true });
+			}
 		} else {
-			this.setState({ confirmModalVisible: true });
+			notification["warn"]({
+				message: "Cannot purchase BOLLY",
+				description: "The purchase amount exceeds the amount of BOLLY left",
+			});
 		}
 	};
 
-	buyBollyCoin = () => {
+	buyBollyCoin = (purchaseId) => {
 		let { purchaseAmount, asset, bollyPrice } = this.state;
 		const { signer } = this.props;
 		purchaseAmount = purchaseAmount.trim();
 		this.setState({ txStatus: "initializing" }, async () => {
 			purchaseBolly({
 				asset,
+				uid: purchaseId,
 				amount: (parseFloat(purchaseAmount) / parseFloat(bollyPrice)).toFixed(10),
 				signer,
 			})
 				.then(async (response) => {
 					this.setState({ txStatus: "waiting", hash: response.data.hash });
 					await response.data.wait();
-					this.fetchBollyBalance();
-					this.fetchAllowance();
-					this.fetchTokenBalance();
-					this.fetchAvailableBolly();
-					this.setState({ txStatus: "success" });
+					const data = {
+						purchaseId,
+						txId: response.data.hash,
+					};
+					API.patch("api/user/purchase", data)
+						.then((_) => {
+							// console.log("Purchase PATCH response", response);
+						})
+						.catch(
+							(err) =>
+								process.env.NODE_ENV === "development" && console.log("Purchase PATCH error", err)
+						)
+						.finally(() => {
+							this.fetchBollyBalance();
+							this.fetchAllowance();
+							this.fetchTokenBalance();
+							this.fetchAvailableBolly();
+							this.setState({ txStatus: "success" });
+						});
 				})
 				.catch((_) => {
 					notification["error"]({

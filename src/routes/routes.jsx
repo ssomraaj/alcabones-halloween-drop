@@ -12,6 +12,8 @@ import { ConnectModal } from "../components/modals";
 const Login = lazy(() => import("../pages/login/Login"));
 const ComingSoon = lazy(() => import("../pages/coming-soon/ComingSoon"));
 const Home = lazy(() => import("../pages/dashboard/home/Home"));
+// const APILogin = lazy(() => import("../pages/api-login/Login"));
+// const LoginWithToken = lazy(() => import("../pages/api-login/LoginWithToken"));
 
 const walletLink = new WalletLink({
 	appName: "Bollycoin",
@@ -211,6 +213,16 @@ class Routes extends Component {
 			<SuspenseWithChunkError fallback={<AppLoader />}>
 				<Switch>
 					<Route exact path="/" component={Login} />
+					{/* <Route
+						exact
+						path="/login"
+						render={(props) => <APILogin walletConnected={connected} {...props} />}
+					/>
+					<Route
+						exact
+						path="/login/:token"
+						render={(props) => <LoginWithToken walletConnected={connected} {...props} />}
+					/> */}
 					<Route exact path="/coming-soon" component={ComingSoon} />
 					<Route
 						exact

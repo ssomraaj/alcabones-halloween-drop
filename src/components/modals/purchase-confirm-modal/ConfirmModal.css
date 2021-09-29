@@ -1,5 +1,5 @@
 .confirm-modal {
-	width: 400px !important;
+	width: 500px !important;
 }
 
 .confirm-grid {
@@ -81,4 +81,98 @@
 .modal-container .tx-description {
 	font-size: 14px;
 	text-align: center;
+}
+
+.kyc-form {
+	width: 100%;
+	display: grid;
+	grid-auto-rows: auto;
+	row-gap: 1.25rem;
+	margin-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid #dedede;
+}
+
+.kyc-form .MuiFormControl-root {
+	max-width: 100%;
+}
+
+.whitelist-form-control {
+	width: 100%;
+}
+
+.whitelist-form-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+	border-width: 1px;
+	border-color: #000;
+}
+
+.whitelist-form-input .MuiOutlinedInput-root {
+	border-radius: 0;
+}
+
+.whitelist-form-input .MuiFormLabel-root.Mui-focused {
+	color: #000;
+	left: -2px;
+	font-family: "medium", sans-serif;
+}
+
+.whitelist-form-control .MuiInputLabel-outlined.MuiInputLabel-shrink {
+	left: -2px;
+	font-family: "medium", sans-serif;
+}
+
+.whitelist-form-control .MuiOutlinedInput-notchedOutline {
+	border-color: #000;
+}
+
+.whitelist-form-control .Mui-disabled {
+	color: #000;
+}
+
+.whitelist-form-control .MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+	border-color: #000;
+}
+
+.whitelist-form-control .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+	border-color: #000;
+}
+
+.whitelist-form-control .MuiFormLabel-root.Mui-focused {
+	color: #000;
+}
+
+.whitelist-form-control .react-tel-input {
+	font-family: "medium", sans-serif;
+	font-size: 16px;
+}
+
+.whitelist-form-control .react-tel-input .form-control {
+	border-color: #000;
+	border-radius: 0;
+	height: 3.5rem !important;
+	width: 100% !important;
+}
+
+.whitelist-form-control .react-tel-input .form-control:focus {
+	border-color: #000;
+	box-shadow: none;
+}
+
+.whitelist-form-control .input-error {
+	border-color: #f44336 !important;
+}
+
+.whitelist-form-control .react-tel-input .special-label {
+	top: -10px;
+}
+
+.whitelist-form-control .react-tel-input .search-box {
+	width: 92%;
+	height: 2rem;
+}
+
+.whitelist-form-control .error {
+	margin: 3px 14px 0;
+	color: #f44336;
+	font-size: 15px;
 }
