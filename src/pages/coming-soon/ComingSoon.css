@@ -403,7 +403,8 @@
 	margin: 3rem 0;
 }
 
-.hero button {
+.hero button,
+.timeline-section button {
 	font-family: "bold", sans-serif;
 	border: none;
 	box-shadow: none;
@@ -417,7 +418,9 @@
 }
 
 .hero button:hover,
-.hero button:focus {
+.hero button:focus,
+.timeline-section button:hover,
+.timeline-section button:focus {
 	opacity: 0.8;
 	transition: all 0.3s ease;
 }
@@ -568,6 +571,10 @@
 	text-align: center;
 }
 
+.timeline-section > div {
+	text-align: center;
+}
+
 @media only screen and (min-width: 1440px) {
 	.logo {
 		font-size: 1.75rem;
@@ -615,7 +622,8 @@
 		line-height: 2.3rem;
 	}
 
-	.hero button {
+	.hero button,
+	.timeline-section button {
 		max-width: 450px;
 		padding: 1.3rem 3rem;
 		font-size: 1.3rem;

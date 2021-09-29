@@ -42,7 +42,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 						<li onClick={scrollToSection}>What is BollyCoin?</li>
 						<li onClick={openLink}>Read Whitepaper</li>
 						<li style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid #dedede" }}>
-							<a href="/get-bollycoin">Buy BollyCoin</a>
+							<a href="/buy-bollycoin">Buy BollyCoin</a>
 						</li>
 					</ul>
 				</div>
@@ -71,7 +71,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
 						data-hovered={hovered}
 					>
-						<a href="/get-bollycoin">Buy BollyCoin</a>
+						<a href="/buy-bollycoin">Buy BollyCoin</a>
 					</li>
 					{/* <li
 						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}

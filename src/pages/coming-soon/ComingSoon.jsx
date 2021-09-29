@@ -111,7 +111,17 @@ const ComingSoon = () => {
 		<>
 			{imagesLoaded < 2 && <AppLoader />}
 			<div
-				style={imagesLoaded < 2 ? { opacity: 0, userSelect: "none", pointerEvents: "none" } : {}}
+				style={
+					imagesLoaded < 2
+						? {
+								opacity: 0,
+								userSelect: "none",
+								pointerEvents: "none",
+								height: 0,
+								overflow: "hidden",
+						  }
+						: {}
+				}
 			>
 				<Navbar navLinkActive={navLinkActive} hovered={hovered} />
 				<div className="coming-soon-outer-container" data-hovered={hovered}>
@@ -259,7 +269,6 @@ const ComingSoon = () => {
 								value storage of the same, similar to how one may value a piece of art, could result
 								in Bollywood NFTs being valued in billions of dollars.
 							</p>
-
 							<button
 								onClick={() => {
 									window.open(
@@ -317,9 +326,7 @@ const ComingSoon = () => {
 							</div>
 						</section>
 						<section className="banner">
-							<h1>
-								Users call the shots and stakers earn rewards from the NFTs sold on our marketplace.
-							</h1>
+							<h1>Users call the shots and earn rewards from the NFTs sold on our marketplace.</h1>
 							<p>
 								BollyCoin is partnering with the biggest media owners of the Bollywood industry to
 								receive original media that will be sold as NFTs. BollyCoin can essentially be
@@ -328,12 +335,30 @@ const ComingSoon = () => {
 							{/* <img src={Movies} alt="showcase" /> */}
 						</section>
 						<section className="timeline-section">
-							<h1>We've got everything planned</h1>
+							<h1>Decentralised Ownership</h1>
 							<p>
-								The potential of the BollyCoin community is limitless and our vision of the
-								ecosystem stretches far beyond its current use case- to decentralise entertainment
-								investment, ownership and ROI.
+								The native digital utility token of the BollyCoin ecosystem, BollyCoin would
+								represent a voting right in our community, hence acting as a governance token.
+								<br />
+								<br />
+								BollyCoin holders will get rewarded in the form of BollyCredits which can be used to
+								purchase NFT’s on our platform when it goes live. Hence these BollyCredits can be
+								converted into Bollywood memorabilia which could be very valuable.
+								<br />
+								<br />
+								The white paper has a further breakup of the reward system in place for BollyCoin
+								holders
 							</p>
+							<div>
+								<button
+									onClick={() => {
+										window.location = "/buy-bollycoin";
+									}}
+									style={{ marginBottom: "2rem" }}
+								>
+									Buy BollyCoin
+								</button>
+							</div>
 						</section>
 						<Timeline />
 					</main>

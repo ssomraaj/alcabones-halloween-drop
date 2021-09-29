@@ -214,7 +214,7 @@ class Routes extends Component {
 					<Route exact path="/coming-soon" component={ComingSoon} />
 					<Route
 						exact
-						path="/get-bollycoin"
+						path="/buy-bollycoin"
 						render={(props) => (
 							<Home
 								walletConnected={connected}
