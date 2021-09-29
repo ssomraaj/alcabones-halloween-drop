@@ -153,7 +153,7 @@ const ComingSoon = () => {
 							<img src={SoonText} alt="soon" />
 						</div>
 						<div className="tagline-text" data-hovered={hovered}>
-							Salman Khan Films NFTs and Salman Khan static NFTs
+							Salman Khan Films NFTs and Salman Khan Static NFTs
 						</div>
 						<div className="letters-container" data-hovered={hovered}>
 							<div className="letter" data-first-part={true}>
