@@ -12,6 +12,7 @@ import {
 	getAllowance,
 	getBollyPrice,
 	purchaseBolly,
+	getAvailableBolly,
 } from "../../../utils/contractHelpers";
 import { PURCHASE_TOKENS } from "../../../utils/contracts";
 import "./Home.css";
@@ -39,12 +40,15 @@ class Home extends Component {
 			hash: "",
 			allowance: "",
 			asset: PURCHASE_TOKENS[0].ticker,
+			availableBolly: "0",
+			fetchingAvailableBolly: true,
 		};
 	}
 
 	componentDidMount() {
 		this.fetchTokenPrice();
 		this.fetchBollyPrice();
+		this.fetchAvailableBolly();
 		const { walletConnected, onModalOpen } = this.props;
 		if (!walletConnected) {
 			onModalOpen();
@@ -62,6 +66,7 @@ class Home extends Component {
 			this.fetchTokenBalance();
 			this.fetchAllowance();
 			this.fetchBollyBalance();
+			this.fetchAvailableBolly();
 		} else if (address !== prevProps.address && !address) {
 			this.setState({
 				bollyBalance: "",
@@ -73,6 +78,19 @@ class Home extends Component {
 			});
 		}
 	}
+
+	fetchAvailableBolly = () => {
+		getAvailableBolly()
+			.then((response) => {
+				this.setState({
+					fetchingAvailableBolly: false,
+					availableBolly: response,
+				});
+			})
+			.catch((err) => {
+				this.setState({ fetchingAvailableBolly: false }, () => console.log(err.message));
+			});
+	};
 
 	fetchBollyPrice = () => {
 		this.setState({ fetchingBollyPrice: true }, () => {
@@ -261,6 +279,7 @@ class Home extends Component {
 					this.fetchBollyBalance();
 					this.fetchAllowance();
 					this.fetchTokenBalance();
+					this.fetchAvailableBolly();
 					this.setState({ txStatus: "success" });
 				})
 				.catch((_) => {
@@ -276,11 +295,17 @@ class Home extends Component {
 	render() {
 		const { onModalOpen, walletConnected, type, address } = this.props;
 		// prettier-ignore
-		const { fetchingBollyBalance, bollyBalance, purchaseAmount, purchaseError, loading, ethBalance, confirmModalVisible, purchasing, fetchingETHBalance, refreshingETHBalance, txStatus, hash, allowance, asset, fetchingBollyPrice, bollyPrice, approving, fetchingTokenPrice, tokenPrice
+		const { fetchingBollyBalance, bollyBalance, purchaseAmount, purchaseError, loading, ethBalance, confirmModalVisible, purchasing, fetchingETHBalance, refreshingETHBalance, txStatus, hash, allowance, asset, fetchingBollyPrice, bollyPrice, approving, fetchingTokenPrice, tokenPrice, fetchingAvailableBolly, availableBolly
 		} = this.state;
 		const checkingPurchaseEligibility =
-			fetchingBollyBalance || loading || purchasing || fetchingETHBalance || approving;
-		const purchaseFormDisabled = fetchingBollyPrice || fetchingETHBalance || loading || purchasing;
+			fetchingBollyBalance ||
+			loading ||
+			purchasing ||
+			fetchingETHBalance ||
+			approving ||
+			fetchingAvailableBolly;
+		const purchaseFormDisabled =
+			fetchingBollyPrice || fetchingETHBalance || loading || purchasing || fetchingAvailableBolly;
 		return (
 			<div className="home-container">
 				<Navbar onModalOpen={onModalOpen} walletConnected={walletConnected} type={type} />
@@ -296,8 +321,10 @@ class Home extends Component {
 								onBalanceRefresh={() => this.fetchBollyBalance()}
 							/>
 							<PurchaseForm
+								fetchingAvailableBolly={fetchingAvailableBolly}
 								fetchingTokenPrice={fetchingTokenPrice}
 								fetchingPrice={fetchingBollyPrice}
+								availableBolly={availableBolly}
 								tokenPrice={tokenPrice}
 								price={bollyPrice}
 								loading={checkingPurchaseEligibility}

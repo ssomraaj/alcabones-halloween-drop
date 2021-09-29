@@ -18,8 +18,9 @@ const PurchaseForm = ({
 	fetchingPrice,
 	price,
 	fetchingTokenPrice,
-	tokenPrice,
 	balance,
+	fetchingAvailableBolly,
+	availableBolly,
 }) => {
 	return (
 		<div className="purchase-form-container">
@@ -59,6 +60,11 @@ const PurchaseForm = ({
 					</div>
 				) : (
 					<div>1 BOLLY = $ {price}</div>
+				)}
+				{!fetchingAvailableBolly && (
+					<div style={{ marginTop: "12px" }}>
+						BOLLY left: {parseFloat(availableBolly).toFixed(4)}
+					</div>
 				)}
 				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
 				{walletConnected ? (

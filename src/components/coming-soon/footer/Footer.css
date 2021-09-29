@@ -1,4 +1,5 @@
 .mobile-footer {
+	width: 100%;
 	display: none;
 }
 
@@ -7,9 +8,8 @@
 		display: flex;
 		padding: 2rem;
 		background-color: #0f0121;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
-		gap: 60px;
 		flex-wrap: wrap;
 	}
 

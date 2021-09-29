@@ -282,3 +282,14 @@ export const purchaseBolly = ({ asset, amount, signer }) =>
 			});
 		}
 	});
+
+export const getAvailableBolly = async () => {
+	try {
+		const tokenContract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, KOVAN_PROVIDER);
+		let availableBolly = await tokenContract.balanceOf(SALE_ADDRESS);
+		availableBolly = ethers.utils.formatUnits(availableBolly, 18);
+		return availableBolly;
+	} catch (err) {
+		return "0";
+	}
+};

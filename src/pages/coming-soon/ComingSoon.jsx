@@ -347,7 +347,7 @@ const ComingSoon = () => {
 								<br />
 								<br />
 								The white paper has a further breakup of the reward system in place for BollyCoin
-								holders
+								holders.
 							</p>
 							<div>
 								<button
