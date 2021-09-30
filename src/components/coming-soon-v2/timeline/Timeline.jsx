@@ -12,7 +12,7 @@ const timeline = [
 				BollyCoin Launches its <br /> "Coming Soon Website"
 			</li>,
 			<li key="time-1">
-				- 20<sup>th</sup> September 2021
+				- 30<sup>th</sup> September 2021
 			</li>,
 		],
 	},

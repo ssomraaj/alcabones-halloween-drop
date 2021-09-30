@@ -320,8 +320,8 @@ class Home extends Component {
 				})
 				.catch((_) => {
 					notification["error"]({
-						message: `Transaction error`,
-						description: "Couldn't purchase BOLLY. Something went wrong. Please try again.",
+						message: "Couldn't purchase BOLLY",
+						description: "Our team has been notified of this issue. We are working on fixing it",
 					});
 					this.setState({ confirmModalVisible: false, txStatus: "" });
 				});

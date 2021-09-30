@@ -8,7 +8,7 @@ import Logo from "../../../assets/images/Logo.svg";
 import PinkLogo from "../../../assets/images/logo-pink.svg";
 import "./Navbar.css";
 
-const Navbar = ({ navLinkActive, hovered }) => {
+const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave }) => {
 	const history = useHistory();
 	const [visible, setVisible] = useState(false);
 
@@ -58,7 +58,11 @@ const Navbar = ({ navLinkActive, hovered }) => {
 				</div>
 			</Drawer>
 			<div className="navbar-container" data-expanded={navLinkActive}>
-				<div className="logo-container">
+				<div
+					className="logo-container"
+					onMouseOver={navLinkActive ? () => false : onMouseOver}
+					onMouseLeave={navLinkActive ? () => false : onMouseLeave}
+				>
 					<img src={Logo} alt="BollyCoin Logo" data-visible={!hovered} />
 					<img src={PinkLogo} alt="BollyCoin Logo" data-visible={hovered} />
 				</div>
@@ -71,7 +75,7 @@ const Navbar = ({ navLinkActive, hovered }) => {
 						What is BollyCoin?
 					</li>
 					<li
-						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
+						className={`nav-item ${navLinkActive ? "remove-nav-link" : ""}`}
 						data-hovered={hovered}
 						onClick={openLink}
 					>

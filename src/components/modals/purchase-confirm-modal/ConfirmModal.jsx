@@ -21,6 +21,7 @@ export default class ConfirmModal extends React.PureComponent {
 			occupation: "",
 			occupationError: "",
 			country: "India",
+			countryError: "",
 		};
 	}
 
@@ -57,6 +58,11 @@ export default class ConfirmModal extends React.PureComponent {
 			this.setState({ occupationError: "Occupation is required" });
 			return;
 		}
+		country = country.trim();
+		if (!country) {
+			this.setState({ countryError: "Country is required" });
+			return;
+		}
 		const data = {
 			phone: `+${mobile}`,
 			email,
@@ -72,7 +78,7 @@ export default class ConfirmModal extends React.PureComponent {
 						if (response.error) {
 							notification["error"]({
 								message: "Couldn't purchase BOLLY",
-								description: "Something went wrong. Please try again",
+								description: response.message,
 							});
 						} else {
 							this.clearFormFields();
@@ -85,7 +91,7 @@ export default class ConfirmModal extends React.PureComponent {
 					this.setState({ submitting: false }, () => {
 						notification["error"]({
 							message: "Couldn't purchase BOLLY",
-							description: "Something went wrong. Please try again",
+							description: "Our team has been notified of this issue. We are working on fixing it",
 						});
 					});
 				});
@@ -95,9 +101,15 @@ export default class ConfirmModal extends React.PureComponent {
 	clearFormFields = () => {
 		this.setState({
 			name: "",
+			nameError: "",
 			mobile: "",
+			mobileError: "",
 			email: "",
+			emailError: "",
 			occupation: "",
+			occupationError: "",
+			country: "India",
+			countryError: "",
 		});
 	};
 
@@ -118,6 +130,8 @@ export default class ConfirmModal extends React.PureComponent {
 			mobile,
 			mobileError,
 			submitting,
+			country,
+			countryError,
 		} = this.state;
 		return (
 			<Modal
@@ -240,7 +254,7 @@ export default class ConfirmModal extends React.PureComponent {
 										}}
 									/>
 								</div>
-								{/* <div className="whitelist-form-control">
+								<div className="whitelist-form-control">
 									<TextField
 										required
 										variant="outlined"
@@ -251,9 +265,9 @@ export default class ConfirmModal extends React.PureComponent {
 										type="text"
 										name="country"
 										value={country}
-										contentEditable={false}
-										disabled
-										onChange={() => false}
+										onChange={this.onInputChange}
+										error={Boolean(countryError)}
+										helperText={countryError}
 										inputProps={{
 											style: {
 												fontFamily: "medium",
@@ -264,8 +278,14 @@ export default class ConfirmModal extends React.PureComponent {
 												fontFamily: "medium",
 											},
 										}}
+										FormHelperTextProps={{
+											style: {
+												fontFamily: "medium",
+												fontSize: "15px",
+											},
+										}}
 									/>
-								</div> */}
+								</div>
 							</div>
 							<div className="confirm-grid">
 								<div>

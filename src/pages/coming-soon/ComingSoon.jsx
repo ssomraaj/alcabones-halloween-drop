@@ -8,15 +8,11 @@ import { AppLoader } from "../../components/loaders";
 import { Navbar, Footer as MobileFooter } from "../../components/coming-soon";
 import { Timeline, Footer } from "../../components/coming-soon-v2";
 import Logo from "../../assets/images/logo-pink.svg";
-import Mouse from "../../assets/images/Mouse.svg";
+// import Mouse from "../../assets/images/Mouse.svg";
 import MainCrystal from "../../assets/images/crystal-1-01.png";
 import SecondaryCrystal from "../../assets/images/crystal-2-01.png";
 import ComingText from "../../assets/images/coming.png";
 import SoonText from "../../assets/images/soon.png";
-import ReelLife from "../../assets/images/partners/rlp.jpg";
-import ArbaazKhan from "../../assets/images/partners/akp.jpg";
-import SalmanKhan from "../../assets/images/partners/skf.jpg";
-import SohailKhan from "../../assets/images/partners/skp.jpg";
 import "./ComingSoon.css";
 import "./TextAnimation.css";
 
@@ -126,7 +122,12 @@ const ComingSoon = () => {
 						: {}
 				}
 			>
-				<Navbar navLinkActive={navLinkActive} hovered={hovered} />
+				<Navbar
+					navLinkActive={navLinkActive}
+					hovered={hovered}
+					onMouseOver={() => setHovered(true)}
+					onMouseLeave={() => setHovered(false)}
+				/>
 				<div className="coming-soon-outer-container" data-hovered={hovered}>
 					<div className="coming-soon-container" data-hovered={hovered}>
 						<div
@@ -151,7 +152,12 @@ const ComingSoon = () => {
 							<img src={ComingText} alt="Coming" />
 							<img src={SoonText} alt="soon" />
 						</div>
-						<div className="tagline-text" data-hovered={hovered}>
+						<div
+							className="tagline-text"
+							data-hovered={hovered}
+							onMouseOver={() => setHovered(true)}
+							onMouseLeave={() => setHovered(false)}
+						>
 							Salman Khan Films NFTs and Salman Khan Static NFTs
 						</div>
 						<div className="letters-container" data-hovered={hovered}>
@@ -242,7 +248,7 @@ const ComingSoon = () => {
 							</a>
 						</div>
 					</div>
-					<div className="cta-container">
+					{/* <div className="cta-container">
 						<img
 							src={Mouse}
 							alt="Mouse Logo"
@@ -254,14 +260,14 @@ const ComingSoon = () => {
 							<span></span>
 						</div>
 						<h3 className="cta-text">scroll down</h3>
-					</div>
+					</div> */}
 				</div>
 				<div className="tagline">
 					<img src={Logo} alt="BollyCoin" />
 					<p>Your Cinematic Universe</p>
 				</div>
 				<div className="landing-main">
-					<div className="main-cointainer">
+					<div className="main-container">
 						<div className="hero">
 							<h1>The Bollywood NFT Marketplace</h1>
 							<div className="tablet-main-graphic" />
@@ -273,16 +279,18 @@ const ComingSoon = () => {
 								believe that this could result in Bollywood NFTs being valued as the next generation
 								of digital art.
 							</p>
-							<button
-								onClick={() => {
-									window.open(
-										"https://bollycoin.s3.us-east-1.amazonaws.com/bollycoin-whitepaper.pdf",
-										"_blank"
-									);
-								}}
-							>
-								read whitepaper
-							</button>
+							<div className="tablet-button-container">
+								<button
+									onClick={() => {
+										window.open(
+											"https://bollycoin.s3.us-east-1.amazonaws.com/bollycoin-whitepaper.pdf",
+											"_blank"
+										);
+									}}
+								>
+									read whitepaper
+								</button>
+							</div>
 						</div>
 					</div>
 					<main>
@@ -357,23 +365,6 @@ const ComingSoon = () => {
 								>
 									Buy BollyCoin
 								</button>
-							</div>
-						</section>
-						<section className="timeline-section partners">
-							<h1>Our Partners</h1>
-							<div className="partners-grid">
-								<div className="partner-card">
-									<img src={ReelLife} alt="Reel life Productions" data-name="rlp" />
-								</div>
-								<div className="partner-card">
-									<img src={ArbaazKhan} alt="Arbaaz Khan Productions" data-name="akp" />
-								</div>
-								<div className="partner-card">
-									<img src={SalmanKhan} alt="Salman Khan Films" data-name="skf" />
-								</div>
-								<div className="partner-card">
-									<img src={SohailKhan} alt="Sohail Khan Productions" data-name="skp" />
-								</div>
 							</div>
 						</section>
 						<Timeline />
