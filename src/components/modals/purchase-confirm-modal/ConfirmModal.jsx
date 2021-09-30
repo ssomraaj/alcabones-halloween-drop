@@ -4,9 +4,10 @@ import { CircularProgress, TextField, Zoom } from "@material-ui/core";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import PhoneInput from "react-phone-input-2";
 
+import { API } from "../../../utils/service";
+
 import "react-phone-input-2/lib/material.css";
 import "./ConfirmModal.css";
-import { API } from "../../../utils/service";
 export default class ConfirmModal extends React.PureComponent {
 	constructor(props) {
 		super(props);
@@ -348,11 +349,7 @@ export default class ConfirmModal extends React.PureComponent {
 								Purchasing{" "}
 								{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)} BOLLY
 							</p>
-							<a
-								href={`https://kovan.etherscan.io/tx/${hash}`}
-								target="_blank"
-								rel="noreferrer noopener"
-							>
+							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
 								View Transaction
 							</a>
 						</div>
@@ -362,11 +359,7 @@ export default class ConfirmModal extends React.PureComponent {
 								<IoIosCheckmarkCircleOutline size={90} color="#00D395" />
 							</Zoom>
 							<p className="tx-status">Transaction confirmed</p>
-							<a
-								href={`https://kovan.etherscan.io/tx/${hash}`}
-								target="_blank"
-								rel="noreferrer noopener"
-							>
+							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
 								View Transaction
 							</a>
 						</div>

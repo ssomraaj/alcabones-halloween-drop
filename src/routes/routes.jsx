@@ -31,8 +31,41 @@ class Routes extends Component {
 			address: "",
 			connected: false,
 			signer: null,
+			provider: null,
 		};
 	}
+
+	componentDidMount() {
+		if (window.ethereum) {
+			window.ethereum.addListener("accountsChanged", this.onAccountsChanged);
+			window.ethereum.addListener("chainChanged", () => window.location.reload());
+		}
+	}
+
+	componentDidUpdate(_, prevState) {
+		const { provider, type } = this.state;
+		if (prevState.provider !== provider && provider && type === "WalletConnect") {
+			type === "WalletConnect" &&
+				provider &&
+				provider.on("disconnect", () => {
+					this.disconnect("WalletConnect");
+				});
+		}
+	}
+
+	componentWillUnmount() {
+		if (window.ethereum) {
+			window.ethereum.removeListener("accountsChanged", this.onAccountsChanged);
+			window.ethereum.removeListener("chainChanged", () => window.location.reload());
+		}
+	}
+
+	onAccountsChanged = () => {
+		const { type } = this.state;
+		if (type === "Metamask") {
+			this.connect("metamask");
+		}
+	};
 
 	open = () => {
 		this.setState({
@@ -60,18 +93,21 @@ class Routes extends Component {
 		}
 	};
 
-	disconnect = (type) => {
+	disconnect = async (type) => {
+		if (type === "Coinbase") {
+			walletLink.disconnect();
+		} else if (type === "WalletConnect") {
+			await this.state.provider?.disconnect();
+			localStorage.removeItem("walletconnect");
+		}
 		this.setState({
 			type: "",
 			connected: false,
 			connecting: false,
 			address: "",
+			provider: null,
+			signer: null,
 		});
-		if (type === "Coinbase") {
-			walletLink.disconnect();
-		} else if (type === "WalletConnect") {
-			localStorage.removeItem("walletconnect");
-		}
 	};
 
 	connectToMetaMask = async () => {
@@ -81,18 +117,19 @@ class Routes extends Component {
 				await window.ethereum.request({ method: "eth_requestAccounts" });
 				const address = await provider.listAccounts();
 				const signer = await provider.getSigner();
-				if (provider.network.chainId === 42) {
+				if (provider.network.chainId === 1) {
 					this.setState({
 						type: "Metamask",
 						address: address[0],
 						signer: signer,
 						connected: true,
 						modal: false,
+						provider,
 					});
 				} else {
 					this.setState({ connecting: false }, () => {
 						notification["error"]({
-							message: "Wrong network detected. Please connect to Kovan Test Network",
+							message: "Wrong network detected. Please connect to Ethereum Mainnet",
 						});
 					});
 				}
@@ -116,7 +153,7 @@ class Routes extends Component {
 		try {
 			const web3Provider = new WalletConnectProvider({
 				infuraId: "857fdaf932a740ffbe04a50c51aaee8e",
-				chainId: 42,
+				chainId: 1,
 			});
 			await web3Provider.enable().catch((_) => {
 				this.setState({
@@ -130,7 +167,7 @@ class Routes extends Component {
 			provider
 				.getNetwork()
 				.then(async (network) => {
-					if (network.chainId === 42) {
+					if (network.chainId === 1) {
 						this.setState({
 							type: "WalletConnect",
 							address: address[0],
@@ -138,12 +175,13 @@ class Routes extends Component {
 							connected: true,
 							connecting: false,
 							modal: false,
+							provider: web3Provider,
 						});
 					} else {
 						await web3Provider.disconnect();
 						this.setState({ connecting: false }, () => {
 							notification["error"]({
-								message: "Wrong network detected. Please connect to Kovan Test Network",
+								message: "Wrong network detected. Please connect to Ethereum Mainnet",
 							});
 						});
 					}
@@ -165,8 +203,8 @@ class Routes extends Component {
 	coinbase = async () => {
 		try {
 			const web3Provider = walletLink.makeWeb3Provider(
-				"https://kovan.infura.io/v3/857fdaf932a740ffbe04a50c51aaee8e",
-				42
+				"https://mainnet.infura.io/v3/857fdaf932a740ffbe04a50c51aaee8e",
+				1
 			);
 			web3Provider
 				.enable()
@@ -177,7 +215,7 @@ class Routes extends Component {
 					provider
 						.getNetwork()
 						.then(async (network) => {
-							if (network.chainId === 42) {
+							if (network.chainId === 1) {
 								this.setState({
 									type: "Coinbase",
 									address: address[0],
@@ -185,11 +223,12 @@ class Routes extends Component {
 									connected: true,
 									connecting: false,
 									modal: false,
+									provider,
 								});
 							} else {
 								this.setState({ connecting: false }, () => {
 									notification["error"]({
-										message: "Wrong network detected. Please connect to Kovan Test Network",
+										message: "Wrong network detected. Please connect to Ethereum Mainnet",
 									});
 								});
 							}

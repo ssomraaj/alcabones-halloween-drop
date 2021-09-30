@@ -238,7 +238,7 @@ class Home extends Component {
 								description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
 								btn: (
 									<a
-										href={`https://kovan.etherscan.io/tx/${response.data.hash}`}
+										href={`https://etherscan.io/tx/${response.data.hash}`}
 										target="_blank"
 										rel="noreferrer noopener"
 									>
@@ -254,7 +254,7 @@ class Home extends Component {
 								description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
 								btn: (
 									<a
-										href={`https://kovan.etherscan.io/tx/${response.data.hash}`}
+										href={`https://etherscan.io/tx/${response.data.hash}`}
 										target="_blank"
 										rel="noreferrer noopener"
 									>
@@ -268,7 +268,7 @@ class Home extends Component {
 						.catch((err) => {
 							notification["error"]({
 								message: "Transaction error",
-								description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Something went wrong. Please try again`,
+								description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Please try again later`,
 							});
 							this.setState({ approving: false }, console.log(err));
 						});

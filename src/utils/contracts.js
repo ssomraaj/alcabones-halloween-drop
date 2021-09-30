@@ -1,10 +1,12 @@
-export const TOKEN_ADDRESS = "0x207cfbdb39aa3c2af7c1c4f04e5fac883f18e216";
+export const TOKEN_ADDRESS = "0x6bd361e10c1afed0d95259e7c0115f3a60e4ea99";
 
 export const TOKEN_ABI = [
 	{
 		inputs: [
-			{ internalType: "string", name: "tokenName", type: "string" },
-			{ internalType: "string", name: "tokenSymbol", type: "string" },
+			{ internalType: "string", name: "_name", type: "string" },
+			{ internalType: "string", name: "_symbol", type: "string" },
+			{ internalType: "uint256", name: "_totalSupply", type: "uint256" },
+			{ internalType: "address", name: "_admin", type: "address" },
 		],
 		stateMutability: "nonpayable",
 		type: "constructor",
@@ -21,6 +23,42 @@ export const TOKEN_ABI = [
 	},
 	{
 		anonymous: false,
+		inputs: [{ indexed: false, internalType: "address", name: "account", type: "address" }],
+		name: "Paused",
+		type: "event",
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{ indexed: true, internalType: "bytes32", name: "role", type: "bytes32" },
+			{ indexed: true, internalType: "bytes32", name: "previousAdminRole", type: "bytes32" },
+			{ indexed: true, internalType: "bytes32", name: "newAdminRole", type: "bytes32" },
+		],
+		name: "RoleAdminChanged",
+		type: "event",
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{ indexed: true, internalType: "bytes32", name: "role", type: "bytes32" },
+			{ indexed: true, internalType: "address", name: "account", type: "address" },
+			{ indexed: true, internalType: "address", name: "sender", type: "address" },
+		],
+		name: "RoleGranted",
+		type: "event",
+	},
+	{
+		anonymous: false,
+		inputs: [
+			{ indexed: true, internalType: "bytes32", name: "role", type: "bytes32" },
+			{ indexed: true, internalType: "address", name: "account", type: "address" },
+			{ indexed: true, internalType: "address", name: "sender", type: "address" },
+		],
+		name: "RoleRevoked",
+		type: "event",
+	},
+	{
+		anonymous: false,
 		inputs: [
 			{ indexed: true, internalType: "address", name: "from", type: "address" },
 			{ indexed: true, internalType: "address", name: "to", type: "address" },
@@ -28,6 +66,33 @@ export const TOKEN_ABI = [
 		],
 		name: "Transfer",
 		type: "event",
+	},
+	{
+		anonymous: false,
+		inputs: [{ indexed: false, internalType: "address", name: "account", type: "address" }],
+		name: "Unpaused",
+		type: "event",
+	},
+	{
+		inputs: [],
+		name: "DEFAULT_ADMIN_ROLE",
+		outputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "MINTER_ROLE",
+		outputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "PAUSER_ROLE",
+		outputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+		stateMutability: "view",
+		type: "function",
 	},
 	{
 		inputs: [
@@ -57,6 +122,13 @@ export const TOKEN_ABI = [
 		type: "function",
 	},
 	{
+		inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+		name: "burn",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
 		inputs: [],
 		name: "decimals",
 		outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
@@ -74,6 +146,33 @@ export const TOKEN_ABI = [
 		type: "function",
 	},
 	{
+		inputs: [{ internalType: "bytes32", name: "role", type: "bytes32" }],
+		name: "getRoleAdmin",
+		outputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "bytes32", name: "role", type: "bytes32" },
+			{ internalType: "address", name: "account", type: "address" },
+		],
+		name: "grantRole",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "bytes32", name: "role", type: "bytes32" },
+			{ internalType: "address", name: "account", type: "address" },
+		],
+		name: "hasRole",
+		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
 		inputs: [
 			{ internalType: "address", name: "spender", type: "address" },
 			{ internalType: "uint256", name: "addedValue", type: "uint256" },
@@ -84,9 +183,54 @@ export const TOKEN_ABI = [
 		type: "function",
 	},
 	{
+		inputs: [
+			{ internalType: "address", name: "to", type: "address" },
+			{ internalType: "uint256", name: "amount", type: "uint256" },
+		],
+		name: "mint",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
 		inputs: [],
 		name: "name",
 		outputs: [{ internalType: "string", name: "", type: "string" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{ inputs: [], name: "pause", outputs: [], stateMutability: "nonpayable", type: "function" },
+	{
+		inputs: [],
+		name: "paused",
+		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "bytes32", name: "role", type: "bytes32" },
+			{ internalType: "address", name: "account", type: "address" },
+		],
+		name: "renounceRole",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{ internalType: "bytes32", name: "role", type: "bytes32" },
+			{ internalType: "address", name: "account", type: "address" },
+		],
+		name: "revokeRole",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "bytes4", name: "interfaceId", type: "bytes4" }],
+		name: "supportsInterface",
+		outputs: [{ internalType: "bool", name: "", type: "bool" }],
 		stateMutability: "view",
 		type: "function",
 	},
@@ -125,6 +269,7 @@ export const TOKEN_ABI = [
 		stateMutability: "nonpayable",
 		type: "function",
 	},
+	{ inputs: [], name: "unpause", outputs: [], stateMutability: "nonpayable", type: "function" },
 ];
 
 export const ERC_20_ABI = [
@@ -350,7 +495,7 @@ export const ERC_20_ABI = [
 	},
 ];
 
-export const SALE_ADDRESS = "0xCAc81dEc553B500daC5cC0214609D3149cAd74F3";
+export const SALE_ADDRESS = "0x06a4CedD808a4600cca8bB2e56ED7799B2ECc566";
 
 export const SALE_ABI = [
 	{
@@ -521,21 +666,21 @@ export const PURCHASE_TOKENS = [
 		id: "tether",
 		name: "usdt",
 		ticker: "USDT",
-		address: "0x13512979ade267ab5100878e2e0f485b568328a4",
+		address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
 		decimals: 6,
 	},
 	{
 		id: "usd-coin",
 		name: "usdc",
 		ticker: "USDC",
-		address: "0xe22da380ee6b445bb8273c81944adeb6e8450422",
+		address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
 		decimals: 6,
 	},
 	{
 		id: "binance-usd",
 		name: "busd",
 		ticker: "BUSD",
-		address: "0x4c6e1efc12fdfd568186b7baec0a43fffb4bcccf",
+		address: "0x4fabb145d64652a948d72533023f6e7a623c7c53",
 		decimals: 18,
 	},
 ];

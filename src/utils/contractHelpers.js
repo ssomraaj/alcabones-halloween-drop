@@ -9,15 +9,12 @@ import {
 	TOKEN_ADDRESS,
 } from "./contracts";
 
-const KOVAN_PROVIDER = new ethers.providers.InfuraProvider(
-	"kovan",
-	"857fdaf932a740ffbe04a50c51aaee8e"
-);
+const PROVIDER = new ethers.providers.InfuraProvider("mainnet", "857fdaf932a740ffbe04a50c51aaee8e");
 
 export const getBollyPrice = () =>
 	new Promise(async (resolve, reject) => {
 		try {
-			const saleContract = new ethers.Contract(SALE_ADDRESS, SALE_ABI, KOVAN_PROVIDER);
+			const saleContract = new ethers.Contract(SALE_ADDRESS, SALE_ABI, PROVIDER);
 			let price = await saleContract.bollycoinPrice();
 			price = ethers.utils.formatUnits(price, 18);
 			resolve({
@@ -35,7 +32,7 @@ export const getBollyPrice = () =>
 export const getBollyBalance = (address) =>
 	new Promise(async (resolve, reject) => {
 		try {
-			const bollyContract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, KOVAN_PROVIDER);
+			const bollyContract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, PROVIDER);
 			let balance = await bollyContract.balanceOf(address);
 			balance = ethers.utils.formatUnits(balance, 18);
 			resolve({
@@ -109,7 +106,7 @@ export const getTokenBalance = (asset, address) =>
 			if (token.length > 0) {
 				const tokenAddress = token[0].address;
 				const tokenDecimals = token[0].decimals;
-				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, KOVAN_PROVIDER);
+				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, PROVIDER);
 				let balance = await tokenContract.balanceOf(address);
 				balance = ethers.utils.formatUnits(balance, tokenDecimals);
 				resolve({
@@ -149,7 +146,7 @@ export const getAllowance = (asset, address) =>
 			if (token.length > 0) {
 				const tokenAddress = token[0].address;
 				const tokenDecimals = token[0].decimals;
-				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, KOVAN_PROVIDER);
+				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, PROVIDER);
 				let allowance = await tokenContract.allowance(address, SALE_ADDRESS);
 				allowance = ethers.utils.formatUnits(allowance, tokenDecimals);
 				resolve({
@@ -285,7 +282,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid }) =>
 
 export const getAvailableBolly = async () => {
 	try {
-		const tokenContract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, KOVAN_PROVIDER);
+		const tokenContract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, PROVIDER);
 		let availableBolly = await tokenContract.balanceOf(SALE_ADDRESS);
 		availableBolly = ethers.utils.formatUnits(availableBolly, 18);
 		return availableBolly;
