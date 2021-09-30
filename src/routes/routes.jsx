@@ -1,5 +1,5 @@
 import React, { lazy, Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import WalletLink from "walletlink";
@@ -9,7 +9,7 @@ import { SuspenseWithChunkError } from "../components";
 import { AppLoader } from "../components/loaders";
 import { ConnectModal } from "../components/modals";
 
-const Login = lazy(() => import("../pages/login/Login"));
+// const Login = lazy(() => import("../pages/login/Login"));
 const ComingSoon = lazy(() => import("../pages/coming-soon/ComingSoon"));
 const Home = lazy(() => import("../pages/dashboard/home/Home"));
 // const APILogin = lazy(() => import("../pages/api-login/Login"));
@@ -107,6 +107,7 @@ class Routes extends Component {
 		} catch (e) {
 			this.setState({
 				connecting: false,
+				connected: false,
 			});
 		}
 	};
@@ -120,6 +121,7 @@ class Routes extends Component {
 			await web3Provider.enable().catch((_) => {
 				this.setState({
 					connecting: false,
+					connected: false,
 				});
 			});
 			const provider = new ethers.providers.Web3Provider(web3Provider);
@@ -149,11 +151,13 @@ class Routes extends Component {
 				.catch(() => {
 					this.setState({
 						connecting: false,
+						connected: false,
 					});
 				});
 		} catch (e) {
 			this.setState({
 				connecting: false,
+				connected: false,
 			});
 		}
 	};
@@ -164,44 +168,50 @@ class Routes extends Component {
 				"https://kovan.infura.io/v3/857fdaf932a740ffbe04a50c51aaee8e",
 				42
 			);
-			await web3Provider.enable().catch((e) => {
-				this.setState({
-					connecting: false,
-					connected: false,
-				});
-				return;
-			});
-			const provider = new ethers.providers.Web3Provider(web3Provider);
-			const address = await provider.listAccounts();
-			const signer = provider.getSigner();
-			provider
-				.getNetwork()
-				.then(async (network) => {
-					if (network.chainId === 42) {
-						this.setState({
-							type: "Coinbase",
-							address: address[0],
-							signer: signer,
-							connected: true,
-							connecting: false,
-							modal: false,
-						});
-					} else {
-						this.setState({ connecting: false }, () => {
-							notification["error"]({
-								message: "Wrong network detected. Please connect to Kovan Test Network",
+			web3Provider
+				.enable()
+				.then(async () => {
+					const provider = new ethers.providers.Web3Provider(web3Provider);
+					const address = await provider.listAccounts();
+					const signer = provider.getSigner();
+					provider
+						.getNetwork()
+						.then(async (network) => {
+							if (network.chainId === 42) {
+								this.setState({
+									type: "Coinbase",
+									address: address[0],
+									signer: signer,
+									connected: true,
+									connecting: false,
+									modal: false,
+								});
+							} else {
+								this.setState({ connecting: false }, () => {
+									notification["error"]({
+										message: "Wrong network detected. Please connect to Kovan Test Network",
+									});
+								});
+							}
+						})
+						.catch(() => {
+							this.setState({
+								connecting: false,
+								connected: false,
 							});
 						});
-					}
 				})
-				.catch(() => {
+				.catch((e) => {
 					this.setState({
 						connecting: false,
+						connected: false,
 					});
+					return;
 				});
 		} catch (e) {
 			this.setState({
 				connecting: false,
+				connected: false,
 			});
 		}
 	};
@@ -212,7 +222,7 @@ class Routes extends Component {
 		return (
 			<SuspenseWithChunkError fallback={<AppLoader />}>
 				<Switch>
-					<Route exact path="/" component={Login} />
+					{/* <Route exact path="/" component={Login} /> */}
 					{/* <Route
 						exact
 						path="/login"
@@ -238,6 +248,7 @@ class Routes extends Component {
 							/>
 						)}
 					/>
+					<Redirect to="/coming-soon" />
 				</Switch>
 				<ConnectModal
 					modal={modal}

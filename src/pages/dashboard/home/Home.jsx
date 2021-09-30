@@ -15,8 +15,8 @@ import {
 	getAvailableBolly,
 } from "../../../utils/contractHelpers";
 import { PURCHASE_TOKENS } from "../../../utils/contracts";
-import "./Home.css";
 import { API } from "../../../utils/service";
+import "./Home.css";
 
 class Home extends Component {
 	constructor(props) {
@@ -44,6 +44,10 @@ class Home extends Component {
 			availableBolly: "0",
 			fetchingAvailableBolly: true,
 		};
+	}
+
+	UNSAFE_componentWillMount() {
+		window.addEventListener("popstate", this.onBackButtonEvent);
 	}
 
 	componentDidMount() {
@@ -79,6 +83,15 @@ class Home extends Component {
 			});
 		}
 	}
+
+	componentWillUnmount() {
+		window.removeEventListener("popstate", this.onBackButtonEvent);
+	}
+
+	onBackButtonEvent = (e) => {
+		e.preventDefault();
+		// window.location = "/coming-soon";
+	};
 
 	fetchAvailableBolly = () => {
 		getAvailableBolly()

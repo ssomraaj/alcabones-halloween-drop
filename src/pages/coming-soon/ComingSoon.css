@@ -466,11 +466,11 @@
 .section.nft {
 	position: relative;
 	margin: 3rem 0;
-	padding: 5rem 7vw;
+	padding: 7.5rem 7vw;
 	display: flex;
 	justify-content: flex-end;
 	background: url(../../assets/images/rounded/poster-6.png) no-repeat left;
-	background-size: 35% auto;
+	background-size: 32% auto;
 }
 
 /* .section-2-graphic {

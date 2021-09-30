@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import $ from "jquery";
 import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
 import { AppLoader } from "../../components/loaders";
@@ -20,15 +21,15 @@ import "./ComingSoon.css";
 import "./TextAnimation.css";
 
 const ComingSoon = () => {
+	let proximityInterval;
+	let mouse = { x: 0, y: 0 };
+	const history = useHistory();
 	const [imagesLoaded, setImagesLoaded] = useState(0);
-	const [loading, setLoading] = useState(true);
 	const [hovered, setHovered] = useState(false);
 	const [navLinkActive, setNavLinkActive] = useState(false);
 	const [socialLink, setSocialLink] = useState(false);
 
 	const intitializeProximityRepel = () => {
-		let mouse = { x: 0, y: 0 };
-
 		let forcex = 0;
 		let forcey = 0;
 		let magnet = 500;
@@ -43,7 +44,7 @@ const ComingSoon = () => {
 		});
 
 		$(".letter").css("position", "absolute");
-		setInterval(() => {
+		proximityInterval = setInterval(() => {
 			$(".letter").each((_, el) => {
 				el = $(el);
 				const x0 = el.offset().left;
@@ -92,10 +93,10 @@ const ComingSoon = () => {
 	};
 
 	useEffect(() => {
-		window.addEventListener("load", () => {
-			setLoading(false);
-			intitializeProximityRepel();
-		});
+		intitializeProximityRepel();
+		return () => {
+			clearInterval(proximityInterval);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -105,11 +106,9 @@ const ComingSoon = () => {
 
 	useEffect(() => {
 		return () => {
-			setImagesLoaded(0);
+			setImagesLoaded(2);
 		};
 	}, []);
-
-	if (loading) return <AppLoader />;
 
 	return (
 		<>
@@ -267,11 +266,12 @@ const ComingSoon = () => {
 							<h1>The Bollywood NFT Marketplace</h1>
 							<div className="tablet-main-graphic" />
 							<p>
-								Over 1 billion people over the world are already Bollywood media consumers and a
-								large portion hold sentimental value in iconic clips and media produced by the
-								industry over the century. Allowing decentralised ownership and assigning monetary
-								value storage of the same, similar to how one may value a piece of art, could result
-								in Bollywood NFTs being valued in billions of dollars.
+								Over 1 billion people in the world are already Bollywood media consumers and a large
+								portion hold sentimental value in iconic moments and media produced by the industry
+								over the century. BollyCoin allows decentralised ownership of NFTs and assigns
+								monetary value storage to the same, similar to how one may value a piece of art. We
+								believe that this could result in Bollywood NFTs being valued as the next generation
+								of digital art.
 							</p>
 							<button
 								onClick={() => {
@@ -304,28 +304,25 @@ const ComingSoon = () => {
 								<div className="tablet-section-2-graphic" />
 								<p>
 									Our marketplace enables the community to buy, trade and profit through the NFTs on
-									our platform! The marketplace allows users to create their own cinematic universes
-									and rewards them from their participation & contribution to the community. We want
-									the audience to actively be a part in shaping what content we release to them. The
-									community is the heart of our platform, and the heart gets what the heart wants!
-									Our community members vote for what NFTs they want to see on the marketplace when
-									they want to see them.
+									our platform! The marketplace allows users to create their own cinematic universe
+									and rewards them from their participation & contribution to the community. The
+									community is the heart of our platform, and they get what they want! We want the
+									community to actively be a part in shaping what content we release to them through
+									our community’s voting system. Our community members vote for what NFTs they want
+									to see on the marketplace when they want to see them.
 								</p>
 							</div>
 						</section>
 						<section className="section nft">
 							<div>
-								<h1>What are BollyCoin NFTs?</h1>
+								<h1>BollyCoin NFTs</h1>
 								<div className="tablet-section-3-graphic" />
 								<p>
 									We are collaborating with some of Bollywood’s largest production houses and
 									celebrities to bring you Blockbuster NFTs! Dialogues, posters & stills from your
-									favourite films! Along with Tweets, posts & more straight from your favourite
-									stars! Beyond NFTs we aim to create immersive, unique and irreplaceable
-									experiences through technology, media & most importantly, our communities’
-									demands. Imagine owning your favorite scene of your favorite Bollywood movie? Or
-									owning the exclusive rights of the NFTs of official posters or trailers to a film
-									you grew up on. That’s all practically possible now!
+									favourite films! Along with tweets, posts & more straight from your favourite
+									stars! Imagine owning your favourite dialogue from your favourite Bollywood movie?
+									Or owning the exclusive NFT poster. That’s all possible now!
 								</p>
 							</div>
 						</section>
@@ -339,25 +336,23 @@ const ComingSoon = () => {
 							{/* <img src={Movies} alt="showcase" /> */}
 						</section>
 						<section className="timeline-section">
-							<h1>Decentralised Ownership</h1>
+							<h1>The BollyCoin Token</h1>
 							<p>
-								The native digital utility token of the BollyCoin ecosystem, BollyCoin would
-								represent a voting right in our community, hence acting as a governance token.
+								The native digital utility token of the BollyCoin ecosystem, each BollyCoin
+								represents a voting right in our community, hence acting as a governance token.
 								<br />
 								<br />
 								BollyCoin holders will get rewarded in the form of BollyCredits which can be used to
-								purchase NFT’s on our platform when it goes live. Hence these BollyCredits can be
-								converted into Bollywood memorabilia which could be very valuable.
+								purchase NFT’s on our platform when it goes live. These BollyCredits can be
+								collected and used to purchase BollyCoin NFTs.
 								<br />
 								<br />
-								The white paper has a further breakup of the reward system in place for BollyCoin
+								Our whitepaper has a further breakup of the reward system in place for BollyCoin
 								holders.
 							</p>
 							<div>
 								<button
-									onClick={() => {
-										window.location = "/buy-bollycoin";
-									}}
+									onClick={() => history.push("/buy-bollycoin")}
 									style={{ marginBottom: "2rem" }}
 								>
 									Buy BollyCoin

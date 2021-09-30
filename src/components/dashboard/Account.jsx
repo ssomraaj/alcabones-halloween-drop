@@ -23,7 +23,7 @@ class Account extends Component {
 				{walletConnected ? (
 					<>
 						<p>
-							{address.slice(0, 7)}...........{address.slice(-4)} ( {walletType} )
+							{address?.slice(0, 7)}...........{address?.slice(-4)} ( {walletType} )
 						</p>
 						{fetchingETHBalance ? (
 							<CircularProgress

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import WebFont from "webfontloader";
 
 import { AppLoader } from "./components/loaders";
 import { Routes } from "./routes";
-export default class App extends Component {
+class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,6 +23,12 @@ export default class App extends Component {
 		});
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.props.location.pathname !== prevProps.location.pathname) {
+			window.location.reload();
+		}
+	}
+
 	render() {
 		const { rendered } = this.state;
 
@@ -32,3 +39,5 @@ export default class App extends Component {
 		return <Routes />;
 	}
 }
+
+export default withRouter(App);
