@@ -116,23 +116,33 @@ class Routes extends Component {
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				await window.ethereum.request({ method: "eth_requestAccounts" });
 				const address = await provider.listAccounts();
-				const signer = await provider.getSigner();
-				if (provider.network.chainId === 1) {
-					this.setState({
-						type: "Metamask",
-						address: address[0],
-						signer: signer,
-						connected: true,
-						modal: false,
-						provider,
-					});
-				} else {
-					this.setState({ connecting: false }, () => {
-						notification["error"]({
-							message: "Wrong network detected. Please connect to Ethereum Mainnet",
+				const signer = provider.getSigner();
+				provider
+					.getNetwork()
+					.then((network) => {
+						if (network.chainId === 1) {
+							this.setState({
+								type: "Metamask",
+								address: address[0],
+								signer: signer,
+								connected: true,
+								modal: false,
+								provider,
+							});
+						} else {
+							this.setState({ connecting: false }, () => {
+								notification["error"]({
+									message: "Wrong network detected. Please connect to Ethereum Mainnet",
+								});
+							});
+						}
+					})
+					.catch(() => {
+						this.setState({
+							connecting: false,
+							connected: false,
 						});
 					});
-				}
 			} else {
 				this.setState({ connecting: false }, () => {
 					notification["error"]({
@@ -142,6 +152,10 @@ class Routes extends Component {
 				});
 			}
 		} catch (e) {
+			process.env.NODE_ENV === "development" &&
+				notification["error"]({
+					message: e.message,
+				});
 			this.setState({
 				connecting: false,
 				connected: false,
