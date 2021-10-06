@@ -12,6 +12,7 @@ import { ConnectModal } from "../components/modals";
 // const Login = lazy(() => import("../pages/login/Login"));
 const ComingSoon = lazy(() => import("../pages/coming-soon/ComingSoon"));
 const Home = lazy(() => import("../pages/dashboard/home/Home"));
+const ContactUs = lazy(() => import("../pages/contact/ContactUs"));
 // const APILogin = lazy(() => import("../pages/api-login/Login"));
 // const LoginWithToken = lazy(() => import("../pages/api-login/LoginWithToken"));
 
@@ -301,6 +302,7 @@ class Routes extends Component {
 							/>
 						)}
 					/>
+					<Route exact path="/contact-us" component={ContactUs} />
 					<Redirect to="/coming-soon" />
 				</Switch>
 				<ConnectModal

@@ -1,5 +1,5 @@
 .coming-soon-outer-container {
-	height: 100vh;
+	height: calc(100vh + 1px);
 	width: 100%;
 	background-color: #0f0931;
 	background-image: url("../../assets/images/Background-1.png"),
@@ -31,7 +31,7 @@
 	border: 1.5px solid #4b90d8;
 	box-shadow: 0px 0px 0px 1px #4b90d8, 0px 0px 60px #4b90d8, inset 0px 0px 0px 1px #4b90d8,
 		inset 0px 0px 140px #4b90d8;
-	border-radius: 30px;
+	border-radius: 20px;
 	transition: 0.4s opacity ease;
 }
 
@@ -45,7 +45,7 @@
 	border: 2px solid #fff;
 	box-shadow: 0px 0px 80px 4px #d53d99, 0px 0px 30px #d53d99, inset 0px 0px 10px 4px #d53d99,
 		inset 0px 0px 30px #d53d99;
-	border-radius: 40px;
+	border-radius: 30px;
 	transition: 0.4s opacity ease;
 }
 
@@ -274,7 +274,7 @@
 	align-items: center;
 	flex-direction: column;
 	gap: 10px;
-	margin-top: -10rem;
+	margin-top: -5rem;
 	cursor: pointer;
 }
 
@@ -326,8 +326,10 @@
 	padding: 3.5rem 0 3.5rem 7vw;
 	min-height: 100vh;
 	overflow: hidden;
-	background: url(../../assets/images/nft-marketplace.jpg) no-repeat center right;
+	background: url(../../assets/images/what-is-bollycoin.png) no-repeat;
 	background-size: 40% auto;
+	background-position-x: 90%;
+	background-position-y: 25%;
 	transition: all 0.3s ease;
 }
 
@@ -393,7 +395,7 @@
 	opacity: 0.8;
 	font-size: calc(0.8em + 0.8vmin);
 	line-height: 2.15rem;
-	width: 79%;
+	width: 80%;
 	margin: 3rem 0;
 }
 
@@ -433,8 +435,8 @@
 	padding: 5rem 7vw;
 	display: flex;
 	justify-content: flex-end;
-	background: url(../../assets/images/what-is-bollycoin.jpg) no-repeat left;
-	background-size: 38% auto;
+	background: url(../../assets/images/rounded/poster-3.png) no-repeat left;
+	background-size: 35% auto;
 }
 
 .section div {
@@ -461,8 +463,8 @@
 
 .invert {
 	justify-content: flex-start;
-	background: url(../../assets/images/why-bollycoin.jpg) no-repeat right;
-	background-size: 45%;
+	background: url(../../assets/images/rounded/poster-1.png) no-repeat right;
+	background-size: 40%;
 }
 
 .section.nft {
@@ -761,7 +763,7 @@
 	.tablet-main-graphic {
 		height: 450px;
 		width: 100%;
-		background: url(../../assets/images/nft-marketplace.jpg) no-repeat center;
+		background: url(../../assets/images/what-is-bollycoin.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -793,7 +795,7 @@
 	.tablet-section-1-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/what-is-bollycoin.jpg) no-repeat center;
+		background: url(../../assets/images/rounded/poster-3.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -804,7 +806,7 @@
 	.tablet-section-2-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/why-bollycoin.jpg) no-repeat center;
+		background: url(../../assets/images/rounded/poster-1.png) no-repeat center;
 		background-size: contain;
 	}
 
@@ -881,12 +883,12 @@
 	}
 
 	.tablet-main-graphic {
-		height: 400px;
+		height: 280px;
 		width: 100%;
-		background: url(../../assets/images/nft-marketplace.jpg) no-repeat center;
+		background: url(../../assets/images/what-is-bollycoin.png) no-repeat center;
 		background-size: contain;
-		margin-top: 0rem;
-		margin-bottom: -1rem;
+		margin-top: -2rem;
+		margin-bottom: -3rem;
 	}
 
 	.banner h1,
@@ -915,6 +917,10 @@
 
 	.section p {
 		margin: 2rem 0 0;
+	}
+
+	.tablet-section-3-graphic {
+		height: 250px;
 	}
 }
 
@@ -969,8 +975,7 @@
 
 @media only screen and (max-width: 375px) {
 	.tablet-main-graphic,
-	.tablet-section-1-graphic,
-	.tablet-section-3-graphic {
+	.tablet-section-1-graphic {
 		height: 300px;
 	}
 

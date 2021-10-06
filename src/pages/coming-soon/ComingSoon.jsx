@@ -248,19 +248,23 @@ const ComingSoon = () => {
 							</a>
 						</div>
 					</div>
-					{/* <div className="cta-container">
-						<img
+					<div className="cta-container">
+						{/* <img
 							src={Mouse}
 							alt="Mouse Logo"
 							onClick={() => window.location.replace("/coming-soon#cinematic")}
-						/>
-						<div className="box" onClick={() => window.location.replace("/coming-soon#cinematic")}>
+						/> */}
+						{/* <div
+							style={{ marginTop: "3rem" }}
+							className="box"
+							onClick={() => window.location.replace("/coming-soon#cinematic")}
+						>
 							<span></span>
 							<span></span>
 							<span></span>
-						</div>
+						</div> */}
 						<h3 className="cta-text">scroll down</h3>
-					</div> */}
+					</div>
 				</div>
 				<div className="tagline">
 					<img src={Logo} alt="BollyCoin" />
@@ -274,10 +278,9 @@ const ComingSoon = () => {
 							<p>
 								Over 1 billion people in the world are already Bollywood media consumers and a large
 								portion hold sentimental value in iconic moments and media produced by the industry
-								over the century. BollyCoin allows decentralised ownership of NFTs and assigns
-								monetary value storage to the same, similar to how one may value a piece of art. We
-								believe that this could result in Bollywood NFTs being valued as the next generation
-								of digital art.
+								over the century. BollyCoin allows decentralised ownership of NFTs. We believe that
+								this could result in Bollywood NFTs being valued as the next generation of digital
+								art.
 							</p>
 							<div className="tablet-button-container">
 								<button
@@ -315,9 +318,7 @@ const ComingSoon = () => {
 									our platform! The marketplace allows users to create their own cinematic universe
 									and rewards them from their participation & contribution to the community. The
 									community is the heart of our platform, and they get what they want! We want the
-									community to actively be a part in shaping what content we release to them through
-									our community’s voting system. Our community members vote for what NFTs they want
-									to see on the marketplace when they want to see them.
+									community to actively be a part in shaping what content we release.
 								</p>
 							</div>
 						</section>
@@ -328,34 +329,27 @@ const ComingSoon = () => {
 								<p>
 									We are collaborating with some of Bollywood’s largest production houses and
 									celebrities to bring you Blockbuster NFTs! Dialogues, posters & stills from your
-									favourite films! Along with tweets, posts & more straight from your favourite
-									stars! Imagine owning your favourite dialogue from your favourite Bollywood movie?
-									Or owning the exclusive NFT poster. That’s all possible now!
+									favourite films! Along with tweets, posts & more, straight from your favourite
+									stars! Imagine owning the NFT to your favourite dialogue from your favourite
+									Bollywood movie? Or owning one of its exclusive NFT posters! That’s all possible
+									now!
 								</p>
 							</div>
-						</section>
-						<section className="banner">
-							<h1>Users call the shots and earn rewards from the NFTs sold on our marketplace.</h1>
-							<p>
-								BollyCoin is partnering with the biggest media owners of the Bollywood industry to
-								receive original media that will be sold as NFTs. BollyCoin can essentially be
-								thought of as a Bollywood's NFT partner.
-							</p>
-							{/* <img src={Movies} alt="showcase" /> */}
 						</section>
 						<section className="timeline-section">
 							<h1>The BollyCoin Token</h1>
 							<p>
-								The native digital utility token of the BollyCoin ecosystem, each BollyCoin
-								represents a voting right in our community, hence acting as a governance token.
+								The native digital utility token of our ecosystem, BollyCoin, represents a voting
+								right in our community, hence acting as a governance token in non-corporate and
+								non-regulatory matters.
 								<br />
 								<br />
-								BollyCoin holders will get rewarded in the form of BollyCredits which can be used to
-								purchase NFT’s on our platform when it goes live. These BollyCredits can be
-								collected and used to purchase BollyCoin NFTs.
+								Every time an NFT is sold on our marketplace, BollyCoin holders are rewarded in the
+								form of BollyCredits which can be used to purchase NFTs on our platform when it goes
+								live. These BollyCredits can be collected and used to purchase BollyCoin NFTs.
 								<br />
 								<br />
-								Our whitepaper has a further breakup of the reward system in place for BollyCoin
+								Our White Paper has a further breakup of the reward system in place for BollyCoin
 								holders.
 							</p>
 							<div>

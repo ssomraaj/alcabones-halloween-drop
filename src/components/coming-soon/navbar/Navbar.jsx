@@ -8,7 +8,7 @@ import Logo from "../../../assets/images/Logo.svg";
 import PinkLogo from "../../../assets/images/logo-pink.svg";
 import "./Navbar.css";
 
-const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave }) => {
+const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave, active }) => {
 	const history = useHistory();
 	const [visible, setVisible] = useState(false);
 
@@ -41,8 +41,22 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave }) => {
 						</button>
 					</div>
 					<ul className="mobile-nav-links">
-						<li onClick={scrollToSection}>What is BollyCoin?</li>
+						{active !== "contact" && <li onClick={scrollToSection}>What is BollyCoin?</li>}
 						<li onClick={openLink}>Read Whitepaper</li>
+						{active !== "contact" && (
+							<li>
+								<a
+									href="/contact-us"
+									style={{ color: "#333" }}
+									onClick={(e) => {
+										e.preventDefault();
+										history.push("/contact-us");
+									}}
+								>
+									Contact Us
+								</a>
+							</li>
+						)}
 						<li style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid #dedede" }}>
 							<a
 								href="/buy-bollycoin"
@@ -57,34 +71,29 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave }) => {
 					</ul>
 				</div>
 			</Drawer>
-			<div className="navbar-container" data-expanded={navLinkActive}>
+			<div className="navbar-container">
 				<div
 					className="logo-container"
+					style={active === "contact" ? { cursor: "pointer", pointerEvents: "all" } : {}}
 					onMouseOver={navLinkActive ? () => false : onMouseOver}
 					onMouseLeave={navLinkActive ? () => false : onMouseLeave}
+					onClick={active === "contact" ? () => (window.location = "/coming-soon") : () => false}
 				>
 					<img src={Logo} alt="BollyCoin Logo" data-visible={!hovered} />
-					<img src={PinkLogo} alt="BollyCoin Logo" data-visible={hovered} />
+					{active !== "contact" && (
+						<img src={PinkLogo} alt="BollyCoin Logo" data-visible={hovered} />
+					)}
 				</div>
 				<ul className="navbar-items">
-					<li
-						className={`nav-item ${navLinkActive ? "remove-nav-link" : ""}`}
-						data-hovered={hovered}
-						onClick={scrollToSection}
-					>
-						What is BollyCoin?
-					</li>
-					<li
-						className={`nav-item ${navLinkActive ? "remove-nav-link" : ""}`}
-						data-hovered={hovered}
-						onClick={openLink}
-					>
+					{active !== "contact" && (
+						<li className={`nav-item`} data-hovered={hovered} onClick={scrollToSection}>
+							What is BollyCoin?
+						</li>
+					)}
+					<li className={`nav-item`} data-hovered={hovered} onClick={openLink}>
 						Read Whitepaper
 					</li>
-					<li
-						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
-						data-hovered={hovered}
-					>
+					<li className={`nav-item`} data-hovered={hovered}>
 						<a
 							href="/buy-bollycoin"
 							onClick={(e) => {
@@ -95,12 +104,19 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave }) => {
 							Buy BollyCoin
 						</a>
 					</li>
-					{/* <li
-						className={`nav-item ${navLinkActive ? "nav-item-onscroll" : ""}`}
-						data-hovered={hovered}
-					>
-						<a href="##">Contact Us</a>
-					</li> */}
+					{active !== "contact" && (
+						<li className={`nav-item`} data-hovered={hovered}>
+							<a
+								href="/contact-us"
+								onClick={(e) => {
+									e.preventDefault();
+									history.push("/contact-us");
+								}}
+							>
+								Contact Us
+							</a>
+						</li>
+					)}
 				</ul>
 				<div className="menu-button-container">
 					<button className="menu-button" type="primary" onClick={showDrawer}>

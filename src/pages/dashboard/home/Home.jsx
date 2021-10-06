@@ -21,6 +21,7 @@ import "./Home.css";
 class Home extends Component {
 	constructor(props) {
 		super(props);
+		window.addEventListener("popstate", this.onBackButtonEvent);
 		this.state = {
 			fetchingTokenPrice: false,
 			tokenPrice: "0",
@@ -44,10 +45,6 @@ class Home extends Component {
 			availableBolly: "0",
 			fetchingAvailableBolly: true,
 		};
-	}
-
-	UNSAFE_componentWillMount() {
-		window.addEventListener("popstate", this.onBackButtonEvent);
 	}
 
 	componentDidMount() {

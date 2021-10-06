@@ -1,0 +1,22 @@
+.contact-section {
+	padding: 200px 1rem 5rem;
+	max-width: 768px;
+	width: 100%;
+	margin: auto;
+	transition: 0.3s all ease;
+}
+
+.contact-title {
+	font-size: 1.25rem;
+}
+
+.contact-section .confirm-button {
+	width: 100%;
+	max-width: 200px;
+}
+
+@media only screen and (max-width: 1080px) {
+	.contact-section {
+		padding-top: 130px;
+	}
+}
