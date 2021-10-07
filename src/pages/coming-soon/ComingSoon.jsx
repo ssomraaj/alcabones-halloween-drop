@@ -284,7 +284,7 @@ const ComingSoon = () => {
 								<button
 									onClick={() => {
 										window.open(
-											"https://bollycoin.s3.us-east-1.amazonaws.com/bollycoin-whitepaper.pdf",
+											"https://bollycoin.s3.amazonaws.com/BollyCoin-whitepaper.pdf",
 											"_blank"
 										);
 									}}
