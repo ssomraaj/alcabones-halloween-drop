@@ -254,16 +254,14 @@ const ComingSoon = () => {
 							alt="Mouse Logo"
 							onClick={() => window.location.replace("/coming-soon#cinematic")}
 						/> */}
-						{/* <div
-							style={{ marginTop: "3rem" }}
-							className="box"
-							onClick={() => window.location.replace("/coming-soon#cinematic")}
-						>
+						<div data-visible={hovered} style={{ marginBottom: "3rem" }} className="box">
 							<span></span>
 							<span></span>
 							<span></span>
-						</div> */}
-						<h3 className="cta-text">scroll down</h3>
+						</div>
+						<h3 className="cta-text" data-hidden={hovered}>
+							scroll down
+						</h3>
 					</div>
 				</div>
 				<div className="tagline">
