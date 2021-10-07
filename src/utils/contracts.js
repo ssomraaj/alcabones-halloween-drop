@@ -1199,21 +1199,21 @@ export const SALE_ABI = [
 ];
 
 export const PURCHASE_TOKENS = [
-	{
-		id: "tether",
-		name: "usdt",
-		ticker: "USDT",
-		address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
-		decimals: 6,
-		abi: USDT_ABI,
-	},
+	// {
+	// 	id: "tether",
+	// 	name: "usdt",
+	// 	ticker: "USDT",
+	// 	address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+	// 	decimals: 6,
+	// 	abi: USDT_ABI,
+	// },
 	{
 		id: "usd-coin",
 		name: "usdc",
 		ticker: "USDC",
 		address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
 		decimals: 6,
-		abi: USDC_ABI,
+		abi: ERC_20_ABI,
 	},
 	{
 		id: "binance-usd",
@@ -1221,6 +1221,6 @@ export const PURCHASE_TOKENS = [
 		ticker: "BUSD",
 		address: "0x4fabb145d64652a948d72533023f6e7a623c7c53",
 		decimals: 18,
-		abi: BUSD_ABI,
+		abi: ERC_20_ABI,
 	},
 ];

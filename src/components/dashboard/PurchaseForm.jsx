@@ -40,10 +40,10 @@ const PurchaseForm = ({
 						}}
 					/>
 					<Select variant="outlined" value={asset} onChange={onAssetChange}>
-						<MenuItem value="USDT">
+						{/* <MenuItem value="USDT">
 							<img className="dropdown-icon" src={USDT} alt="usdt" />
 							USDT
-						</MenuItem>
+						</MenuItem> */}
 						<MenuItem value="USDC">
 							<img className="dropdown-icon" src={USDC} alt="usdc" />
 							USDC
