@@ -1,13 +1,6 @@
 import axios from "axios";
 import { ethers } from "ethers";
-import {
-	ERC_20_ABI,
-	PURCHASE_TOKENS,
-	SALE_ABI,
-	SALE_ADDRESS,
-	TOKEN_ABI,
-	TOKEN_ADDRESS,
-} from "./contracts";
+import { PURCHASE_TOKENS, SALE_ABI, SALE_ADDRESS, TOKEN_ABI, TOKEN_ADDRESS } from "./contracts";
 
 const PROVIDER = new ethers.providers.InfuraProvider("mainnet", "857fdaf932a740ffbe04a50c51aaee8e");
 
@@ -106,7 +99,8 @@ export const getTokenBalance = (asset, address) =>
 			if (token.length > 0) {
 				const tokenAddress = token[0].address;
 				const tokenDecimals = token[0].decimals;
-				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, PROVIDER);
+				const tokenABI = token[0].abi;
+				const tokenContract = new ethers.Contract(tokenAddress, tokenABI, PROVIDER);
 				let balance = await tokenContract.balanceOf(address);
 				balance = ethers.utils.formatUnits(balance, tokenDecimals);
 				resolve({
@@ -146,7 +140,8 @@ export const getAllowance = (asset, address) =>
 			if (token.length > 0) {
 				const tokenAddress = token[0].address;
 				const tokenDecimals = token[0].decimals;
-				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, PROVIDER);
+				const tokenABI = token[0].abi;
+				const tokenContract = new ethers.Contract(tokenAddress, tokenABI, PROVIDER);
 				let allowance = await tokenContract.allowance(address, SALE_ADDRESS);
 				allowance = ethers.utils.formatUnits(allowance, tokenDecimals);
 				resolve({
@@ -180,7 +175,8 @@ export const approveToken = ({ asset, amount, signer }) =>
 			if (token.length > 0) {
 				const tokenAddress = token[0].address;
 				const tokenDecimals = token[0].decimals;
-				const tokenContract = new ethers.Contract(tokenAddress, ERC_20_ABI, signer);
+				const tokenABI = token[0].abi;
+				const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
 				const result = await tokenContract.approve(
 					SALE_ADDRESS,
 					ethers.utils.parseUnits(amount, tokenDecimals)

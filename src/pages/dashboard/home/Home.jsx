@@ -124,6 +124,8 @@ class Home extends Component {
 		this.setState({ fetchingBollyBalance: true }, () => {
 			getAllowance(asset, address)
 				.then((response) => {
+					process.env.NODE_ENV === "development" &&
+						console.log(`${asset} allowance`, response.allowance);
 					this.setState({
 						fetchingBollyBalance: false,
 						allowance: response.allowance,
@@ -141,6 +143,7 @@ class Home extends Component {
 		this.setState({ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: true }, () => {
 			getTokenBalance(asset, address)
 				.then((res) => {
+					process.env.NODE_ENV === "development" && console.log(`${asset} balance`, res.balance);
 					this.setState(
 						{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
 						() => {
