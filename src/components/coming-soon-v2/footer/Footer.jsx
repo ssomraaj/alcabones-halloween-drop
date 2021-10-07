@@ -161,6 +161,10 @@ export default class Footer extends Component {
 							</a>
 						</div>
 					</div>
+					<div style={{ fontSize: "8px", opacity: 0.8, textAlign: "center" }}>
+						<p style={{ margin: 0 }}>Developed Under the Laws of BVI</p>
+						<p>NFTs and the BollyCoin are subject to market risk</p>
+					</div>
 				</div>
 			</footer>
 		);

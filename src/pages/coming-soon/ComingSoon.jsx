@@ -158,7 +158,7 @@ const ComingSoon = () => {
 							onMouseOver={() => setHovered(true)}
 							onMouseLeave={() => setHovered(false)}
 						>
-							Salman Khan Films NFTs and Salman Khan Static NFTs
+							Salman Khan Films' NFTs and Salman Khan Static NFTs
 						</div>
 						<div className="letters-container" data-hovered={hovered}>
 							<div className="letter" data-first-part={true}>
