@@ -28,7 +28,7 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave, active }) =
 	};
 
 	const openLink = () => {
-		window.open("https://bollycoin.s3.amazonaws.com/BOLLYCOIN-WP.pdf", "_blank");
+		window.open("https://bollycoin.s3.amazonaws.com/BollyCoin-whitepaper.pdf", "_blank");
 	};
 
 	return (
