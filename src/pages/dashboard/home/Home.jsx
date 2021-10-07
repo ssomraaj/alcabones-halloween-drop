@@ -230,8 +230,16 @@ class Home extends Component {
 		if (parseFloat(purchaseAmount) <= parseFloat(availableBolly)) {
 			if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
 				this.setState({ approving: true }, () => {
+					notification["info"]({
+						key: "check-wallet-notification",
+						message: "Approve transaction",
+						description:
+							"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
+						duration: 0,
+					});
 					approveToken({ asset, amount: parseFloat(purchaseAmount).toFixed(10), signer })
 						.then(async (response) => {
+							notification.close("check-wallet-notification");
 							notification["info"]({
 								key: "approval-processing-notification",
 								message: "Transaction processing",
@@ -266,11 +274,22 @@ class Home extends Component {
 							this.setState({ approving: false, allowance: purchaseAmount });
 						})
 						.catch((err) => {
+							notification.close("check-wallet-notification");
+							process.env.NODE_ENV === "development" && console.log(err);
+							if (
+								err.message &&
+								(err.message?.toLowerCase().includes("user denied transaction signature") ||
+									err.message?.toLowerCase().includes("user canceled") ||
+									err.message?.toLowerCase().includes("user rejected the transaction"))
+							) {
+								this.setState({ approving: false });
+								return;
+							}
 							notification["error"]({
 								message: "Transaction error",
 								description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Please try again later`,
 							});
-							this.setState({ approving: false }, console.log(err));
+							this.setState({ approving: false });
 						});
 				});
 			} else {
@@ -289,6 +308,13 @@ class Home extends Component {
 		const { signer } = this.props;
 		purchaseAmount = purchaseAmount.trim();
 		this.setState({ txStatus: "initializing" }, async () => {
+			notification["info"]({
+				key: "check-wallet-notification",
+				message: "Approve transaction",
+				description:
+					"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
+				duration: 0,
+			});
 			purchaseBolly({
 				asset,
 				uid: purchaseId,
@@ -296,6 +322,7 @@ class Home extends Component {
 				signer,
 			})
 				.then(async (response) => {
+					notification.close("check-wallet-notification");
 					this.setState({ txStatus: "waiting", hash: response.data.hash });
 					await response.data.wait();
 					const data = {
@@ -319,6 +346,7 @@ class Home extends Component {
 						});
 				})
 				.catch((_) => {
+					notification.close("check-wallet-notification");
 					notification["error"]({
 						message: "Couldn't purchase BOLLY",
 						description: "Our team has been notified of this issue. We are working on fixing it",

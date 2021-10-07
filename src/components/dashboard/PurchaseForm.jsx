@@ -1,7 +1,7 @@
 import React from "react";
-import { CircularProgress, MenuItem, Select } from "@material-ui/core";
+import { CircularProgress, Fade, MenuItem, Select } from "@material-ui/core";
 import { FormInput } from ".";
-import { BUSD, USDC, USDT } from "../../utils/icons";
+import { BUSD, USDC } from "../../utils/icons";
 
 const PurchaseForm = ({
 	loading,
@@ -54,6 +54,13 @@ const PurchaseForm = ({
 						</MenuItem>
 					</Select>
 				</div>
+				{!fetchingPrice && amount && parseFloat(amount) > 0 && (
+					<Fade in={!!amount}>
+						<div style={{ marginBottom: "10px", marginTop: "5px" }}>
+							Buying {(parseFloat(amount) / parseFloat(price)).toFixed(4)} BOLLY
+						</div>
+					</Fade>
+				)}
 				{fetchingPrice || fetchingTokenPrice ? (
 					<div>
 						<CircularProgress thickness={5} size={19} style={{ color: "#000" }} />
@@ -62,8 +69,9 @@ const PurchaseForm = ({
 					<div>1 BOLLY = $ {price}</div>
 				)}
 				{!fetchingAvailableBolly && (
-					<div style={{ marginTop: "12px" }}>
-						BOLLY left: {parseFloat(availableBolly).toFixed(4)}
+					<div style={{ marginTop: "12px", width: "100%", maxWidth: "400px" }}>
+						{parseFloat(availableBolly).toFixed(4)} BOLLY remains available to purchase in this
+						round of the 100,000,000 total supply.
 					</div>
 				)}
 				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
@@ -83,7 +91,7 @@ const PurchaseForm = ({
 						) : parseFloat(allowance) >= parseFloat(amount) ? (
 							`buy now with ${asset}`
 						) : (
-							`approve ${asset}`
+							`Confirm purchase`
 						)}
 					</button>
 				) : (

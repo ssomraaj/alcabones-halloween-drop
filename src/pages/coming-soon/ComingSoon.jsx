@@ -276,9 +276,12 @@ const ComingSoon = () => {
 							<p>
 								Over 1 billion people in the world are already Bollywood media consumers and a large
 								portion hold sentimental value in iconic moments and media produced by the industry
-								over the century. BollyCoin allows decentralised ownership of NFTs. We believe that
-								this could result in Bollywood NFTs being valued as the next generation of digital
-								art.
+								over the century. Digital collectibles from the Bollywood Industry will be auctioned
+								through our platform, providing an innovative way for Bollywood enthusiasts from
+								around the world to own NFTs of their favourite Bollywood films and celebrities. We
+								aim to be the world’s largest Bollywood NFT marketplace, partnering with the biggest
+								producers and celebrities in the industry to create iconic and exclusive one of a
+								kind NFTs.
 							</p>
 							<div className="tablet-button-container">
 								<button
@@ -297,66 +300,58 @@ const ComingSoon = () => {
 					<main>
 						<section className="section" id="about">
 							<div>
-								<h1>What is BollyCoin?</h1>
+								<h1>The BollyCoin Token</h1>
 								<div className="tablet-section-1-graphic" />
 								<p>
-									BollyCoin is a decentralized community that uses blockchain technology to give
-									artists, producers and fans of Bollywood media a chance to express their fandom by
-									creating & collecting NFTs from their favourite films and by their favourite
-									artists.
+									The native digital utility token of our ecosystem, BollyCoin, represents a voting
+									right in our community, hence acting as a governance token in non-corporate and
+									non-regulatory matters.
+									<br />
+									<br />
+									Every time an NFT is sold on our marketplace, BollyCoin holders are rewarded in
+									the form of BollyCredits which can be used to purchase NFTs on our platform when
+									it goes live.
+									<br />
+									<br />
+									Our White Paper has a further breakup of the reward system in place for BollyCoin
+									holders.
 								</p>
+								<div className="tablet-button-container">
+									<button
+										onClick={() => {
+											history.push("/buy-bollycoin");
+										}}
+									>
+										buy bollycoin
+									</button>
+								</div>
 							</div>
 						</section>
 						<section className="section invert">
 							<div>
-								<h1>Why BollyCoin?</h1>
+								<h1>The BollyCoin Community</h1>
 								<div className="tablet-section-2-graphic" />
 								<p>
 									Our marketplace enables the community to buy, trade and profit through the NFTs on
-									our platform! The marketplace allows users to create their own cinematic universe
-									and rewards them from their participation & contribution to the community. The
-									community is the heart of our platform, and they get what they want! We want the
-									community to actively be a part in shaping what content we release.
+									our platform. Users can create their own cinematic universe and BollyCoin rewards
+									them for their participation & contribution to the community. We want the
+									community to actively be a part in shaping what content we release next and much
+									more.
 								</p>
 							</div>
 						</section>
 						<section className="section nft">
 							<div>
-								<h1>BollyCoin NFTs</h1>
+								<h1>BollyCoin Partners</h1>
 								<div className="tablet-section-3-graphic" />
 								<p>
 									We are collaborating with some of Bollywood’s largest production houses and
-									celebrities to bring you Blockbuster NFTs! Dialogues, posters & stills from your
-									favourite films! Along with tweets, posts & more, straight from your favourite
-									stars! Imagine owning the NFT to your favourite dialogue from your favourite
-									Bollywood movie? Or owning one of its exclusive NFT posters! That’s all possible
-									now!
+									celebrities to bring you Blockbuster NFTs. This includes dialogues, posters &
+									stills from your favourite films along with tweets, posts & more, straight from
+									your favourite stars! Imagine owning the NFT to your favourite dialogue from your
+									favourite Bollywood movie? Or owning one of its exclusive NFT posters? That’s all
+									possible now!
 								</p>
-							</div>
-						</section>
-						<section className="timeline-section">
-							<h1>The BollyCoin Token</h1>
-							<p>
-								The native digital utility token of our ecosystem, BollyCoin, represents a voting
-								right in our community, hence acting as a governance token in non-corporate and
-								non-regulatory matters.
-								<br />
-								<br />
-								Every time an NFT is sold on our marketplace, BollyCoin holders are rewarded in the
-								form of BollyCredits which can be used to purchase NFTs on our platform when it goes
-								live. These BollyCredits can be collected and used to purchase BollyCoin NFTs.
-								<br />
-								<br />
-								Our White Paper has a further breakup of the reward system in place for BollyCoin
-								holders.
-							</p>
-							<div>
-								<button
-									onClick={() => history.push("/buy-bollycoin")}
-									style={{ marginBottom: "2rem" }}
-								>
-									Buy BollyCoin
-								</button>
 							</div>
 						</section>
 						<Timeline />

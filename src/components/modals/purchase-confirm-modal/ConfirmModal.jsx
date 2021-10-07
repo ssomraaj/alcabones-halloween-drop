@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, notification } from "antd";
-import { CircularProgress, TextField, Zoom } from "@material-ui/core";
+import { CircularProgress, TextField, Zoom, Checkbox } from "@material-ui/core";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import PhoneInput from "react-phone-input-2";
 
@@ -23,6 +23,8 @@ export default class ConfirmModal extends React.PureComponent {
 			occupationError: "",
 			country: "India",
 			countryError: "",
+			termsAgreed: false,
+			termsError: "",
 		};
 	}
 
@@ -34,7 +36,7 @@ export default class ConfirmModal extends React.PureComponent {
 	};
 
 	handleConfirm = () => {
-		let { name, mobile, email, occupation, country } = this.state;
+		let { name, mobile, email, occupation, country, termsAgreed } = this.state;
 		const { onConfirm } = this.props;
 		name = name.trim();
 		if (!name) {
@@ -62,6 +64,10 @@ export default class ConfirmModal extends React.PureComponent {
 		country = country.trim();
 		if (!country) {
 			this.setState({ countryError: "Country is required" });
+			return;
+		}
+		if (!termsAgreed) {
+			this.setState({ termsError: "Please agree to the above conditions to continue" });
 			return;
 		}
 		const data = {
@@ -133,6 +139,8 @@ export default class ConfirmModal extends React.PureComponent {
 			submitting,
 			country,
 			countryError,
+			termsAgreed,
+			termsError,
 		} = this.state;
 		return (
 			<Modal
@@ -189,7 +197,11 @@ export default class ConfirmModal extends React.PureComponent {
 											this.setState({ mobile, country: data.name, mobileError: "" })
 										}
 									/>
-									{Boolean(mobileError) && <p className="error">{mobileError}</p>}
+									{Boolean(mobileError) && (
+										<p className="error" style={{ textAlign: "center" }}>
+											{mobileError}
+										</p>
+									)}
 								</div>
 								<div className="whitelist-form-control">
 									<TextField
@@ -287,6 +299,28 @@ export default class ConfirmModal extends React.PureComponent {
 										}}
 									/>
 								</div>
+								<div
+									className="whitelist-form-control"
+									style={{ display: "flex", alignItems: "center" }}
+								>
+									<div>
+										<Checkbox
+											checked={termsAgreed}
+											onChange={() =>
+												this.setState((state) => ({
+													termsAgreed: !state.termsAgreed,
+													termsError: "",
+												}))
+											}
+										/>
+									</div>
+									<div style={{ paddingLeft: "5px" }}>
+										<span style={{ fontSize: "1rem" }}>
+											By continuing, you agree to the terms & conditions of BollyCoin.
+										</span>
+									</div>
+								</div>
+								{Boolean(termsError) && <p className="error">{termsError}</p>}
 							</div>
 							<div className="confirm-grid">
 								<div>

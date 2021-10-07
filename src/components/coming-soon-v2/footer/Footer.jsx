@@ -116,6 +116,7 @@ export default class Footer extends Component {
 										style: {
 											fontFamily: "medium",
 											fontSize: "13px",
+											color: "#FFF",
 										},
 									}}
 									onKeyDown={(e) => {
@@ -128,7 +129,7 @@ export default class Footer extends Component {
 									{subscribing ? (
 										<CircularProgress
 											size={18}
-											style={{ color: "#FFF", position: "relative", top: "3px" }}
+											style={{ color: "#000", position: "relative", top: "3px" }}
 										/>
 									) : (
 										"subscribe"
