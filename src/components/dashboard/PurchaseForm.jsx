@@ -89,9 +89,9 @@ const PurchaseForm = ({
 						) : parseFloat(amount) > parseFloat(balance) ? (
 							`Insufficient ${asset}`
 						) : parseFloat(allowance) >= parseFloat(amount) ? (
-							`buy now with ${asset}`
+							`Purchase now with ${asset}`
 						) : (
-							`Confirm purchase`
+							`Approve ${asset}`
 						)}
 					</button>
 				) : (
