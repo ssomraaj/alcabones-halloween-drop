@@ -21,6 +21,7 @@ class App extends Component {
 			active: () => this.setState({ rendered: true }),
 			inactive: () => this.setState({ rendered: true }),
 		});
+		localStorage.clear();
 	}
 
 	componentDidUpdate(prevProps) {
