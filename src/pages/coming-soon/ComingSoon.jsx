@@ -201,7 +201,7 @@ const ComingSoon = () => {
 							</div>
 						</div>
 						<div className="bottom-tagline-text" data-hovered={hovered}>
-							November 2021
+							December 2021
 						</div>
 						<div className="social-media-container">
 							<a

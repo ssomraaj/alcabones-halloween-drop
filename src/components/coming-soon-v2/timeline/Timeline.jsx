@@ -41,14 +41,14 @@ const timeline = [
 		// year: '2021',
 		events: [
 			<li key="desc-4">BollyCoin initial coin offering</li>,
-			<li key="time-4">- November 2021</li>,
+			<li key="time-4">- October 2021</li>,
 		],
 	},
 	{
 		name: "item5",
 		events: [
 			<li key="desc-5">BollyCoin NFT Platform goes live</li>,
-			<li key="time-5">- November 2021</li>,
+			<li key="time-5">- December 2021</li>,
 		],
 	},
 	{

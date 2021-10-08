@@ -41,7 +41,7 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave, active }) =
 						</button>
 					</div>
 					<ul className="mobile-nav-links">
-						{active !== "contact" && <li onClick={scrollToSection}>The BollyCoin Token</li>}
+						{/* {active !== "contact" && <li onClick={scrollToSection}>The BollyCoin Token</li>} */}
 						<li onClick={openLink}>Read Whitepaper</li>
 						{active !== "contact" && (
 							<li>
@@ -85,11 +85,11 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave, active }) =
 					)}
 				</div>
 				<ul className="navbar-items">
-					{active !== "contact" && (
+					{/* {active !== "contact" && (
 						<li className={`nav-item`} data-hovered={hovered} onClick={scrollToSection}>
 							The BollyCoin Token
 						</li>
-					)}
+					)} */}
 					<li className={`nav-item`} data-hovered={hovered} onClick={openLink}>
 						Read Whitepaper
 					</li>
