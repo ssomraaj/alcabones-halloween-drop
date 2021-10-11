@@ -1,4 +1,11 @@
-import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
+import {
+	FaDiscord,
+	FaFacebookF,
+	FaInstagram,
+	FaReddit,
+	FaTelegram,
+	FaTwitter,
+} from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
@@ -10,6 +17,9 @@ const Footer = () => {
 				rel="noreferrer noopener"
 			>
 				<FaFacebookF size={22} className="mobile-footer-item" />
+			</a>
+			<a href="https://twitter.com/bollycoin" target="_blank" rel="noreferrer noopener">
+				<FaTwitter size={22} className="mobile-footer-item" />
 			</a>
 			<a href="https://www.instagram.com/bollycoin" target="_blank" rel="noreferrer noopener">
 				<FaInstagram size={22} className="mobile-footer-item" />

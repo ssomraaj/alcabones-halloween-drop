@@ -2,7 +2,14 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import $ from "jquery";
-import { FaDiscord, FaFacebookF, FaInstagram, FaReddit, FaTelegram } from "react-icons/fa";
+import {
+	FaDiscord,
+	FaFacebookF,
+	FaInstagram,
+	FaReddit,
+	FaTelegram,
+	FaTwitter,
+} from "react-icons/fa";
 import { AppLoader } from "../../components/loaders";
 
 import { Navbar, Footer as MobileFooter } from "../../components/coming-soon";
@@ -210,6 +217,12 @@ const ComingSoon = () => {
 								rel="noreferrer noopener"
 							>
 								<FaFacebookF
+									size={22}
+									className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
+								/>
+							</a>
+							<a href="https://twitter.com/bollycoin" target="_blank" rel="noreferrer noopener">
+								<FaTwitter
 									size={22}
 									className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
 								/>
