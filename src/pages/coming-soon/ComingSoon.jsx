@@ -325,9 +325,9 @@ const ComingSoon = () => {
 									non-regulatory matters.
 									<br />
 									<br />
-									Every time an NFT is sold on our marketplace, BollyCoin holders are rewarded in
-									the form of BollyCredits which can be used to purchase NFTs on our platform when
-									it goes live.
+									Every time an NFT is sold on our marketplace, 10% of the sale value of the NFT
+									gets credited to BollyCoin holders in the form of BollyCredits which can be used
+									to purchase NFTs on our platform when it goes live.
 									<br />
 									<br />
 									Our White Paper has a further breakup of the reward system in place for BollyCoin
