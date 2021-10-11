@@ -292,6 +292,7 @@ class Routes extends Component {
 						)}
 					/>
 					<Route exact path="/contact-us" component={ContactUs} />
+					<Route exact path="/coming-soon" component={ComingSoon} />
 				</Switch>
 				<ConnectModal
 					modal={modal}
