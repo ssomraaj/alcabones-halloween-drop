@@ -137,6 +137,17 @@ export default class Footer extends Component {
 								</button>
 							</div>
 						</div>
+						{/* <div>
+                            <h2>Join our community</h2>
+                            <div className="footer-social-links">
+                                <a href="https://twitter.com" target="_blank" rel="noreferrer noopener">
+                                    <FaTwitter size={40} color="#000" />
+                                </a>
+                                <a href="https://discord.com" target="_blank" rel="noreferrer noopener">
+                                    <img src={Discord} width={40} height={40} alt="Discord" />
+                                </a>
+                            </div>
+                        </div> */}
 					</div>
 					<div className="copyrights">
 						<div>&copy; 2021 Bollycoin</div>
@@ -152,9 +163,8 @@ export default class Footer extends Component {
 					</div>
 					<div style={{ opacity: 0.8, textAlign: "center" }}>
 						<p style={{ margin: 0, fontSize: "14px", lineHeight: "24px" }}>
-							Every time an NFT is sold on our marketplace, 10% of the sale value of the NFT gets
-							credited to BollyCoin holders in the form of BollyCredits which can be used to
-							purchase NFTs on our platform when it goes live.
+							Developed Under the Laws of BVI <br /> NFTs and the BollyCoin are subject to market
+							risk
 						</p>
 					</div>
 				</div>
