@@ -276,18 +276,7 @@ class Routes extends Component {
 		return (
 			<SuspenseWithChunkError fallback={<AppLoader />}>
 				<Switch>
-					{/* <Route exact path="/" component={Login} /> */}
-					{/* <Route
-						exact
-						path="/login"
-						render={(props) => <APILogin walletConnected={connected} {...props} />}
-					/>
-					<Route
-						exact
-						path="/login/:token"
-						render={(props) => <LoginWithToken walletConnected={connected} {...props} />}
-					/> */}
-					<Route exact path="/coming-soon" component={ComingSoon} />
+					<Route exact path="/" component={ComingSoon} />
 					<Route
 						exact
 						path="/buy-bollycoin"
@@ -303,7 +292,6 @@ class Routes extends Component {
 						)}
 					/>
 					<Route exact path="/contact-us" component={ContactUs} />
-					<Redirect to="/coming-soon" />
 				</Switch>
 				<ConnectModal
 					modal={modal}
