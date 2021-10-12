@@ -163,8 +163,8 @@ export default class Footer extends Component {
 					</div>
 					<div style={{ opacity: 0.8, textAlign: "center" }}>
 						<p style={{ margin: 0, fontSize: "14px", lineHeight: "24px" }}>
-							Developed Under the Laws of BVI <br /> NFTs and the BollyCoin are subject to market
-							risk
+							Developed Under the Laws of BVI <br /> NFTs and cryptocurrencies are always subject to
+							market risk.
 						</p>
 					</div>
 				</div>
