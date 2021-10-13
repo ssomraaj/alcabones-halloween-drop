@@ -167,7 +167,7 @@ class Routes extends Component {
 	walletconnect = async () => {
 		try {
 			const web3Provider = new WalletConnectProvider({
-				infuraId: "857fdaf932a740ffbe04a50c51aaee8e",
+				infuraId: "de3be78ee53a4982aa44dcc9eb858904",
 				chainId: 1,
 			});
 			await web3Provider.enable().catch((_) => {
@@ -218,7 +218,7 @@ class Routes extends Component {
 	coinbase = async () => {
 		try {
 			const web3Provider = walletLink.makeWeb3Provider(
-				"https://mainnet.infura.io/v3/857fdaf932a740ffbe04a50c51aaee8e",
+				"https://mainnet.infura.io/v3/de3be78ee53a4982aa44dcc9eb858904",
 				1
 			);
 			web3Provider
