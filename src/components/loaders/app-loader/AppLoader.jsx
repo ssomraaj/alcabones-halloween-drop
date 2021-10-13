@@ -8,7 +8,7 @@ import "./AppLoader.css";
 const AppLoader = () => {
 	return (
 		<div className="app-loading-container">
-			<Image src={Crystal} loading="eager" width="100px" />
+			<Image preview={false} src={Crystal} loading="eager" width="100px" />
 		</div>
 	);
 };
