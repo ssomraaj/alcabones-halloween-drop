@@ -596,11 +596,31 @@
 	margin: auto;
 }
 
-.tagline p {
+.tagline > p {
 	margin: 1rem auto 0;
 	text-align: center !important;
 	font-size: 2.5rem;
 	font-family: bold, sans-serif;
+}
+
+.tagline .form-control .MuiFormLabel-root {
+	color: #000;
+}
+
+.tagline .form-control .MuiOutlinedInput-root {
+	color: #000;
+}
+
+.tagline .form-control .form-input .MuiOutlinedInput-root:hover,
+.tagline .form-control .MuiOutlinedInput-notchedOutline {
+	border-color: #000 !important;
+}
+
+.tagline .form-control button {
+	background-color: #000;
+	color: #fff;
+	padding: 0.5rem 0.5rem;
+	font-size: 15px;
 }
 
 .timeline-section {
@@ -996,6 +1016,12 @@
 
 	.tablet-section-3-graphic {
 		height: 280px;
+	}
+}
+
+@media only screen and (max-width: 475px) {
+	.tagline .form-control button {
+		font-size: 13px;
 	}
 }
 

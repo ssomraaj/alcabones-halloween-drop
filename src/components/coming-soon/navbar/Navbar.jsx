@@ -29,7 +29,7 @@ const Navbar = ({ navLinkActive, hovered, onMouseOver, onMouseLeave, active }) =
 
 	const openLink = () => {
 		window.open(
-			"https://drive.google.com/file/d/1ZFYoBGWXLMVjSeeETrW6JzN45Klr4Ywr/view?usp=sharing",
+			"https://drive.google.com/file/d/1F38p5R4Le4FBswk_nG79xSqFABb7anQN/view?usp=sharing",
 			"_blank"
 		);
 	};

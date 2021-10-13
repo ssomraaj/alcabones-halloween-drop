@@ -22,6 +22,8 @@ import ComingText from "../../assets/images/coming.png";
 import SoonText from "../../assets/images/soon.png";
 import "./ComingSoon.css";
 import "./TextAnimation.css";
+import { CircularProgress, TextField } from "@material-ui/core";
+import { API } from "../../utils/service";
 
 const ComingSoon = () => {
 	let proximityInterval;
@@ -31,6 +33,13 @@ const ComingSoon = () => {
 	const [hovered, setHovered] = useState(false);
 	const [navLinkActive, setNavLinkActive] = useState(false);
 	const [socialLink, setSocialLink] = useState(false);
+	const [state, setState] = useState({
+		email: "",
+		emailError: false,
+		helperText: "",
+		subscribing: false,
+	});
+	const { email, emailError, helperText, subscribing } = state;
 
 	const intitializeProximityRepel = () => {
 		let forcex = 0;
@@ -112,6 +121,77 @@ const ComingSoon = () => {
 			setImagesLoaded(2);
 		};
 	}, []);
+
+	const updateEmail = (e) => {
+		setState((state) => ({
+			...state,
+			email: e.target.value,
+			emailError: false,
+			helperText: "",
+		}));
+	};
+
+	const subscribe = () => {
+		let { email } = state;
+		email = email.trim();
+		if (!email) {
+			setState((state) => ({
+				...state,
+				emailError: true,
+				helperText: "Enter your E-mail",
+			}));
+			return;
+		}
+		if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+			setState((state) => ({
+				...state,
+				emailError: true,
+				helperText: "Enter a valid E-mail address",
+			}));
+			return;
+		}
+		setState((state) => ({ ...state, subscribing: true, emailError: false, helperText: "" }));
+		const data = {
+			email: email.toLowerCase(),
+		};
+		API.post("api/user/subscribe", data)
+			.then((res) => {
+				const { data: response } = res;
+				if (response.error) {
+					setState((state) => ({
+						...state,
+						subscribing: false,
+						emailError: true,
+						helperText: response.message || "Server Error. Please try again",
+					}));
+				} else {
+					setState((state) => ({
+						...state,
+						subscribing: false,
+						helperText: "You now have early access!",
+					}));
+
+					setTimeout(
+						() =>
+							setState((state) => ({
+								...state,
+								helperText: "",
+								email: "",
+							})),
+						1500
+					);
+				}
+			})
+			.catch(() => {
+				setState((state) => ({
+					...state,
+					subscribing: false,
+					emailError: true,
+					helperText:
+						"Our team has been notified of this issue and we are working on fixing it. Please try again later",
+				}));
+			});
+	};
 
 	return (
 		<>
@@ -284,6 +364,60 @@ const ComingSoon = () => {
 				<div className="tagline">
 					<img src={Logo} alt="BollyCoin" />
 					<p>Your Cinematic Universe</p>
+					<div
+						className="form-control"
+						style={{
+							width: "100%",
+							maxWidth: "500px",
+							margin: "3rem auto 0",
+							gridTemplateColumns: "1.1fr 0.9fr",
+							columnGap: "0.5rem",
+						}}
+					>
+						<TextField
+							type="email"
+							autoComplete="email"
+							label="E-mail"
+							variant="outlined"
+							className="form-input"
+							value={email}
+							onChange={updateEmail}
+							error={emailError}
+							helperText={helperText}
+							inputProps={{
+								style: {
+									fontFamily: "medium",
+								},
+							}}
+							InputLabelProps={{
+								style: {
+									fontFamily: "medium",
+								},
+							}}
+							FormHelperTextProps={{
+								style: {
+									fontFamily: "medium",
+									fontSize: "13px",
+									color: "#000",
+								},
+							}}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									subscribe();
+								}
+							}}
+						/>
+						<button disabled={subscribing} onClick={subscribe}>
+							{subscribing ? (
+								<CircularProgress
+									size={18}
+									style={{ color: "#FFF", position: "relative", top: "3px" }}
+								/>
+							) : (
+								"join early access"
+							)}
+						</button>
+					</div>
 				</div>
 				<div className="landing-main">
 					<div className="main-container">
@@ -304,7 +438,7 @@ const ComingSoon = () => {
 								<button
 									onClick={() => {
 										window.open(
-											"https://bollycoin.s3.amazonaws.com/BollyCoin-whitepaper.pdf",
+											"https://drive.google.com/file/d/1F38p5R4Le4FBswk_nG79xSqFABb7anQN/view?usp=sharing",
 											"_blank"
 										);
 									}}

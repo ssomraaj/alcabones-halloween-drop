@@ -27,7 +27,7 @@ const PurchaseForm = ({
 			<div className="purchase-form-wrapper">
 				<div className="heading">Buy BollyCoin</div>
 				<p style={{ marginTop: "-1rem", marginBottom: "2rem" }}>
-					For help purchasing bollycoin,{" "}
+					For help purchasing BollyCoin,{" "}
 					<span>
 						<a
 							href="https://drive.google.com/file/d/1hEkd5T9aV2WfcVYt581HL2wLEK1ELZEC/view?usp=sharing"
