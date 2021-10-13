@@ -150,7 +150,7 @@ export default class Footer extends Component {
                         </div> */}
 					</div>
 					<div className="copyrights">
-						<div>&copy; 2021 Bollycoin</div>
+						<div>&copy; 2021 BollyCoin</div>
 						<div>
 							<a
 								style={{ marginRight: "1rem" }}
