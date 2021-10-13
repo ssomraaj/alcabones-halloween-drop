@@ -522,7 +522,7 @@
 	padding: 4rem 7vw;
 	display: flex;
 	justify-content: flex-end;
-	background: url(../../assets/images/partners-revised.png) no-repeat left;
+	background: url(../../assets/images/partners-revised-v2.png) no-repeat left;
 	background-size: 38% auto;
 }
 
@@ -913,7 +913,7 @@
 	.tablet-section-3-graphic {
 		height: 350px;
 		width: 100%;
-		background: url(../../assets/images/partners-revised.png) no-repeat center;
+		background: url(../../assets/images/partners-revised-v2.png) no-repeat center;
 		background-size: contain;
 	}
 
