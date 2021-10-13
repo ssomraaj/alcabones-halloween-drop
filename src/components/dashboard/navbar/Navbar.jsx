@@ -11,7 +11,7 @@ export default class Navbar extends Component {
 					<div
 						className="logo"
 						style={{ cursor: "pointer" }}
-						onClick={() => (window.location = "/coming-soon")}
+						onClick={() => (window.location = "/")}
 					>
 						<img src={Logo} alt="logo" />
 					</div>
