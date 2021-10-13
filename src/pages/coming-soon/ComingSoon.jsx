@@ -327,7 +327,7 @@ const ComingSoon = () => {
 									className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
 								/>
 							</a>
-							<a href="https://discord.gg/Ngx7kaGw4c" target="_blank" rel="noreferrer noopener">
+							<a href="https://discord.gg/5ymBKKwBNR" target="_blank" rel="noreferrer noopener">
 								<FaDiscord
 									size={22}
 									className={`social-icons ${socialLink ? "social-icons-onscroll" : ""}`}
