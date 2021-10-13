@@ -29,7 +29,13 @@ const PurchaseForm = ({
 				<p style={{ marginTop: "-1rem", marginBottom: "2rem" }}>
 					For help purchasing bollycoin,{" "}
 					<span>
-						<a>Read here</a>
+						<a
+							href="https://drive.google.com/file/d/1hEkd5T9aV2WfcVYt581HL2wLEK1ELZEC/view?usp=sharing"
+							target="_blank"
+							rel="noreferrer noopener"
+						>
+							Read here
+						</a>
 					</span>
 				</p>
 				<div className="purchase-form-control">
