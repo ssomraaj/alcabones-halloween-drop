@@ -318,7 +318,7 @@ export default class ConfirmModal extends React.PureComponent {
 										<span style={{ fontSize: "1rem" }}>
 											By continuing, you agree to the{" "}
 											<a
-												href="https://bollycoin.s3.amazonaws.com/terms-and-conditions.pdf"
+												href="https://drive.google.com/file/d/1hLLfTFBahkYTbY0sizHMtE6LnXn0-hJY/view?usp=sharing"
 												target="_blank"
 												rel="noreferrer"
 											>

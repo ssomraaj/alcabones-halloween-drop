@@ -153,6 +153,14 @@ export default class Footer extends Component {
 						<div>&copy; 2021 Bollycoin</div>
 						<div>
 							<a
+								style={{ marginRight: "1rem" }}
+								href="https://drive.google.com/file/d/1st4Psb-LoyPwTFxJ0LIdSRYW7_clH4GA/view?usp=sharing"
+								target="_blank"
+								rel="noreferrer noopener"
+							>
+								Privacy Policy
+							</a>
+							<a
 								href="https://etherscan.io/token/0x6bd361e10c1afed0d95259e7c0115f3a60e4ea99"
 								target="_blank"
 								rel="noreferrer noopener"

@@ -26,6 +26,12 @@ const PurchaseForm = ({
 		<div className="purchase-form-container">
 			<div className="purchase-form-wrapper">
 				<div className="heading">Buy BollyCoin</div>
+				<p style={{ marginTop: "-1rem", marginBottom: "2rem" }}>
+					For help purchasing bollycoin,{" "}
+					<span>
+						<a>Read here</a>
+					</span>
+				</p>
 				<div className="purchase-form-control">
 					<FormInput
 						label={`Amount (${asset})`}
@@ -70,8 +76,8 @@ const PurchaseForm = ({
 				)}
 				{!fetchingAvailableBolly && (
 					<div style={{ marginTop: "12px", width: "100%", maxWidth: "400px" }}>
-						{parseFloat(availableBolly).toFixed(4)} BOLLY remains available to purchase in this
-						round of the 100,000,000 total supply.
+						{Number(parseFloat(availableBolly).toFixed(4)).toLocaleString()} BOLLY remains available
+						to purchase in this round of the 100,000,000 total supply.
 					</div>
 				)}
 				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
