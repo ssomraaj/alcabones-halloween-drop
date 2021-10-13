@@ -462,9 +462,9 @@
 	transition: all 0.3s ease;
 }
 
-.hero button {
+/* .hero button {
 	margin-left: 8rem;
-}
+} */
 
 .tablet-button-container {
 	margin-top: 2rem;
@@ -488,9 +488,9 @@
 	width: 50%;
 }
 
-.section .tablet-button-container {
+/* .section .tablet-button-container {
 	text-align: center;
-}
+} */
 
 .section h1 {
 	color: #000;
