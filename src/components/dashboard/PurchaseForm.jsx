@@ -1,7 +1,7 @@
 import React from "react";
 import { CircularProgress, Fade, MenuItem, Select } from "@material-ui/core";
 import { FormInput } from ".";
-import { BUSD, USDC } from "../../utils/icons";
+import { BUSD, USDC, ETH } from "../../utils/icons";
 
 const PurchaseForm = ({
 	loading,
@@ -17,6 +17,7 @@ const PurchaseForm = ({
 	onModalOpen,
 	fetchingPrice,
 	price,
+	tokenPrice,
 	fetchingTokenPrice,
 	balance,
 	fetchingAvailableBolly,
@@ -56,6 +57,10 @@ const PurchaseForm = ({
 							<img className="dropdown-icon" src={USDT} alt="usdt" />
 							USDT
 						</MenuItem> */}
+						<MenuItem value="ETH">
+							<img className="dropdown-icon" src={ETH} alt="eth" />
+							ETH
+						</MenuItem>
 						<MenuItem value="USDC">
 							<img className="dropdown-icon" src={USDC} alt="usdc" />
 							USDC
@@ -69,7 +74,11 @@ const PurchaseForm = ({
 				{!fetchingPrice && amount && parseFloat(amount) > 0 && (
 					<Fade in={!!amount}>
 						<div style={{ marginBottom: "10px", marginTop: "5px" }}>
-							Buying {(parseFloat(amount) / parseFloat(price)).toFixed(4)} BOLLY
+							Buying{" "}
+							{asset === "ETH"
+								? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
+								: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(6)}{" "}
+							BOLLY
 						</div>
 					</Fade>
 				)}
@@ -88,24 +97,43 @@ const PurchaseForm = ({
 				)}
 				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
 				{walletConnected ? (
-					<button
-						onClick={onPurchase}
-						disabled={
-							!amount || parseFloat(amount) === 0 || parseFloat(amount) > parseFloat(balance)
-						}
-					>
-						{loading ? (
-							<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
-						) : parseFloat(amount) === 0 || !amount ? (
-							"Enter amount"
-						) : parseFloat(amount) > parseFloat(balance) ? (
-							`Insufficient ${asset}`
-						) : parseFloat(allowance) >= parseFloat(amount) ? (
-							`Purchase now with ${asset}`
-						) : (
-							`Approve ${asset}`
-						)}
-					</button>
+					asset !== "ETH" ? (
+						<button
+							onClick={onPurchase}
+							disabled={
+								!amount || parseFloat(amount) === 0 || parseFloat(amount) > parseFloat(balance)
+							}
+						>
+							{loading ? (
+								<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
+							) : parseFloat(amount) === 0 || !amount ? (
+								"Enter amount"
+							) : parseFloat(amount) > parseFloat(balance) ? (
+								`Insufficient ${asset}`
+							) : parseFloat(allowance) >= parseFloat(amount) ? (
+								`Purchase now with ${asset}`
+							) : (
+								`Approve ${asset}`
+							)}
+						</button>
+					) : (
+						<button
+							onClick={onPurchase}
+							disabled={
+								!amount || parseFloat(amount) === 0 || parseFloat(amount) > parseFloat(balance)
+							}
+						>
+							{loading ? (
+								<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
+							) : parseFloat(amount) === 0 || !amount ? (
+								"Enter amount"
+							) : parseFloat(amount) > parseFloat(balance) ? (
+								`Insufficient ${asset}`
+							) : (
+								`Purchase now with ${asset}`
+							)}
+						</button>
+					)
 				) : (
 					<button onClick={onModalOpen}>connect wallet</button>
 				)}

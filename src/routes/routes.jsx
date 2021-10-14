@@ -133,7 +133,7 @@ class Routes extends Component {
 						} else {
 							this.setState({ connecting: false }, () => {
 								notification["error"]({
-									message: "Wrong network detected. Please connect to Ethereum Mainnet",
+									message: "Wrong network detected. Please connect to Ethereum  Mainnet",
 								});
 							});
 						}

@@ -81,6 +81,7 @@ export default class ConfirmModal extends React.PureComponent {
 			API.post("api/user/purchase", data)
 				.then((res) => {
 					const response = res.data;
+					process.env.NODE_ENV === "development" && console.log(response.id);
 					this.setState({ submitting: false }, () => {
 						if (response.error) {
 							notification["error"]({
@@ -340,7 +341,13 @@ export default class ConfirmModal extends React.PureComponent {
 								<div>
 									<div>Total</div>
 									<div>
-										{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)}{" "}
+										{asset === "ETH"
+											? Math.floor(
+													parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
+											  )
+											: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
+													6
+											  )}{" "}
 										BOLLY
 									</div>
 								</div>
@@ -376,7 +383,12 @@ export default class ConfirmModal extends React.PureComponent {
 							<p className="tx-status">Initializing</p>
 							<p className="tx-description">
 								Purchasing{" "}
-								{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)} BOLLY
+								{asset === "ETH"
+									? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
+									: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
+											6
+									  )}{" "}
+								BOLLY
 							</p>
 						</div>
 					) : status === "waiting" ? (
@@ -389,7 +401,12 @@ export default class ConfirmModal extends React.PureComponent {
 							<p className="tx-status">Transaction submitted. Waiting for upto 3 confirmations</p>
 							<p className="tx-description">
 								Purchasing{" "}
-								{parseFloat(amount / (parseFloat(price) * parseFloat(tokenPrice))).toFixed(6)} BOLLY
+								{asset === "ETH"
+									? Math.floor(parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))))
+									: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
+											6
+									  )}{" "}
+								BOLLY
 							</p>
 							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
 								View Transaction

@@ -13,6 +13,7 @@ import {
 	getBollyPrice,
 	purchaseBolly,
 	getAvailableBolly,
+	getETHBalance,
 } from "../../../utils/contractHelpers";
 import { PURCHASE_TOKENS } from "../../../utils/contracts";
 import { API } from "../../../utils/service";
@@ -44,6 +45,7 @@ class Home extends Component {
 			asset: PURCHASE_TOKENS[0].ticker,
 			availableBolly: "0",
 			fetchingAvailableBolly: true,
+			gas: "",
 		};
 	}
 
@@ -56,7 +58,6 @@ class Home extends Component {
 			onModalOpen();
 		} else {
 			this.fetchTokenBalance();
-			this.fetchAllowance();
 			this.fetchBollyBalance();
 		}
 	}
@@ -122,18 +123,25 @@ class Home extends Component {
 		const { asset } = this.state;
 		const { address } = this.props;
 		this.setState({ fetchingBollyBalance: true }, () => {
-			getAllowance(asset, address)
-				.then((response) => {
-					process.env.NODE_ENV === "development" &&
-						console.log(`${asset} allowance`, response.allowance);
-					this.setState({
-						fetchingBollyBalance: false,
-						allowance: response.allowance,
-					});
-				})
-				.catch((err) => {
-					this.setState({ fetchingBollyBalance: false }, () => console.log(err.message));
+			if (asset === "ETH") {
+				this.setState({
+					fetchingBollyBalance: false,
+					allowance: 0,
 				});
+			} else {
+				getAllowance(asset, address)
+					.then((response) => {
+						process.env.NODE_ENV === "development" &&
+							console.log(`${asset} allowance`, response.allowance);
+						this.setState({
+							fetchingBollyBalance: false,
+							allowance: response.allowance,
+						});
+					})
+					.catch((err) => {
+						this.setState({ fetchingBollyBalance: false }, () => console.log(err.message));
+					});
+			}
 		});
 	};
 
@@ -141,17 +149,39 @@ class Home extends Component {
 		const { address } = this.props;
 		const { asset } = this.state;
 		this.setState({ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: true }, () => {
-			getTokenBalance(asset, address)
+			getETHBalance(address)
 				.then((res) => {
 					process.env.NODE_ENV === "development" && console.log(`${asset} balance`, res.balance);
-					this.setState(
-						{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
-						() => {
+					this.setState({ gas: parseFloat(res.balance) }, () => {
+						if (asset === "ETH") {
 							this.setState({
 								ethBalance: parseFloat(res.balance),
+								[loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false,
 							});
+						} else {
+							getTokenBalance(asset, address)
+								.then((res) => {
+									process.env.NODE_ENV === "development" &&
+										console.log(`${asset} balance`, res.balance);
+									this.setState(
+										{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
+										() => {
+											this.setState({
+												ethBalance: parseFloat(res.balance),
+											});
+										}
+									);
+								})
+								.catch((err) => {
+									this.setState(
+										{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
+										() => {
+											console.log("Unable to fetch token balance - ", err.message);
+										}
+									);
+								});
 						}
-					);
+					});
 				})
 				.catch((err) => {
 					this.setState(
@@ -169,6 +199,7 @@ class Home extends Component {
 		this.setState({ fetchingTokenPrice: true }, () => {
 			getTokenPrice(asset)
 				.then((res) => {
+					process.env.NODE_ENV === "development" && console.log(`${asset} price`, res.price);
 					this.setState({ fetchingTokenPrice: false }, () => {
 						this.setState({
 							tokenPrice: parseFloat(res.price),
@@ -224,76 +255,102 @@ class Home extends Component {
 	};
 
 	handlePurchase = () => {
-		let { purchaseAmount, allowance, asset, availableBolly } = this.state;
+		let { purchaseAmount, allowance, asset, availableBolly, bollyPrice, tokenPrice, gas } =
+			this.state;
 		const { signer } = this.props;
 		purchaseAmount = purchaseAmount.trim();
-		if (parseFloat(purchaseAmount) <= parseFloat(availableBolly)) {
-			if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
-				this.setState({ approving: true }, () => {
-					notification["info"]({
-						key: "check-wallet-notification",
-						message: "Approve transaction",
-						description:
-							"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
-						duration: 0,
+		if (
+			parseFloat(purchaseAmount) * parseFloat(tokenPrice) <=
+			parseFloat(availableBolly) * parseFloat(bollyPrice)
+		) {
+			if (asset === "ETH") {
+				if (parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) < 1) {
+					notification["warn"]({
+						message: "Minimum purchase is 1 BOLLY",
 					});
-					approveToken({ asset, amount: parseFloat(purchaseAmount).toFixed(10), signer })
-						.then(async (response) => {
-							notification.close("check-wallet-notification");
+				} else this.setState({ confirmModalVisible: true });
+			} else {
+				if (parseFloat(gas) === 0) {
+					notification["warn"]({
+						message:
+							"Insufficient ETH balance. ETH is required to pay miner fees for each transaction",
+					});
+				} else if (
+					parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) <
+					1
+				) {
+					notification["warn"]({
+						message: "Minimum purchase is 1 BOLLY",
+					});
+				} else {
+					if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
+						this.setState({ approving: true }, () => {
 							notification["info"]({
-								key: "approval-processing-notification",
-								message: "Transaction processing",
-								description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
-								btn: (
-									<a
-										href={`https://etherscan.io/tx/${response.data.hash}`}
-										target="_blank"
-										rel="noreferrer noopener"
-									>
-										View on Etherscan
-									</a>
-								),
+								key: "check-wallet-notification",
+								message: "Approve transaction",
+								description:
+									"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
 								duration: 0,
 							});
-							await response.data.wait();
-							notification.close("approval-processing-notification");
-							notification["success"]({
-								message: "Transaction successful",
-								description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
-								btn: (
-									<a
-										href={`https://etherscan.io/tx/${response.data.hash}`}
-										target="_blank"
-										rel="noreferrer noopener"
-									>
-										View on Etherscan
-									</a>
-								),
-								duration: 3,
-							});
-							this.setState({ approving: false, allowance: purchaseAmount });
-						})
-						.catch((err) => {
-							notification.close("check-wallet-notification");
-							process.env.NODE_ENV === "development" && console.log(err);
-							if (
-								err.message &&
-								(err.message?.toLowerCase().includes("user denied transaction signature") ||
-									err.message?.toLowerCase().includes("user canceled") ||
-									err.message?.toLowerCase().includes("user rejected the transaction"))
-							) {
-								this.setState({ approving: false });
-								return;
-							}
-							notification["error"]({
-								message: "Transaction error",
-								description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Please try again later`,
-							});
-							this.setState({ approving: false });
+							approveToken({ asset, amount: parseFloat(purchaseAmount).toFixed(10), signer })
+								.then(async (response) => {
+									notification.close("check-wallet-notification");
+									notification["info"]({
+										key: "approval-processing-notification",
+										message: "Transaction processing",
+										description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
+										btn: (
+											<a
+												href={`https://etherscan.io/tx/${response.data.hash}`}
+												target="_blank"
+												rel="noreferrer noopener"
+											>
+												View on Etherscan
+											</a>
+										),
+										duration: 0,
+									});
+									await response.data.wait();
+									notification.close("approval-processing-notification");
+									notification["success"]({
+										message: "Transaction successful",
+										description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
+										btn: (
+											<a
+												href={`https://etherscan.io/tx/${response.data.hash}`}
+												target="_blank"
+												rel="noreferrer noopener"
+											>
+												View on Etherscan
+											</a>
+										),
+										duration: 3,
+									});
+									this.setState({ approving: false, allowance: purchaseAmount });
+								})
+								.catch((err) => {
+									notification.close("check-wallet-notification");
+									process.env.NODE_ENV === "development" && console.log(err);
+									if (
+										err.message &&
+										(err.message?.toLowerCase().includes("user denied transaction signature") ||
+											err.message?.toLowerCase().includes("user canceled") ||
+											err.message?.toLowerCase().includes("user rejected the transaction"))
+									) {
+										this.setState({ approving: false });
+										return;
+									}
+									notification["error"]({
+										message: "Transaction error",
+										description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Please try again later`,
+									});
+									this.setState({ approving: false });
+								});
 						});
-				});
-			} else {
-				this.setState({ confirmModalVisible: true });
+					} else {
+						this.setState({ confirmModalVisible: true });
+					}
+				}
 			}
 		} else {
 			notification["warn"]({
@@ -304,56 +361,66 @@ class Home extends Component {
 	};
 
 	buyBollyCoin = (purchaseId) => {
-		let { purchaseAmount, asset, bollyPrice } = this.state;
+		let { purchaseAmount, asset, bollyPrice, tokenPrice, gas } = this.state;
 		const { signer } = this.props;
 		purchaseAmount = purchaseAmount.trim();
-		this.setState({ txStatus: "initializing" }, async () => {
-			notification["info"]({
-				key: "check-wallet-notification",
-				message: "Approve transaction",
-				description:
-					"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
-				duration: 0,
+		if (parseFloat(gas) === 0) {
+			notification["warn"]({
+				message: "Insufficient ETH balance. ETH is required to pay miner fees for each transaction",
 			});
-			purchaseBolly({
-				asset,
-				uid: purchaseId,
-				amount: (parseFloat(purchaseAmount) / parseFloat(bollyPrice)).toFixed(10),
-				signer,
-			})
-				.then(async (response) => {
-					notification.close("check-wallet-notification");
-					this.setState({ txStatus: "waiting", hash: response.data.hash });
-					await response.data.wait();
-					const data = {
-						purchaseId,
-						txId: response.data.hash,
-					};
-					API.patch("api/user/purchase", data)
-						.then((_) => {
-							// console.log("Purchase PATCH response", response);
-						})
-						.catch(
-							(err) =>
-								process.env.NODE_ENV === "development" && console.log("Purchase PATCH error", err)
-						)
-						.finally(() => {
-							this.fetchBollyBalance();
-							this.fetchAllowance();
-							this.fetchTokenBalance();
-							this.fetchAvailableBolly();
-							this.setState({ txStatus: "success" });
-						});
-				})
-				.catch((_) => {
-					notification.close("check-wallet-notification");
-					notification["error"]({
-						message: "Couldn't purchase BOLLY",
-						description: "Our team has been notified of this issue. We are working on fixing it",
-					});
-					this.setState({ confirmModalVisible: false, txStatus: "" });
+		} else {
+			this.setState({ txStatus: "initializing" }, async () => {
+				notification["info"]({
+					key: "check-wallet-notification",
+					message: "Approve transaction",
+					description:
+						"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
+					duration: 0,
 				});
-		});
+				purchaseBolly({
+					asset,
+					uid: purchaseId,
+					amount: (
+						parseFloat(purchaseAmount) /
+						(parseFloat(bollyPrice) / parseFloat(tokenPrice))
+					).toFixed(10),
+					signer,
+					payable: parseFloat(purchaseAmount),
+				})
+					.then(async (response) => {
+						notification.close("check-wallet-notification");
+						this.setState({ txStatus: "waiting", hash: response.data.hash });
+						await response.data.wait();
+						const data = {
+							purchaseId,
+							txId: response.data.hash,
+						};
+						API.patch("api/user/purchase", data)
+							.then((_) => {
+								// console.log("Purchase PATCH response", response);
+							})
+							.catch(
+								(err) =>
+									process.env.NODE_ENV === "development" && console.log("Purchase PATCH error", err)
+							)
+							.finally(() => {
+								this.fetchBollyBalance();
+								this.fetchAllowance();
+								this.fetchTokenBalance();
+								this.fetchAvailableBolly();
+								this.setState({ txStatus: "success" });
+							});
+					})
+					.catch((_) => {
+						notification.close("check-wallet-notification");
+						notification["error"]({
+							message: "Couldn't purchase BOLLY",
+							description: "Our team has been notified of this issue. We are working on fixing it",
+						});
+						this.setState({ confirmModalVisible: false, txStatus: "" });
+					});
+			});
+		}
 	};
 
 	render() {
