@@ -342,9 +342,7 @@ export default class ConfirmModal extends React.PureComponent {
 									<div>Total</div>
 									<div>
 										{asset === "ETH"
-											? Math.floor(
-													parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
-											  )
+											? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
 											: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
 													6
 											  )}{" "}
