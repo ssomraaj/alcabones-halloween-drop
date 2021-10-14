@@ -264,7 +264,7 @@ class Home extends Component {
 			parseFloat(availableBolly) * parseFloat(bollyPrice)
 		) {
 			if (asset === "ETH") {
-				if (parseFloat(purchaseAmount) - parseFloat(gas) < 0.03) {
+				if (parseFloat(gas) - parseFloat(purchaseAmount) < 0.03) {
 					notification["warn"]({
 						message:
 							"Insufficient ETH balance for paying miner fees. ETH is required to pay miner fees for each transaction",

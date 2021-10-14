@@ -269,14 +269,15 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 
 				case "USDC":
 					saleContract
-						.purchaseWithUSDC(amount, uid)
+						.purchaseWithUSDC(parseFloat(amount), uid)
 						.then((response) => {
 							resolve({
 								error: false,
 								data: response,
 							});
 						})
-						.catch((_) => {
+						.catch((err) => {
+							console.log(err);
 							reject({
 								error: true,
 								message: "Something went wrong. Please try again.",
