@@ -2,7 +2,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { PURCHASE_TOKENS, SALE_ABI, SALE_ADDRESS, TOKEN_ABI, TOKEN_ADDRESS } from "./contracts";
 
-const PROVIDER = new ethers.providers.InfuraProvider("mainnet", "de3be78ee53a4982aa44dcc9eb858904");
+const PROVIDER = new ethers.providers.InfuraProvider("mainnet", process.env.REACT_APP_INFURA_KEY);
 
 export const getBollyPrice = () =>
 	new Promise(async (resolve, reject) => {

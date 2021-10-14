@@ -1,5 +1,5 @@
 import React, { lazy, Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import WalletLink from "walletlink";
@@ -37,6 +37,7 @@ class Routes extends Component {
 	}
 
 	componentDidMount() {
+		console.log(process.env.REACT_APP_INFURA_KEY);
 		if (window.ethereum) {
 			window.ethereum.addListener("accountsChanged", this.onAccountsChanged);
 			window.ethereum.addListener("chainChanged", () => window.location.reload());
@@ -167,7 +168,7 @@ class Routes extends Component {
 	walletconnect = async () => {
 		try {
 			const web3Provider = new WalletConnectProvider({
-				infuraId: "de3be78ee53a4982aa44dcc9eb858904",
+				infuraId: process.env.REACT_APP_INFURA_KEY,
 				chainId: 1,
 			});
 			await web3Provider.enable().catch((_) => {
@@ -218,7 +219,7 @@ class Routes extends Component {
 	coinbase = async () => {
 		try {
 			const web3Provider = walletLink.makeWeb3Provider(
-				"https://mainnet.infura.io/v3/de3be78ee53a4982aa44dcc9eb858904",
+				`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
 				1
 			);
 			web3Provider

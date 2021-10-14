@@ -40,7 +40,7 @@ export const connectToWalletConnect = () =>
 	new Promise(async (resolve, reject) => {
 		try {
 			const web3Provider = new WalletConnectProvider({
-				infuraId: "857fdaf932a740ffbe04a50c51aaee8e",
+				infuraId: process.env.REACT_APP_INFURA_KEY,
 			});
 			await web3Provider.enable().catch((err) => {
 				reject({
@@ -69,7 +69,7 @@ export const connectToCoinbase = () =>
 	new Promise(async (resolve, reject) => {
 		try {
 			const web3Provider = walletLink.makeWeb3Provider(
-				"https://mainnet.infura.io/v3/857fdaf932a740ffbe04a50c51aaee8e",
+				`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
 				1
 			);
 			await web3Provider.enable().catch((err) => {
