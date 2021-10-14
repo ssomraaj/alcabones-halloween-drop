@@ -37,7 +37,6 @@ class Routes extends Component {
 	}
 
 	componentDidMount() {
-		console.log(process.env.REACT_APP_INFURA_KEY);
 		if (window.ethereum) {
 			window.ethereum.addListener("accountsChanged", this.onAccountsChanged);
 			window.ethereum.addListener("chainChanged", () => window.location.reload());
