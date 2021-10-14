@@ -14,6 +14,7 @@ import {
 	purchaseBolly,
 	getAvailableBolly,
 	getETHBalance,
+	gasEstimate,
 } from "../../../utils/contractHelpers";
 import { PURCHASE_TOKENS } from "../../../utils/contracts";
 import { API } from "../../../utils/service";
@@ -231,7 +232,7 @@ class Home extends Component {
 		});
 	};
 
-	updateAmount = (e) => {
+	updateAmount = async (e) => {
 		let {
 			target: { value },
 		} = e;
@@ -264,29 +265,13 @@ class Home extends Component {
 			parseFloat(availableBolly) * parseFloat(bollyPrice)
 		) {
 			if (asset === "ETH") {
-				if (parseFloat(gas) - parseFloat(purchaseAmount) < 0.03) {
-					notification["warn"]({
-						message:
-							"Insufficient ETH balance for paying miner fees. ETH is required to pay miner fees for each transaction",
-					});
-				} else if (
-					parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) <
-					1
-				) {
+				if (parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) < 1) {
 					notification["warn"]({
 						message: "Minimum purchase is 1 BOLLY",
 					});
 				} else this.setState({ confirmModalVisible: true });
 			} else {
-				if (parseFloat(gas) < 0.03) {
-					notification["warn"]({
-						message:
-							"Insufficient ETH balance. ETH is required to pay miner fees for each transaction",
-					});
-				} else if (
-					parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) <
-					1
-				) {
+				if (parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) < 1) {
 					notification["warn"]({
 						message: "Minimum purchase is 1 BOLLY",
 					});
@@ -419,11 +404,12 @@ class Home extends Component {
 								this.setState({ txStatus: "success" });
 							});
 					})
-					.catch((_) => {
+					.catch((err) => {
+						console.log(err);
 						notification.close("check-wallet-notification");
 						notification["error"]({
-							message: "Couldn't purchase BOLLY",
-							description: "Our team has been notified of this issue. We are working on fixing it",
+							message: "Error Processing Purchase",
+							description: err.message,
 						});
 						this.setState({ confirmModalVisible: false, txStatus: "" });
 					});

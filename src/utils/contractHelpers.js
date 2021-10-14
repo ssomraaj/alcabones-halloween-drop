@@ -220,7 +220,6 @@ export const approveToken = ({ asset, amount, signer }) =>
 
 export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 	new Promise(async (resolve, reject) => {
-		console.log(payable, asset, amount, uid);
 		try {
 			if (!asset) {
 				reject({
@@ -233,7 +232,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 				case "ETH":
 					saleContract
 						.purchaseWithETH(uid, {
-							value: parseFloat(payable) * 10 ** 18,
+							value: ethers.utils.parseEther(parseFloat(payable).toString()),
 						})
 						.then((response) => {
 							resolve({
@@ -245,7 +244,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 							console.log(err);
 							reject({
 								error: true,
-								message: "Something went wrong. Please try again.",
+								message: err.message || "Unknown Error Occurred. Please try again after sometime.",
 							});
 						});
 					break;
@@ -259,10 +258,10 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 								data: response,
 							});
 						})
-						.catch((_) => {
+						.catch((err) => {
 							reject({
 								error: true,
-								message: "Something went wrong. Please try again.",
+								message: err.message || "Unknown Error Occurred. Please try again after sometime.",
 							});
 						});
 					break;
@@ -277,10 +276,9 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 							});
 						})
 						.catch((err) => {
-							console.log(err);
 							reject({
 								error: true,
-								message: "Something went wrong. Please try again.",
+								message: err.message || "Unknown Error Occurred. Please try again after sometime.",
 							});
 						});
 					break;
@@ -294,10 +292,10 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 								data: response,
 							});
 						})
-						.catch((_) => {
+						.catch((err) => {
 							reject({
 								error: true,
-								message: "Something went wrong. Please try again.",
+								message: err.message || "Unknown Error Occurred. Please try again after sometime.",
 							});
 						});
 					break;
@@ -309,10 +307,10 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 					});
 					break;
 			}
-		} catch (_) {
+		} catch (err) {
 			reject({
 				error: true,
-				message: "Something went wrong. Please try again.",
+				message: err.message || "Unknown Error Occurred. Please try again after sometime.",
 			});
 		}
 	});
