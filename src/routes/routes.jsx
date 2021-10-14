@@ -121,7 +121,7 @@ class Routes extends Component {
 				provider
 					.getNetwork()
 					.then((network) => {
-						if (network.chainId === 1) {
+						if (network.chainId === 42) {
 							this.setState({
 								type: "Metamask",
 								address: address[0],
@@ -133,7 +133,7 @@ class Routes extends Component {
 						} else {
 							this.setState({ connecting: false }, () => {
 								notification["error"]({
-									message: "Wrong network detected. Please connect to Ethereum Mainnet",
+									message: "Wrong network detected. Please connect to Kovan Test Network",
 								});
 							});
 						}
@@ -218,7 +218,7 @@ class Routes extends Component {
 	coinbase = async () => {
 		try {
 			const web3Provider = walletLink.makeWeb3Provider(
-				`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
+				`https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
 				1
 			);
 			web3Provider
@@ -230,7 +230,7 @@ class Routes extends Component {
 					provider
 						.getNetwork()
 						.then(async (network) => {
-							if (network.chainId === 1) {
+							if (network.chainId === 42) {
 								this.setState({
 									type: "Coinbase",
 									address: address[0],
@@ -243,7 +243,7 @@ class Routes extends Component {
 							} else {
 								this.setState({ connecting: false }, () => {
 									notification["error"]({
-										message: "Wrong network detected. Please connect to Ethereum Mainnet",
+										message: "Wrong network detected. Please connect to Kovan Test Network",
 									});
 								});
 							}

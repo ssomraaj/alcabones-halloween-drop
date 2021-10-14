@@ -2,7 +2,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { PURCHASE_TOKENS, SALE_ABI, SALE_ADDRESS, TOKEN_ABI, TOKEN_ADDRESS } from "./contracts";
 
-const PROVIDER = new ethers.providers.InfuraProvider("mainnet", process.env.REACT_APP_INFURA_KEY);
+const PROVIDER = new ethers.providers.InfuraProvider("kovan", process.env.REACT_APP_INFURA_KEY);
 
 export const getBollyPrice = () =>
 	new Promise(async (resolve, reject) => {
@@ -57,7 +57,10 @@ export const getTokenPrice = (asset) =>
 					.then((response) => {
 						resolve({
 							error: false,
-							price: response.data[tokenId].usd,
+							price:
+								asset === "ETH"
+									? response.data[tokenId].usd + response.data[tokenId].usd * 0.02
+									: response.data[tokenId].usd,
 						});
 					})
 					.catch((err) => {
@@ -72,6 +75,23 @@ export const getTokenPrice = (asset) =>
 					message: "Invalid token",
 				});
 			}
+		} catch (err) {
+			reject({
+				error: true,
+				message: err.message,
+			});
+		}
+	});
+
+export const getETHBalance = (address) =>
+	new Promise(async (resolve, reject) => {
+		try {
+			let balance = await PROVIDER.getBalance(address);
+			balance = ethers.utils.formatEther(balance);
+			resolve({
+				error: false,
+				balance,
+			});
 		} catch (err) {
 			reject({
 				error: true,
@@ -199,7 +219,7 @@ export const approveToken = ({ asset, amount, signer }) =>
 		}
 	});
 
-export const purchaseBolly = ({ asset, amount, signer, uid }) =>
+export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 	new Promise(async (resolve, reject) => {
 		try {
 			if (!asset) {
@@ -210,6 +230,26 @@ export const purchaseBolly = ({ asset, amount, signer, uid }) =>
 			}
 			const saleContract = new ethers.Contract(SALE_ADDRESS, SALE_ABI, signer);
 			switch (asset) {
+				case "ETH":
+					saleContract
+						.purchaseWithETH(Math.floor(parseFloat(amount)), uid, {
+							value: parseFloat(payable) * 10 ** 18,
+						})
+						.then((response) => {
+							resolve({
+								error: false,
+								data: response,
+							});
+						})
+						.catch((err) => {
+							console.log(err);
+							reject({
+								error: true,
+								message: "Something went wrong. Please try again.",
+							});
+						});
+					break;
+
 				case "USDT":
 					saleContract
 						.purchaseWithUSDT(parseFloat(amount), uid)
