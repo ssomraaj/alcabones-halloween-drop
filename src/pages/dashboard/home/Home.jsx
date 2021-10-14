@@ -275,6 +275,13 @@ class Home extends Component {
 						message:
 							"Insufficient ETH balance. ETH is required to pay miner fees for each transaction",
 					});
+				} else if (
+					parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) <
+					1
+				) {
+					notification["warn"]({
+						message: "Minimum purchase is 1 BOLLY",
+					});
 				} else {
 					if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
 						this.setState({ approving: true }, () => {

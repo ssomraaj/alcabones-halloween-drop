@@ -1,8 +1,7 @@
-import axios from "axios";
 import { ethers } from "ethers";
 import { PURCHASE_TOKENS, SALE_ABI, SALE_ADDRESS, TOKEN_ABI, TOKEN_ADDRESS } from "./contracts";
 
-const PROVIDER = new ethers.providers.InfuraProvider("kovan", process.env.REACT_APP_INFURA_KEY);
+const PROVIDER = new ethers.providers.InfuraProvider("mainnet", process.env.REACT_APP_INFURA_KEY);
 
 export const getBollyPrice = () =>
 	new Promise(async (resolve, reject) => {
@@ -40,48 +39,48 @@ export const getBollyBalance = (address) =>
 		}
 	});
 
-export const getTokenPrice = (asset) =>
-	new Promise(async (resolve, reject) => {
-		try {
-			if (!asset) {
-				reject({
-					error: true,
-					message: "Token is required",
-				});
-			}
-			const token = PURCHASE_TOKENS.filter((token) => token.ticker === asset);
-			if (token.length > 0) {
-				const tokenId = token[0].id;
-				axios
-					.get(`https://api.coingecko.com/api/v3/simple/price?ids=${tokenId}&vs_currencies=usd`)
-					.then((response) => {
-						resolve({
-							error: false,
-							price:
-								asset === "ETH"
-									? response.data[tokenId].usd + response.data[tokenId].usd * 0.02
-									: response.data[tokenId].usd,
-						});
-					})
-					.catch((err) => {
-						reject({
-							error: true,
-							message: "Couldn't fetch token price. Something went wrong",
-						});
-					});
-			} else {
-				reject({
-					error: true,
-					message: "Invalid token",
-				});
-			}
-		} catch (err) {
-			reject({
-				error: true,
-				message: err.message,
-			});
-		}
-	});
+// export const getTokenPrice = (asset) =>
+// 	new Promise(async (resolve, reject) => {
+// 		try {
+// 			if (!asset) {
+// 				reject({
+// 					error: true,
+// 					message: "Token is required",
+// 				});
+// 			}
+// 			const token = PURCHASE_TOKENS.filter((token) => token.ticker === asset);
+// 			if (token.length > 0) {
+// 				const tokenId = token[0].id;
+// 				axios
+// 					.get(`https://api.coingecko.com/api/v3/simple/price?ids=${tokenId}&vs_currencies=usd`)
+// 					.then((response) => {
+// 						resolve({
+// 							error: false,
+// 							price:
+// 								asset === "ETH"
+// 									? response.data[tokenId].usd + response.data[tokenId].usd * 0.02
+// 									: response.data[tokenId].usd,
+// 						});
+// 					})
+// 					.catch((err) => {
+// 						reject({
+// 							error: true,
+// 							message: "Couldn't fetch token price. Something went wrong",
+// 						});
+// 					});
+// 			} else {
+// 				reject({
+// 					error: true,
+// 					message: "Invalid token",
+// 				});
+// 			}
+// 		} catch (err) {
+// 			reject({
+// 				error: true,
+// 				message: err.message,
+// 			});
+// 		}
+// 	});
 
 export const getETHBalance = (address) =>
 	new Promise(async (resolve, reject) => {
@@ -221,6 +220,7 @@ export const approveToken = ({ asset, amount, signer }) =>
 
 export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 	new Promise(async (resolve, reject) => {
+		console.log(payable, asset, amount, uid);
 		try {
 			if (!asset) {
 				reject({
@@ -232,7 +232,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 			switch (asset) {
 				case "ETH":
 					saleContract
-						.purchaseWithETH(Math.floor(parseFloat(amount)), uid, {
+						.purchaseWithETH(uid, {
 							value: parseFloat(payable) * 10 ** 18,
 						})
 						.then((response) => {
@@ -269,7 +269,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 
 				case "USDC":
 					saleContract
-						.purchaseWithUSDC(parseFloat(amount), uid)
+						.purchaseWithUSDC(amount, uid)
 						.then((response) => {
 							resolve({
 								error: false,
@@ -324,5 +324,77 @@ export const getAvailableBolly = async () => {
 		return availableBolly;
 	} catch (err) {
 		return "0";
+	}
+};
+
+export const getTokenPrice = async (asset) => {
+	try {
+		if (asset !== "ETH")
+			return {
+				error: false,
+				price: 1,
+			};
+		const aggregatorV3InterfaceABI = [
+			{
+				inputs: [],
+				name: "decimals",
+				outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+				stateMutability: "view",
+				type: "function",
+			},
+			{
+				inputs: [],
+				name: "description",
+				outputs: [{ internalType: "string", name: "", type: "string" }],
+				stateMutability: "view",
+				type: "function",
+			},
+			{
+				inputs: [{ internalType: "uint80", name: "_roundId", type: "uint80" }],
+				name: "getRoundData",
+				outputs: [
+					{ internalType: "uint80", name: "roundId", type: "uint80" },
+					{ internalType: "int256", name: "answer", type: "int256" },
+					{ internalType: "uint256", name: "startedAt", type: "uint256" },
+					{ internalType: "uint256", name: "updatedAt", type: "uint256" },
+					{ internalType: "uint80", name: "answeredInRound", type: "uint80" },
+				],
+				stateMutability: "view",
+				type: "function",
+			},
+			{
+				inputs: [],
+				name: "latestRoundData",
+				outputs: [
+					{ internalType: "uint80", name: "roundId", type: "uint80" },
+					{ internalType: "int256", name: "answer", type: "int256" },
+					{ internalType: "uint256", name: "startedAt", type: "uint256" },
+					{ internalType: "uint256", name: "updatedAt", type: "uint256" },
+					{ internalType: "uint80", name: "answeredInRound", type: "uint80" },
+				],
+				stateMutability: "view",
+				type: "function",
+			},
+			{
+				inputs: [],
+				name: "version",
+				outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+				stateMutability: "view",
+				type: "function",
+			},
+		];
+		const addr = "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419";
+		const priceFeed = new ethers.Contract(addr, aggregatorV3InterfaceABI, PROVIDER);
+		let roundData = await priceFeed.latestRoundData();
+		// Do something with roundData
+		return {
+			error: false,
+			price: ethers.utils.formatUnits(roundData[1], 8),
+		};
+	} catch (e) {
+		return {
+			error: true,
+			price: 0,
+		};
 	}
 };

@@ -384,7 +384,7 @@ export default class ConfirmModal extends React.PureComponent {
 							<p className="tx-description">
 								Purchasing{" "}
 								{asset === "ETH"
-									? Math.floor(parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))))
+									? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
 									: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
 											6
 									  )}{" "}

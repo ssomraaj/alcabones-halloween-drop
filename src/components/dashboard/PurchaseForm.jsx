@@ -76,7 +76,7 @@ const PurchaseForm = ({
 						<div style={{ marginBottom: "10px", marginTop: "5px" }}>
 							Buying{" "}
 							{asset === "ETH"
-								? Math.floor(parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))))
+								? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
 								: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(6)}{" "}
 							BOLLY
 						</div>

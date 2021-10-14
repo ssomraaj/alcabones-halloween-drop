@@ -1,4 +1,4 @@
-export const TOKEN_ADDRESS = "0x207cfbdb39aa3c2af7c1c4f04e5fac883f18e216";
+export const TOKEN_ADDRESS = "0x6bd361e10c1afed0d95259e7c0115f3a60e4ea99";
 
 export const TOKEN_ABI = [
 	{
@@ -1032,18 +1032,46 @@ export const ERC_20_ABI = [
 // 	},
 // ];
 
-export const SALE_ADDRESS = "0x39d0B33686a388f54a3000Ed542B7a2fDC1E5004";
+export const SALE_ADDRESS = "0xdBd4F99027F1b2845069Fd14959F3b5be7Efe2BD";
 
 export const SALE_ABI = [
 	{
 		inputs: [
-			{ internalType: "address", name: "_usdtAddress", type: "address" },
-			{ internalType: "address", name: "_usdcAddress", type: "address" },
-			{ internalType: "address", name: "_busdAddress", type: "address" },
-			{ internalType: "address", name: "_wbtcAddress", type: "address" },
-			{ internalType: "address", name: "_bollyAddress", type: "address" },
-			{ internalType: "address", name: "_oracleAddress", type: "address" },
-			{ internalType: "address", name: "_settlementAddress", type: "address" },
+			{
+				internalType: "address",
+				name: "_usdtAddress",
+				type: "address",
+			},
+			{
+				internalType: "address",
+				name: "_usdcAddress",
+				type: "address",
+			},
+			{
+				internalType: "address",
+				name: "_busdAddress",
+				type: "address",
+			},
+			{
+				internalType: "address",
+				name: "_wbtcAddress",
+				type: "address",
+			},
+			{
+				internalType: "address",
+				name: "_bollyAddress",
+				type: "address",
+			},
+			{
+				internalType: "address",
+				name: "_oracleAddress",
+				type: "address",
+			},
+			{
+				internalType: "address",
+				name: "_settlementAddress",
+				type: "address",
+			},
 		],
 		stateMutability: "nonpayable",
 		type: "constructor",
@@ -1051,11 +1079,36 @@ export const SALE_ABI = [
 	{
 		anonymous: false,
 		inputs: [
-			{ indexed: true, internalType: "address", name: "buyer", type: "address" },
-			{ indexed: false, internalType: "string", name: "uid", type: "string" },
-			{ indexed: false, internalType: "uint256", name: "amount", type: "uint256" },
-			{ indexed: false, internalType: "uint256", name: "valueInPurchaseCurrency", type: "uint256" },
-			{ indexed: false, internalType: "bytes32", name: "currency", type: "bytes32" },
+			{
+				indexed: true,
+				internalType: "address",
+				name: "buyer",
+				type: "address",
+			},
+			{
+				indexed: false,
+				internalType: "string",
+				name: "uid",
+				type: "string",
+			},
+			{
+				indexed: false,
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256",
+			},
+			{
+				indexed: false,
+				internalType: "uint256",
+				name: "valueInPurchaseCurrency",
+				type: "uint256",
+			},
+			{
+				indexed: false,
+				internalType: "bytes32",
+				name: "currency",
+				type: "bytes32",
+			},
 		],
 		name: "Purchase",
 		type: "event",
@@ -1063,139 +1116,308 @@ export const SALE_ABI = [
 	{
 		inputs: [],
 		name: "admin",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [],
 		name: "bolly",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [],
 		name: "bollycoinPrice",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		outputs: [
+			{
+				internalType: "uint256",
+				name: "",
+				type: "uint256",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [],
 		name: "busd",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [],
+		name: "oracle",
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [
-			{ internalType: "uint256", name: "_amount", type: "uint256" },
-			{ internalType: "string", name: "uid", type: "string" },
+			{
+				internalType: "uint256",
+				name: "_amount",
+				type: "uint256",
+			},
+			{
+				internalType: "string",
+				name: "uid",
+				type: "string",
+			},
 		],
 		name: "purchaseWithBUSD",
-		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool",
+			},
+		],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
 		inputs: [
-			{ internalType: "uint256", name: "_amount", type: "uint256" },
-			{ internalType: "string", name: "uid", type: "string" },
+			{
+				internalType: "string",
+				name: "uid",
+				type: "string",
+			},
 		],
 		name: "purchaseWithETH",
-		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool",
+			},
+		],
 		stateMutability: "payable",
 		type: "function",
 	},
 	{
 		inputs: [
-			{ internalType: "uint256", name: "_amount", type: "uint256" },
-			{ internalType: "string", name: "uid", type: "string" },
+			{
+				internalType: "uint256",
+				name: "_amount",
+				type: "uint256",
+			},
+			{
+				internalType: "string",
+				name: "uid",
+				type: "string",
+			},
 		],
 		name: "purchaseWithUSDC",
-		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool",
+			},
+		],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
 		inputs: [
-			{ internalType: "uint256", name: "_amount", type: "uint256" },
-			{ internalType: "string", name: "uid", type: "string" },
+			{
+				internalType: "uint256",
+				name: "_amount",
+				type: "uint256",
+			},
+			{
+				internalType: "string",
+				name: "uid",
+				type: "string",
+			},
 		],
 		name: "purchaseWithUSDT",
-		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool",
+			},
+		],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
 		inputs: [
-			{ internalType: "uint256", name: "_amount", type: "uint256" },
-			{ internalType: "string", name: "uid", type: "string" },
+			{
+				internalType: "uint256",
+				name: "_amount",
+				type: "uint256",
+			},
+			{
+				internalType: "string",
+				name: "uid",
+				type: "string",
+			},
 		],
 		name: "purchaseWithWBTC",
-		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool",
+			},
+		],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
 		inputs: [],
 		name: "settlementAddress",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAdmin", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAdmin",
+				type: "address",
+			},
+		],
 		name: "transferControl",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAddress", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
 		name: "updateBolly",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "uint256", name: "newPrice", type: "uint256" }],
+		inputs: [
+			{
+				internalType: "uint256",
+				name: "newPrice",
+				type: "uint256",
+			},
+		],
 		name: "updateBollycoinPrice",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAddress", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
 		name: "updateBusd",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAddress", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
+		name: "updateOracle",
+		outputs: [],
+		stateMutability: "nonpayable",
+		type: "function",
+	},
+	{
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
 		name: "updateSettlementWallet",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAddress", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
 		name: "updateUsdc",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAddress", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
 		name: "updateUsdt",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "address", name: "newAddress", type: "address" }],
+		inputs: [
+			{
+				internalType: "address",
+				name: "newAddress",
+				type: "address",
+			},
+		],
 		name: "updateWBTC",
 		outputs: [],
 		stateMutability: "nonpayable",
@@ -1204,31 +1426,63 @@ export const SALE_ABI = [
 	{
 		inputs: [],
 		name: "usdc",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [],
 		name: "usdt",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [],
 		name: "wBTC",
-		outputs: [{ internalType: "address", name: "", type: "address" }],
+		outputs: [
+			{
+				internalType: "address",
+				name: "",
+				type: "address",
+			},
+		],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [
-			{ internalType: "address", name: "to", type: "address" },
-			{ internalType: "uint256", name: "amount", type: "uint256" },
+			{
+				internalType: "address",
+				name: "to",
+				type: "address",
+			},
+			{
+				internalType: "uint256",
+				name: "amount",
+				type: "uint256",
+			},
 		],
 		name: "withdrawBolly",
-		outputs: [{ internalType: "bool", name: "", type: "bool" }],
+		outputs: [
+			{
+				internalType: "bool",
+				name: "",
+				type: "bool",
+			},
+		],
 		stateMutability: "nonpayable",
 		type: "function",
 	},
