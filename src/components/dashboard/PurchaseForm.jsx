@@ -23,6 +23,7 @@ const PurchaseForm = ({
 	fetchingAvailableBolly,
 	availableBolly,
 }) => {
+	console.log(tokenPrice, "TP");
 	return (
 		<div className="purchase-form-container">
 			<div className="purchase-form-wrapper">
@@ -77,7 +78,7 @@ const PurchaseForm = ({
 							Buying{" "}
 							{asset === "ETH"
 								? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
-								: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(6)}{" "}
+								: parseFloat(amount / (parseFloat(price) / parseFloat("1"))).toFixed(6)}{" "}
 							BOLLY
 						</div>
 					</Fade>
