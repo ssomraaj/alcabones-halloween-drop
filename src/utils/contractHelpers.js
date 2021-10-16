@@ -251,7 +251,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 
 				case "USDT":
 					saleContract
-						.purchaseWithUSDT(parseFloat(amount), uid)
+						.purchaseWithUSDT(Math.floor(parseFloat(amount)), uid)
 						.then((response) => {
 							resolve({
 								error: false,
@@ -268,7 +268,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 
 				case "USDC":
 					saleContract
-						.purchaseWithUSDC(parseFloat(amount), uid)
+						.purchaseWithUSDC(Math.floor(parseFloat(amount)), uid)
 						.then((response) => {
 							resolve({
 								error: false,
@@ -285,7 +285,7 @@ export const purchaseBolly = ({ asset, amount, signer, uid, payable }) =>
 
 				case "BUSD":
 					saleContract
-						.purchaseWithBUSD(parseFloat(amount), uid)
+						.purchaseWithBUSD(Math.floor(parseFloat(amount)), uid)
 						.then((response) => {
 							resolve({
 								error: false,
