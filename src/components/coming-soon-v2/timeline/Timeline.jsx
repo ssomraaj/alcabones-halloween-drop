@@ -31,7 +31,7 @@ const timeline = [
 			<li key="desc-3">
 				Actual allotment of BollyCoin
 				<br />
-				to Presale/Private round Investors
+				to community members
 			</li>,
 			<li key="time-3">- October 2021</li>,
 		],
@@ -39,10 +39,7 @@ const timeline = [
 	{
 		name: "item4",
 		// year: '2021',
-		events: [
-			<li key="desc-4">BollyCoin initial coin offering</li>,
-			<li key="time-4">- October 2021</li>,
-		],
+		events: [<li key="desc-4">BollyCoin token offering</li>, <li key="time-4">- October 2021</li>],
 	},
 	{
 		name: "item5",

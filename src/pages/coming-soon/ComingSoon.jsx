@@ -483,11 +483,10 @@ const ComingSoon = () => {
 								<h1>The BollyCoin Community</h1>
 								<div className="tablet-section-2-graphic" />
 								<p>
-									Our marketplace enables the community to buy, trade and profit through the NFTs on
-									our platform. Users can create their own cinematic universe and BollyCoin rewards
-									them for their participation & contribution to the community. We want the
-									community to actively be a part in shaping what content we release next and much
-									more.
+									Our marketplace enables the community to buy and trade NFTs on our platform. Users
+									can create their own cinematic universe and BollyCoin rewards them for their
+									participation & contribution to the community. We want the community to actively
+									be a part in shaping what content we release next and much more.
 								</p>
 							</div>
 						</section>

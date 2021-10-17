@@ -317,15 +317,14 @@ export default class ConfirmModal extends React.PureComponent {
 									</div>
 									<div style={{ paddingLeft: "5px" }}>
 										<span style={{ fontSize: "1rem" }}>
-											By continuing, you agree to the{" "}
+											Please see the attached draft of the Bollycoin Utility Tokens{" "}
 											<a
 												href="https://drive.google.com/file/d/1hLLfTFBahkYTbY0sizHMtE6LnXn0-hJY/view?usp=sharing"
 												target="_blank"
 												rel="noreferrer"
 											>
-												terms & conditions
+												terms of sale
 											</a>{" "}
-											of BollyCoin.
 										</span>
 									</div>
 								</div>
