@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { GoPrimitiveDot } from "react-icons/go";
 import Logo from "../../../assets/images/logo-pink.svg";
+import { MenuItem, Select } from "@material-ui/core";
+import { ETH, POLYGON } from "../../../utils/icons";
 import "./Navbar.css";
+
 export default class Navbar extends Component {
 	render() {
-		const { onModalOpen, walletConnected, type } = this.props;
+		const { onModalOpen, walletConnected, type, onNetworkUpdate, currentChain } = this.props;
 		return (
 			<nav className="navbar">
 				<div className="header">
@@ -16,10 +19,29 @@ export default class Navbar extends Component {
 						<img src={Logo} alt="logo" />
 					</div>
 				</div>
-				<button className="connect-button" onClick={onModalOpen}>
-					{walletConnected && <GoPrimitiveDot size={20} color="#168804" />}
-					{walletConnected ? `Connected to ${type}` : "Connect Wallet"}
-				</button>
+				<div>
+					<Select
+						className="network-select"
+						variant="outlined"
+						value={currentChain}
+						onChange={(e) => {
+							onNetworkUpdate(e.target.value);
+						}}
+					>
+						<MenuItem value="POLYGON">
+							<img className="dropdown-icon" src={POLYGON} alt="polygon" />
+							POLYGON
+						</MenuItem>
+						<MenuItem value="ETH">
+							<img className="dropdown-icon" src={ETH} alt="weth" />
+							ETH
+						</MenuItem>
+					</Select>
+					<button className="connect-button" onClick={onModalOpen}>
+						{walletConnected && <GoPrimitiveDot size={20} color="#168804" />}
+						{walletConnected ? `Connected to ${type}` : "Connect Wallet"}
+					</button>
+				</div>
 			</nav>
 		);
 	}

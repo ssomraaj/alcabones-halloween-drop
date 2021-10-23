@@ -34,6 +34,17 @@
 	box-shadow: none;
 	outline: none;
 	transition: 0.4s all ease;
+	border-radius: 30px;
+}
+
+.network-select {
+	height: 50px;
+	border-radius: 30px !important;
+	margin-right: 1rem;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding: 10px;
 }
 
 .connect-button:hover,
@@ -61,6 +72,7 @@
 @media only screen and (max-width: 550px) {
 	.navbar {
 		align-items: center;
+		justify-content: center;
 	}
 
 	.connect-button {

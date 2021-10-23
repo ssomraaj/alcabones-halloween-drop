@@ -118,6 +118,14 @@
 	display: flex;
 }
 
+.MuiSelect-outlined.MuiSelect-outlined {
+	width: 100px;
+}
+
+.MuiOutlinedInput-root {
+	border-radius: 10px;
+}
+
 .purchase-form-input {
 	flex: 1 1 0;
 	max-width: 14vw;
@@ -127,10 +135,6 @@
 .purchase-form-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
 	border-width: 1px;
 	border-color: #000;
-}
-
-.purchase-form-input .MuiOutlinedInput-root {
-	border-radius: 0;
 }
 
 .purchase-form-input .MuiFormLabel-root.Mui-focused {
@@ -170,15 +174,21 @@
 	margin-top: 2rem;
 	font-family: "bold", sans-serif;
 	border: none;
+	border-radius: 30px;
 	box-shadow: none;
 	background-color: #000;
 	color: #fff;
 	text-transform: uppercase;
 	font-size: calc(0.5em + 1vmin);
-	padding: calc(0.5em + 1vmin) calc(1.5em + 1vmin);
+	padding: calc(0.2em + 1vmin) calc(1.5em + 1vmin);
 	cursor: pointer;
 	letter-spacing: 0.5px;
 	transition: all 0.3s ease;
+	opacity: 1;
+}
+
+.buy-row button {
+	margin-right: 1rem;
 }
 
 .purchase-form-container button:disabled {
@@ -188,12 +198,27 @@
 
 .purchase-form-container button:not(:disabled):hover,
 .purchase-form-container button:not(:disabled):focus {
-	opacity: 0.7;
+	opacity: 0.9;
 	transition: all 0.3s ease;
+}
+
+.exchange-price {
+	margin-bottom: 1.5rem;
+	font-size: 0.8rem !important;
 }
 
 .purchase-form-wrapper {
 	width: 70%;
+}
+
+.help-guide {
+	font-size: 0.9rem !important;
+}
+
+.network-info {
+	padding: 0.5rem;
+	background-color: white;
+	border-radius: 30px;
 }
 
 .purchase-section-footer {
@@ -276,7 +301,6 @@
 }
 
 .MuiOutlinedInput-root {
-	border-radius: 0 !important;
 	border: none !important;
 	background-color: white;
 }
@@ -310,7 +334,7 @@
 		max-width: 1500px;
 		width: 100%;
 		margin: auto;
-		padding: 1rem 5rem;
+		padding: 6rem 5rem;
 	}
 
 	.heading {
@@ -384,14 +408,9 @@
 		margin-bottom: 1rem;
 	}
 
-	.purchase-form-container {
-		border-radius: 0;
-	}
-
 	.account-section {
 		display: flex;
 		flex-direction: row;
-		border-radius: 0 0 30px 30px;
 	}
 
 	.account-section > div:first-child {
@@ -511,6 +530,15 @@
 		background-size: 22px;
 		transition: 0.3s all ease;
 	}
+	.home-section {
+		padding: 0 0;
+		flex-direction: column-reverse;
+	}
+	.dashboard {
+		flex-direction: column-reverse;
+		padding-bottom: 2rem !important;
+		border-radius: 0;
+	}
 }
 
 @media only screen and (max-width: 450px) {
@@ -547,8 +575,8 @@
 	}
 
 	.purchase-form-container button {
-		margin-top: 4rem;
-		font-size: 0.8rem;
+		margin-top: 1rem;
+		font-size: 1rem;
 	}
 }
 
