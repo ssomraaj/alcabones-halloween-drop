@@ -46,7 +46,7 @@ footer p {
 }
 
 .form-input .MuiOutlinedInput-root {
-	border-radius: 0;
+	border-radius: 30px;
 	color: #fff;
 }
 
@@ -73,7 +73,8 @@ footer p {
 	border: none;
 	box-shadow: none;
 	background-color: #fff;
-	color: #000;
+	color: #020202;
+	border-radius: 30px;
 	text-transform: uppercase;
 	font-size: calc(0.6em + 1vmin);
 	padding: 0.5rem 2rem;

@@ -8,15 +8,12 @@ import {
 	approveToken,
 	getTokenPrice,
 	getTokenBalance,
-	getBollyBalance,
 	getAllowance,
 	getBollyPrice,
 	purchaseBolly,
 	getAvailableBolly,
-	getETHBalance,
-	gasEstimate,
+	getNativeBalance,
 } from "../../../utils/contractHelpers";
-import { PURCHASE_TOKENS } from "../../../utils/contracts";
 import { API } from "../../../utils/service";
 import "./Home.css";
 
@@ -26,14 +23,11 @@ class Home extends Component {
 		window.addEventListener("popstate", this.onBackButtonEvent);
 		this.state = {
 			fetchingTokenPrice: false,
+			tokenBalance: "0",
 			tokenPrice: "0",
 			fetchingBollyPrice: false,
 			bollyPrice: "0",
-			fetchingBollyBalance: false,
-			bollyBalance: "",
-			fetchingETHBalance: false,
-			refreshingETHBalance: false,
-			ethBalance: "",
+			fetchingTokenBalance: false,
 			purchaseAmount: "10",
 			purchaseError: "",
 			approving: false,
@@ -43,10 +37,10 @@ class Home extends Component {
 			txStatus: "",
 			hash: "",
 			allowance: "",
-			asset: PURCHASE_TOKENS[0].ticker,
 			availableBolly: "0",
 			fetchingAvailableBolly: true,
 			gas: "",
+			refresh: false,
 		};
 	}
 
@@ -54,23 +48,23 @@ class Home extends Component {
 		this.fetchTokenPrice();
 		this.fetchBollyPrice();
 		this.fetchAvailableBolly();
-		const { walletConnected, onModalOpen } = this.props;
-		if (!walletConnected) {
-			onModalOpen();
-		} else {
+		const { walletConnected } = this.props;
+		if (walletConnected) {
 			this.fetchTokenBalance();
-			this.fetchBollyBalance();
 		}
 	}
 
 	componentDidUpdate(prevProps) {
-		const { address } = this.props;
-		if (address !== prevProps.address && address) {
+		const { address, currentChain, asset } = this.props;
+		if (
+			(address !== prevProps.address && address) ||
+			currentChain !== prevProps.currentChain ||
+			asset !== prevProps.asset
+		) {
 			this.fetchTokenPrice();
-			this.fetchTokenBalance();
 			this.fetchAllowance();
-			this.fetchBollyBalance();
 			this.fetchAvailableBolly();
+			this.fetchTokenBalance();
 		} else if (address !== prevProps.address && !address) {
 			this.setState({
 				bollyBalance: "",
@@ -89,11 +83,11 @@ class Home extends Component {
 
 	onBackButtonEvent = (e) => {
 		e.preventDefault();
-		// window.location = "/coming-soon";
 	};
 
 	fetchAvailableBolly = () => {
-		getAvailableBolly()
+		const { currentChain } = this.props;
+		getAvailableBolly(currentChain)
 			.then((response) => {
 				this.setState({
 					fetchingAvailableBolly: false,
@@ -106,8 +100,9 @@ class Home extends Component {
 	};
 
 	fetchBollyPrice = () => {
+		const { currentChain } = this.props;
 		this.setState({ fetchingBollyPrice: true }, () => {
-			getBollyPrice()
+			getBollyPrice(currentChain)
 				.then((response) => {
 					this.setState({
 						fetchingBollyPrice: false,
@@ -120,9 +115,33 @@ class Home extends Component {
 		});
 	};
 
+	fetchTokenBalance = () => {
+		const { asset, currentChain, address } = this.props;
+		if (asset === "ETH" || asset === "POLYGON") {
+			getNativeBalance(address, currentChain)
+				.then((res) => {
+					if (res.balance) {
+						this.setState({ tokenBalance: res.balance, fetchingTokenBalance: false });
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			getTokenBalance(asset, address, currentChain)
+				.then((res) => {
+					if (res.balance) {
+						this.setState({ tokenBalance: res.balance, fetchingTokenBalance: false });
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
+
 	fetchAllowance = () => {
-		const { asset } = this.state;
-		const { address } = this.props;
+		const { address, asset } = this.props;
 		this.setState({ fetchingBollyBalance: true }, () => {
 			if (asset === "ETH") {
 				this.setState({
@@ -146,59 +165,10 @@ class Home extends Component {
 		});
 	};
 
-	fetchTokenBalance = (loading = true) => {
-		const { address } = this.props;
-		const { asset } = this.state;
-		this.setState({ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: true }, () => {
-			getETHBalance(address)
-				.then((res) => {
-					process.env.NODE_ENV === "development" && console.log(`${asset} balance`, res.balance);
-					this.setState({ gas: parseFloat(res.balance) }, () => {
-						if (asset === "ETH") {
-							this.setState({
-								ethBalance: parseFloat(res.balance),
-								[loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false,
-							});
-						} else {
-							getTokenBalance(asset, address)
-								.then((res) => {
-									process.env.NODE_ENV === "development" &&
-										console.log(`${asset} balance`, res.balance);
-									this.setState(
-										{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
-										() => {
-											this.setState({
-												ethBalance: parseFloat(res.balance),
-											});
-										}
-									);
-								})
-								.catch((err) => {
-									this.setState(
-										{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
-										() => {
-											console.log("Unable to fetch token balance - ", err.message);
-										}
-									);
-								});
-						}
-					});
-				})
-				.catch((err) => {
-					this.setState(
-						{ [loading ? "fetchingETHBalance" : "refreshingETHBalance"]: false },
-						() => {
-							console.log("Unable to fetch token balance - ", err.message);
-						}
-					);
-				});
-		});
-	};
-
 	fetchTokenPrice = () => {
-		const { asset } = this.state;
+		const { asset, currentChain } = this.props;
 		this.setState({ fetchingTokenPrice: true }, () => {
-			getTokenPrice(asset)
+			getTokenPrice(asset, currentChain)
 				.then((res) => {
 					process.env.NODE_ENV === "development" && console.log(`${asset} price`, res.price);
 					this.setState({ fetchingTokenPrice: false }, () => {
@@ -215,23 +185,6 @@ class Home extends Component {
 		});
 	};
 
-	fetchBollyBalance = () => {
-		const { address } = this.props;
-		this.setState({ fetchingBollyBalance: true }, async () => {
-			try {
-				const data = await getBollyBalance(address);
-				this.setState({
-					bollyBalance: data.balance,
-					fetchingBollyBalance: false,
-				});
-			} catch (err) {
-				this.setState({ fetchingBollyBalance: false }, () => {
-					console.log(err);
-				});
-			}
-		});
-	};
-
 	updateAmount = async (e) => {
 		let {
 			target: { value },
@@ -244,118 +197,158 @@ class Home extends Component {
 		}
 	};
 
-	handleAssetChange = (e) => {
-		const { walletConnected } = this.props;
-		this.setState({ asset: e.target.value }, () => {
-			if (walletConnected) {
-				this.fetchTokenBalance();
-				this.fetchAllowance();
-				this.fetchTokenPrice();
+	fetchBalance = async () => {
+		const { asset, address, currentChain } = this.props;
+		this.setState({ approving: true });
+		if (asset === "ETH" || asset === "POLYGON") {
+			const res = await getNativeBalance(address, currentChain);
+			return res.balance;
+		} else {
+			const res = await getTokenBalance(asset, address, currentChain);
+			return res.balance;
+		}
+	};
+
+	handleApproval = async () => {
+		const { asset, currentChain, signer } = this.props;
+		const { purchaseAmount } = this.state;
+		const tokenBalance = await this.fetchBalance();
+		if (asset !== "ETH" && asset !== "POLYGON") {
+			if (parseFloat(tokenBalance) < parseFloat(purchaseAmount)) {
+				notification["error"]({
+					message: `Insufficient ${asset} balance`,
+				});
+				this.setState({ approving: false });
+			} else {
+				this.setState({ approving: true }, () => {
+					notification["info"]({
+						key: "check-wallet-notification",
+						message: "Approve transaction",
+						description: `Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ${asset}.`,
+						duration: 0,
+					});
+					approveToken({
+						asset,
+						amount: parseFloat(purchaseAmount).toFixed(10),
+						signer,
+						currentChain,
+					})
+						.then(async (response) => {
+							notification.close("check-wallet-notification");
+							notification["info"]({
+								key: "approval-processing-notification",
+								message: "Transaction processing",
+								description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
+								btn: (
+									<a
+										href={
+											currentChain === "ETH"
+												? `https://etherscan.io/tx/${response.data.hash}`
+												: `https://polygonscan.com/tx/${response.data.hash}`
+										}
+										target="_blank"
+										rel="noreferrer noopener"
+									>
+										View on Etherscan
+									</a>
+								),
+								duration: 0,
+							});
+							await response.data.wait();
+							notification.close("approval-processing-notification");
+							notification["success"]({
+								message: "Transaction successful",
+								description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
+								btn: (
+									<a
+										href={
+											currentChain === "ETH"
+												? `https://etherscan.io/tx/${response.data.hash}`
+												: `https://polygonscan.com/tx/${response.data.hash}`
+										}
+										target="_blank"
+										rel="noreferrer noopener"
+									>
+										View on Etherscan
+									</a>
+								),
+								duration: 3,
+							});
+							this.setState({ approving: false, allowance: purchaseAmount });
+						})
+						.catch((err) => {
+							notification.close("check-wallet-notification");
+							process.env.NODE_ENV === "development" && console.log(err);
+							if (
+								err.message &&
+								(err.message?.toLowerCase().includes("user denied transaction signature") ||
+									err.message?.toLowerCase().includes("user canceled") ||
+									err.message?.toLowerCase().includes("user rejected the transaction"))
+							) {
+								this.setState({ approving: false });
+								return;
+							}
+							notification["error"]({
+								message: "Transaction error",
+								description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Please try again later`,
+							});
+							this.setState({ approving: false });
+						});
+				});
 			}
-		});
+		}
 	};
 
 	handlePurchase = () => {
-		let { purchaseAmount, allowance, asset, availableBolly, bollyPrice, tokenPrice, gas } =
+		const { asset } = this.props;
+		const { tokenBalance, purchaseAmount, allowance, tokenPrice, bollyPrice, availableBolly } =
 			this.state;
-		const { signer } = this.props;
-		purchaseAmount = purchaseAmount.trim();
-		if (
-			parseFloat(purchaseAmount) * parseFloat(tokenPrice) <=
-			parseFloat(availableBolly) * parseFloat(bollyPrice)
-		) {
-			if (asset === "ETH") {
-				if (parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) < 1) {
-					notification["warn"]({
-						message: "Minimum purchase is 1 BOLLY",
-					});
-				} else this.setState({ confirmModalVisible: true });
+
+		let bollyToPurchase = !purchaseAmount
+			? 0
+			: tokenPrice && parseFloat(tokenPrice) > 0
+			? parseFloat(
+					(parseFloat(purchaseAmount) * parseFloat(tokenPrice)) / parseFloat(bollyPrice)
+			  ).toFixed(4)
+			: parseFloat(parseFloat(purchaseAmount) / parseFloat(bollyPrice)).toFixed(4);
+		if (parseFloat(bollyToPurchase) < 10) {
+			notification["error"]({
+				message: `Minimum BollyCoin Purchase per transaction is 10 BOLLY`,
+			});
+		} else if (bollyToPurchase > parseFloat(availableBolly)) {
+			notification["error"]({
+				message: `The maximum purchase amount of Bolly is ${availableBolly}`,
+			});
+		} else if (asset === "ETH" || asset === "POLYGON") {
+			if (parseFloat(tokenBalance) < parseFloat(purchaseAmount)) {
+				notification["error"]({
+					message: `Insufficient ${asset} balance`,
+				});
 			} else {
-				if (parseFloat(purchaseAmount) / (parseFloat(bollyPrice) / parseFloat(tokenPrice)) < 1) {
-					notification["warn"]({
-						message: "Minimum purchase is 1 BOLLY",
-					});
-				} else {
-					if (parseFloat(purchaseAmount) > parseFloat(allowance)) {
-						this.setState({ approving: true }, () => {
-							notification["info"]({
-								key: "check-wallet-notification",
-								message: "Approve transaction",
-								description:
-									"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
-								duration: 0,
-							});
-							approveToken({ asset, amount: parseFloat(purchaseAmount).toFixed(10), signer })
-								.then(async (response) => {
-									notification.close("check-wallet-notification");
-									notification["info"]({
-										key: "approval-processing-notification",
-										message: "Transaction processing",
-										description: `Your approval of ${purchaseAmount} ${asset} is being processed. You can view the transaction here`,
-										btn: (
-											<a
-												href={`https://etherscan.io/tx/${response.data.hash}`}
-												target="_blank"
-												rel="noreferrer noopener"
-											>
-												View on Etherscan
-											</a>
-										),
-										duration: 0,
-									});
-									await response.data.wait();
-									notification.close("approval-processing-notification");
-									notification["success"]({
-										message: "Transaction successful",
-										description: `Your approval of ${purchaseAmount} ${asset} is successful. You can view the transaction here`,
-										btn: (
-											<a
-												href={`https://etherscan.io/tx/${response.data.hash}`}
-												target="_blank"
-												rel="noreferrer noopener"
-											>
-												View on Etherscan
-											</a>
-										),
-										duration: 3,
-									});
-									this.setState({ approving: false, allowance: purchaseAmount });
-								})
-								.catch((err) => {
-									notification.close("check-wallet-notification");
-									process.env.NODE_ENV === "development" && console.log(err);
-									if (
-										err.message &&
-										(err.message?.toLowerCase().includes("user denied transaction signature") ||
-											err.message?.toLowerCase().includes("user canceled") ||
-											err.message?.toLowerCase().includes("user rejected the transaction"))
-									) {
-										this.setState({ approving: false });
-										return;
-									}
-									notification["error"]({
-										message: "Transaction error",
-										description: `Your approval of ${purchaseAmount} ${asset} couldn't be processed. Please try again later`,
-									});
-									this.setState({ approving: false });
-								});
-						});
-					} else {
-						this.setState({ confirmModalVisible: true });
-					}
-				}
+				this.setState({
+					confirmModalVisible: true,
+				});
 			}
 		} else {
-			notification["warn"]({
-				message: "Cannot purchase BOLLY",
-				description: "The purchase amount exceeds the amount of BOLLY left",
-			});
+			if (parseFloat(tokenBalance) < parseFloat(purchaseAmount)) {
+				notification["error"]({
+					message: `Insufficient ${asset} balance`,
+				});
+			} else if (parseFloat(allowance) < parseFloat(purchaseAmount)) {
+				notification["error"]({
+					message: `Insufficient ${asset} allowance for purchase`,
+				});
+			} else {
+				this.setState({
+					confirmModalVisible: true,
+				});
+			}
 		}
 	};
 
 	buyBollyCoin = (purchaseId) => {
-		let { purchaseAmount, asset, bollyPrice, tokenPrice, gas } = this.state;
-		const { signer } = this.props;
+		let { purchaseAmount, bollyPrice, tokenPrice, gas } = this.state;
+		const { signer, asset, currentChain } = this.props;
 		purchaseAmount = purchaseAmount.trim();
 		if (parseFloat(gas) === 0) {
 			notification["warn"]({
@@ -373,12 +366,16 @@ class Home extends Component {
 				purchaseBolly({
 					asset,
 					uid: purchaseId,
-					amount: (
-						parseFloat(purchaseAmount) /
-						(parseFloat(bollyPrice) / parseFloat(tokenPrice))
+					amount: parseFloat(
+						tokenPrice && parseFloat(tokenPrice) > 0
+							? parseFloat(
+									(parseFloat(purchaseAmount) * parseFloat(tokenPrice)) / parseFloat(bollyPrice)
+							  ).toFixed(4)
+							: parseFloat(parseFloat(purchaseAmount) / parseFloat(bollyPrice)).toFixed(4)
 					).toFixed(10),
 					signer,
 					payable: parseFloat(purchaseAmount),
+					currentChain,
 				})
 					.then(async (response) => {
 						notification.close("check-wallet-notification");
@@ -397,11 +394,10 @@ class Home extends Component {
 									process.env.NODE_ENV === "development" && console.log("Purchase PATCH error", err)
 							)
 							.finally(() => {
-								this.fetchBollyBalance();
 								this.fetchAllowance();
-								this.fetchTokenBalance();
 								this.fetchAvailableBolly();
-								this.setState({ txStatus: "success" });
+								this.fetchTokenBalance();
+								this.setState({ txStatus: "success", refresh: !this.state.refresh });
 							});
 					})
 					.catch((err) => {
@@ -418,32 +414,53 @@ class Home extends Component {
 	};
 
 	render() {
-		const { onModalOpen, walletConnected, type, address } = this.props;
-		// prettier-ignore
-		const { fetchingBollyBalance, bollyBalance, purchaseAmount, purchaseError, loading, ethBalance, confirmModalVisible, purchasing, fetchingETHBalance, refreshingETHBalance, txStatus, hash, allowance, asset, fetchingBollyPrice, bollyPrice, approving, fetchingTokenPrice, tokenPrice, fetchingAvailableBolly, availableBolly
+		const {
+			onModalOpen,
+			walletConnected,
+			type,
+			address,
+			onNetworkUpdate,
+			currentChain,
+			asset,
+			assetChange,
+			update,
+		} = this.props;
+		const {
+			approving,
+			refresh,
+			purchaseAmount,
+			purchaseError,
+			tokenBalance,
+			confirmModalVisible,
+			txStatus,
+			hash,
+			allowance,
+			fetchingBollyPrice,
+			bollyPrice,
+			fetchingTokenPrice,
+			tokenPrice,
+			fetchingAvailableBolly,
+			availableBolly,
+			fetchingTokenBalance,
 		} = this.state;
-		const checkingPurchaseEligibility =
-			fetchingBollyBalance ||
-			loading ||
-			purchasing ||
-			fetchingETHBalance ||
-			approving ||
-			fetchingAvailableBolly;
-		const purchaseFormDisabled =
-			fetchingBollyPrice || fetchingETHBalance || loading || purchasing || fetchingAvailableBolly;
 		return (
 			<div className="home-container">
-				<Navbar onModalOpen={onModalOpen} walletConnected={walletConnected} type={type} />
+				<Navbar
+					onModalOpen={onModalOpen}
+					onNetworkUpdate={onNetworkUpdate}
+					walletConnected={walletConnected}
+					type={type}
+					currentChain={currentChain}
+				/>
 				<div className="home-section">
-					{/* <button className="home-button" /> */}
 					<div className="dashboard">
 						<div className="purchase-section">
 							<BalanceSection
 								price={bollyPrice}
+								address={address}
 								walletConnected={walletConnected}
-								fetchingBollyBalance={fetchingBollyBalance}
-								bollyBalance={bollyBalance}
-								onBalanceRefresh={() => this.fetchBollyBalance()}
+								currentChain={currentChain}
+								refresh={refresh}
 							/>
 							<PurchaseForm
 								fetchingAvailableBolly={fetchingAvailableBolly}
@@ -452,25 +469,21 @@ class Home extends Component {
 								availableBolly={availableBolly}
 								tokenPrice={tokenPrice}
 								price={bollyPrice}
-								loading={checkingPurchaseEligibility}
-								formDisabled={purchaseFormDisabled}
+								approving={approving}
 								amount={purchaseAmount}
 								onAmountUpdate={this.updateAmount}
+								onAssetChange={assetChange}
 								asset={asset}
-								onAssetChange={this.handleAssetChange}
-								balance={ethBalance}
+								balance={tokenBalance}
 								allowance={allowance}
 								walletConnected={walletConnected}
 								onPurchase={this.handlePurchase}
+								onApprove={this.handleApproval}
 								error={purchaseError}
 								onModalOpen={onModalOpen}
+								currentChain={currentChain}
+								loading={fetchingTokenBalance || fetchingBollyPrice || fetchingAvailableBolly}
 							/>
-							{/* <div className="purchase-section-footer">
-								<p>
-									For Purchase History,{" "}
-									<span onClick={() => history.push("/purchase-history")}>Click Here</span>
-								</p>
-							</div> */}
 						</div>
 						<div className="account-section">
 							<Account
@@ -478,10 +491,8 @@ class Home extends Component {
 								walletConnected={walletConnected}
 								walletType={type}
 								address={address}
-								fetchingETHBalance={fetchingETHBalance}
-								ethBalance={ethBalance}
-								refreshingETHBalance={refreshingETHBalance}
-								onBalanceRefresh={() => this.fetchTokenBalance(false)}
+								currentChain={currentChain}
+								refresh={refresh}
 							/>
 						</div>
 					</div>
@@ -501,6 +512,7 @@ class Home extends Component {
 						});
 					}}
 					onConfirm={this.buyBollyCoin}
+					currentChain={currentChain}
 				/>
 			</div>
 		);

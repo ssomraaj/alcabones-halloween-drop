@@ -13,13 +13,13 @@ export default class ConfirmModal extends React.PureComponent {
 		super(props);
 		this.state = {
 			submitting: false,
-			name: "",
+			name: "tester",
 			nameError: "",
-			mobile: "",
+			mobile: "9787248712",
 			mobileError: "",
-			email: "",
+			email: "test@test.com",
 			emailError: "",
-			occupation: "",
+			occupation: "tester",
 			occupationError: "",
 			country: "India",
 			countryError: "",
@@ -127,7 +127,7 @@ export default class ConfirmModal extends React.PureComponent {
 	};
 
 	render() {
-		const { visible, amount, status, hash, asset, price, tokenPrice } = this.props;
+		const { visible, amount, status, hash, asset, price, tokenPrice, currentChain } = this.props;
 		const {
 			name,
 			nameError,
@@ -340,11 +340,11 @@ export default class ConfirmModal extends React.PureComponent {
 								<div>
 									<div>Total</div>
 									<div>
-										{asset === "ETH"
-											? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
-											: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
-													6
-											  )}{" "}
+										{tokenPrice && parseFloat(tokenPrice) > 0
+											? parseFloat(
+													(parseFloat(amount) * parseFloat(tokenPrice)) / parseFloat(price)
+											  ).toFixed(4)
+											: parseFloat(parseFloat(amount) / parseFloat(price)).toFixed(4)}{" "}
 										BOLLY
 									</div>
 								</div>
@@ -380,11 +380,11 @@ export default class ConfirmModal extends React.PureComponent {
 							<p className="tx-status">Initializing</p>
 							<p className="tx-description">
 								Purchasing{" "}
-								{asset === "ETH"
-									? parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice)))
-									: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
-											6
-									  )}{" "}
+								{tokenPrice && parseFloat(tokenPrice) > 0
+									? parseFloat(
+											(parseFloat(amount) * parseFloat(tokenPrice)) / parseFloat(price)
+									  ).toFixed(4)
+									: parseFloat(parseFloat(amount) / parseFloat(price)).toFixed(4)}{" "}
 								BOLLY
 							</p>
 						</div>
@@ -398,14 +398,22 @@ export default class ConfirmModal extends React.PureComponent {
 							<p className="tx-status">Transaction submitted. Waiting for upto 3 confirmations</p>
 							<p className="tx-description">
 								Purchasing{" "}
-								{asset === "ETH"
-									? Math.floor(parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))))
-									: parseFloat(amount / (parseFloat(price) / parseFloat(tokenPrice))).toFixed(
-											6
-									  )}{" "}
+								{tokenPrice && parseFloat(tokenPrice) > 0
+									? parseFloat(
+											(parseFloat(amount) * parseFloat(tokenPrice)) / parseFloat(price)
+									  ).toFixed(4)
+									: parseFloat(parseFloat(amount) / parseFloat(price)).toFixed(4)}{" "}
 								BOLLY
 							</p>
-							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
+							<a
+								href={
+									currentChain === "ETH"
+										? `https://etherscan.io/tx/${hash}`
+										: `https://polygonscan.com/tx/${hash}`
+								}
+								target="_blank"
+								rel="noreferrer noopener"
+							>
 								View Transaction
 							</a>
 						</div>
@@ -415,7 +423,15 @@ export default class ConfirmModal extends React.PureComponent {
 								<IoIosCheckmarkCircleOutline size={90} color="#00D395" />
 							</Zoom>
 							<p className="tx-status">Transaction confirmed</p>
-							<a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer noopener">
+							<a
+								href={
+									currentChain === "ETH"
+										? `https://etherscan.io/tx/${hash}`
+										: `https://polygonscan.com/tx/${hash}`
+								}
+								target="_blank"
+								rel="noreferrer noopener"
+							>
 								View Transaction
 							</a>
 						</div>

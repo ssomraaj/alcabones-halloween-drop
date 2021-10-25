@@ -33,6 +33,8 @@ class Routes extends Component {
 			connected: false,
 			signer: null,
 			provider: null,
+			currentChain: "ETH",
+			asset: "ETH",
 		};
 	}
 
@@ -41,6 +43,10 @@ class Routes extends Component {
 			window.ethereum.addListener("accountsChanged", this.onAccountsChanged);
 			window.ethereum.addListener("chainChanged", () => window.location.reload());
 		}
+		this.setState({
+			currentChain: localStorage.getItem("chain") || "ETH",
+			asset: localStorage.getItem("chain") || "ETH",
+		});
 	}
 
 	componentDidUpdate(_, prevState) {
@@ -114,6 +120,7 @@ class Routes extends Component {
 	connectToMetaMask = async () => {
 		try {
 			if (window.ethereum !== undefined) {
+				const { currentChain } = this.state;
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				await window.ethereum.request({ method: "eth_requestAccounts" });
 				const address = await provider.listAccounts();
@@ -121,19 +128,25 @@ class Routes extends Component {
 				provider
 					.getNetwork()
 					.then((network) => {
-						if (network.chainId === 1) {
+						if (
+							(network.chainId === 1 && currentChain === "ETH") ||
+							(network.chainId === 137 && currentChain === "POLYGON")
+						) {
 							this.setState({
 								type: "Metamask",
 								address: address[0],
 								signer: signer,
 								connected: true,
+								connecting: false,
 								modal: false,
 								provider,
 							});
 						} else {
 							this.setState({ connecting: false }, () => {
 								notification["error"]({
-									message: "Wrong network detected. Please connect to Ethereum  Mainnet",
+									message: `Wrong network detected. Please connect to ${
+										currentChain === "ETH" ? "Ethereum" : currentChain
+									}  Mainnet`,
 								});
 							});
 						}
@@ -166,9 +179,10 @@ class Routes extends Component {
 
 	walletconnect = async () => {
 		try {
+			const { currentChain } = this.state;
 			const web3Provider = new WalletConnectProvider({
 				infuraId: process.env.REACT_APP_INFURA_KEY,
-				chainId: 1,
+				chainId: currentChain === "ETH" ? 1 : 137,
 			});
 			await web3Provider.enable().catch((_) => {
 				this.setState({
@@ -182,7 +196,10 @@ class Routes extends Component {
 			provider
 				.getNetwork()
 				.then(async (network) => {
-					if (network.chainId === 1) {
+					if (
+						(network.chainId === 1 && currentChain === "ETH") ||
+						(network.chainId === 137 && currentChain === "POLYGON")
+					) {
 						this.setState({
 							type: "WalletConnect",
 							address: address[0],
@@ -196,7 +213,9 @@ class Routes extends Component {
 						await web3Provider.disconnect();
 						this.setState({ connecting: false }, () => {
 							notification["error"]({
-								message: "Wrong network detected. Please connect to Ethereum Mainnet",
+								message: `Wrong network detected. Please connect to ${
+									currentChain === "ETH" ? "Ethereum" : currentChain
+								}  Mainnet`,
 							});
 						});
 					}
@@ -217,9 +236,12 @@ class Routes extends Component {
 
 	coinbase = async () => {
 		try {
+			const { currentChain } = this.state;
 			const web3Provider = walletLink.makeWeb3Provider(
-				`https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
-				1
+				currentChain === "ETH"
+					? `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
+					: `https://mainnet-polygon.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
+				currentChain === "ETH" ? 1 : 137
 			);
 			web3Provider
 				.enable()
@@ -230,7 +252,10 @@ class Routes extends Component {
 					provider
 						.getNetwork()
 						.then(async (network) => {
-							if (network.chainId === 1) {
+							if (
+								(network.chainId === 1 && currentChain === "ETH") ||
+								(network.chainId === 137 && currentChain === "POLYGON")
+							) {
 								this.setState({
 									type: "Coinbase",
 									address: address[0],
@@ -243,7 +268,9 @@ class Routes extends Component {
 							} else {
 								this.setState({ connecting: false }, () => {
 									notification["error"]({
-										message: "Wrong network detected. Please connect to Ethereum Mainnet",
+										message: `Wrong network detected. Please connect to ${
+											currentChain === "ETH" ? "Ethereum" : currentChain
+										}  Mainnet`,
 									});
 								});
 							}
@@ -270,9 +297,24 @@ class Routes extends Component {
 		}
 	};
 
-	render() {
-		const { modal, connecting, connected, address, type, signer } = this.state;
+	networkChange = (network) => {
+		this.setState({
+			connected: false,
+			signer: null,
+			currentChain: network,
+			asset: network,
+		});
+		localStorage.setItem("chain", network);
+	};
 
+	assetChange = (e) => {
+		this.setState({
+			asset: e.target.value,
+		});
+	};
+
+	render() {
+		const { modal, connecting, connected, address, type, signer, currentChain, asset } = this.state;
 		return (
 			<SuspenseWithChunkError fallback={<AppLoader />}>
 				<Switch>
@@ -287,6 +329,10 @@ class Routes extends Component {
 								signer={signer}
 								type={type}
 								onModalOpen={this.open}
+								onNetworkUpdate={this.networkChange}
+								currentChain={currentChain}
+								assetChange={this.assetChange}
+								asset={asset}
 								{...props}
 							/>
 						)}

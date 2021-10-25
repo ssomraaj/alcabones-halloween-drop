@@ -213,7 +213,7 @@
 }
 
 .debug-controls button {
-	color: #000;
+	color: #020202;
 }
 
 .coming-soon-graphics {
@@ -283,7 +283,7 @@
 }
 
 .social-icons-onscroll:hover {
-	color: #000;
+	color: #020202;
 }
 
 .cta-container {
@@ -384,7 +384,7 @@
 	user-select: none;
 	cursor: pointer;
 	font-family: "primary", sans-serif;
-	color: #000;
+	color: #020202;
 	font-size: calc(1.5em + 1vmin);
 }
 
@@ -397,7 +397,7 @@
 }
 
 .header a:hover {
-	color: #000;
+	color: #020202;
 	opacity: 0.5;
 	transition: 0.3s all ease;
 }
@@ -421,7 +421,7 @@
 
 .hero h1 {
 	font-family: "bold", sans-serif;
-	color: #000;
+	color: #020202;
 	opacity: 1;
 	font-size: calc(3.5em + 1vmin);
 	line-height: 4.25rem;
@@ -429,7 +429,7 @@
 }
 
 .hero p {
-	color: #000;
+	color: #020202;
 	opacity: 0.8;
 	font-size: calc(0.8em + 0.8vmin);
 	line-height: 2.15rem;
@@ -443,13 +443,14 @@
 	font-family: "bold", sans-serif;
 	border: none;
 	box-shadow: none;
-	background-color: #000;
+	background-color: #020202;
 	color: #fff;
 	text-transform: uppercase;
 	font-size: calc(0.6em + 1vmin);
 	padding: calc(0.5em + 1vmin) calc(3em + 1vmin);
 	cursor: pointer;
 	transition: all 0.3s ease;
+	border-radius: 50px;
 }
 
 .hero button:hover,
@@ -493,7 +494,7 @@
 } */
 
 .section h1 {
-	color: #000;
+	color: #020202;
 	opacity: 1;
 	font-size: calc(3em + 1vmin);
 	line-height: 4.25rem;
@@ -502,7 +503,7 @@
 }
 
 .section p {
-	color: #000;
+	color: #020202;
 	opacity: 0.8;
 	font-size: calc(0.8em + 1vmin);
 	line-height: 2.15rem;
@@ -543,7 +544,7 @@
 }
 
 .banner h1 {
-	color: #000;
+	color: #020202;
 	font-family: "bold", sans-serif;
 	opacity: 1;
 	font-size: calc(3em + 1vmin);
@@ -551,7 +552,7 @@
 }
 
 .banner p {
-	color: #000;
+	color: #020202;
 	opacity: 0.8;
 	font-size: calc(0.8em + 1vmin);
 	line-height: 2.15rem;
@@ -560,10 +561,10 @@
 }
 
 .banner button {
-	border: 1px solid #000;
+	border: 1px solid #020202;
 	box-shadow: none;
 	background-color: transparent;
-	color: #000;
+	color: #020202;
 	text-transform: capitalize;
 	font-size: calc(0.65em + 1vmin);
 	padding: calc(0.15em + 1vmin) calc(4.25em + 1vmin);
@@ -604,23 +605,25 @@
 }
 
 .tagline .form-control .MuiFormLabel-root {
-	color: #000;
+	color: #020202;
 }
 
 .tagline .form-control .MuiOutlinedInput-root {
-	color: #000;
+	color: #020202;
 }
 
 .tagline .form-control .form-input .MuiOutlinedInput-root:hover,
 .tagline .form-control .MuiOutlinedInput-notchedOutline {
-	border-color: #000 !important;
+	border-color: #020202 !important;
+	border-radius: 50px;
 }
 
 .tagline .form-control button {
-	background-color: #000;
+	background-color: #020202;
 	color: #fff;
 	padding: 0.5rem 0.5rem;
 	font-size: 15px;
+	border-radius: 50px;
 }
 
 .timeline-section {
@@ -628,7 +631,7 @@
 }
 
 .timeline-section h1 {
-	color: #000;
+	color: #020202;
 	font-size: calc(3em + 1vmin);
 	font-family: "bold", sans-serif;
 	line-height: 4.25rem;
@@ -636,7 +639,7 @@
 }
 
 .timeline-section > p {
-	color: #000;
+	color: #020202;
 	opacity: 0.8;
 	font-size: calc(0.8em + 1vmin);
 	line-height: 2.15rem;
