@@ -299,7 +299,11 @@ class Home extends Component {
 					(parseFloat(purchaseAmount) * parseFloat(tokenPrice)) / parseFloat(bollyPrice)
 			  ).toFixed(4)
 			: parseFloat(parseFloat(purchaseAmount) / parseFloat(bollyPrice)).toFixed(4);
-		if (bollyToPurchase > parseFloat(availableBolly)) {
+		if (parseFloat(bollyToPurchase) < 10) {
+			notification["error"]({
+				message: `Minimum BollyCoin Purchase per transaction is 10 BOLLY`,
+			});
+		} else if (bollyToPurchase > parseFloat(availableBolly)) {
 			notification["error"]({
 				message: `The maximum purchase amount of Bolly is ${availableBolly}`,
 			});

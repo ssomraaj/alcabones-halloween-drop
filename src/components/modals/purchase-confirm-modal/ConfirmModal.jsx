@@ -13,13 +13,13 @@ export default class ConfirmModal extends React.PureComponent {
 		super(props);
 		this.state = {
 			submitting: false,
-			name: "tester",
+			name: "",
 			nameError: "",
-			mobile: "9787248712",
+			mobile: "",
 			mobileError: "",
-			email: "test@test.com",
+			email: "",
 			emailError: "",
-			occupation: "tester",
+			occupation: "",
 			occupationError: "",
 			country: "India",
 			countryError: "",

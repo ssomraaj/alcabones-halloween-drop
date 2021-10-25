@@ -145,7 +145,7 @@ const PurchaseForm = ({
 								{parseFloat(amount) === 0 || !amount
 									? "Enter amount"
 									: parseFloat(amount) > parseFloat(balance)
-									? `Insufficient Balance`
+									? `Insufficient ${asset}`
 									: `Purchase now`}
 							</button>
 						</div>
