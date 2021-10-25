@@ -197,22 +197,34 @@ class Home extends Component {
 		}
 	};
 
+	fetchBalance = async () => {
+		const { asset, address, currentChain } = this.props;
+		this.setState({ approving: true });
+		if (asset === "ETH" || asset === "POLYGON") {
+			const res = await getNativeBalance(address, currentChain);
+			return res.balance;
+		} else {
+			const res = await getTokenBalance(asset, address, currentChain);
+			return res.balance;
+		}
+	};
+
 	handleApproval = async () => {
 		const { asset, currentChain, signer } = this.props;
-		const { purchaseAmount, tokenBalance } = this.state;
-		console.log(asset);
+		const { purchaseAmount } = this.state;
+		const tokenBalance = await this.fetchBalance();
 		if (asset !== "ETH" && asset !== "POLYGON") {
 			if (parseFloat(tokenBalance) < parseFloat(purchaseAmount)) {
 				notification["error"]({
 					message: `Insufficient ${asset} balance`,
 				});
+				this.setState({ approving: false });
 			} else {
 				this.setState({ approving: true }, () => {
 					notification["info"]({
 						key: "check-wallet-notification",
 						message: "Approve transaction",
-						description:
-							"Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ETH.",
+						description: `Please check your connected wallet for the transaction prompt and accept to continue. Note: Miner fees are applicable for every transaction, paid with ${asset}.`,
 						duration: 0,
 					});
 					approveToken({
