@@ -176,7 +176,7 @@ class Routes extends Component {
 		try {
 			const { currentChain } = this.state;
 			const web3Provider = new WalletConnectProvider({
-				infuraId: process.env.REACT_APP_INFURA_KEY,
+				infuraId: "de3be78ee53a4982aa44dcc9eb858904",
 				chainId: currentChain === "ETH" ? 1 : 137,
 			});
 			await web3Provider.enable().catch((_) => {
@@ -234,8 +234,8 @@ class Routes extends Component {
 			const { currentChain } = this.state;
 			const web3Provider = walletLink.makeWeb3Provider(
 				currentChain === "ETH"
-					? `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
-					: `https://mainnet-polygon.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
+					? `https://mainnet.infura.io/v3/de3be78ee53a4982aa44dcc9eb858904`
+					: `https://mainnet-polygon.infura.io/v3/de3be78ee53a4982aa44dcc9eb858904`,
 				currentChain === "ETH" ? 1 : 137
 			);
 			web3Provider
