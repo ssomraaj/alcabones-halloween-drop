@@ -139,13 +139,13 @@ class PurchaseForm extends React.Component {
 							});
 						})
 						.catch((err) => {
-							this.setState({ visible: false, purchasing: false });
+							this.setState({ visible: false, status: "" });
 							notification["error"]({
 								message: err.message,
 							});
 						});
 				} catch (e) {
-					this.setState({ visible: false, purchasing: false });
+					this.setState({ visible: false, status: "" });
 					notification["error"]({
 						message: e.message,
 					});
