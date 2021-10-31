@@ -104,9 +104,6 @@
 
 .cabone-card:hover {
 	cursor: pointer;
-	background-color: black;
-	color: white;
-	transition: all 0.3s;
 }
 
 .cabone-card-selected:hover {
