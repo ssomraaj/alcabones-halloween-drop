@@ -24,7 +24,7 @@ export default class CaboneCard extends React.Component {
 			let id = ethers.utils.formatUnits(parseInt(bone.id, 16), 0);
 			let status = await contract.claimed(id);
 			this.setState({
-				soldOut: status,
+				soldOut: !status,
 				loading: false,
 			});
 		} catch (e) {
