@@ -174,7 +174,6 @@ class PurchaseForm extends React.Component {
 								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
 								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
 								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
-								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
 							</div>
 						) : (
 							<div className="cabone-select">
