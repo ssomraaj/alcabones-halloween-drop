@@ -122,7 +122,7 @@ export default class Account extends React.Component {
 							Checkout our collection On Opensea,{" "}
 							<span>
 								<a
-									href="https://opensea.io/collection/two-faced-alcabones"
+									href="https://opensea.io/collection/two-faced-al-cabones"
 									target="_blank"
 									rel="noreferrer noopener"
 								>
@@ -138,7 +138,7 @@ export default class Account extends React.Component {
 							Checkout our collection On Opensea,{" "}
 							<span>
 								<a
-									href="https://opensea.io/collection/two-faced-alcabones"
+									href="https://opensea.io/collection/two-faced-al-cabones"
 									target="_blank"
 									rel="noreferrer noopener"
 								>
