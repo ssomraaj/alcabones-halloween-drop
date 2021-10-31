@@ -82,7 +82,7 @@
 	}
 
 	.logo img {
-		max-width: 250px;
+		max-width: 100px;
 		height: 50px;
 		margin-left: -3rem;
 		margin-bottom: 1rem;
@@ -91,7 +91,7 @@
 
 @media only screen and (max-width: 450px) {
 	.logo {
-		width: 120px;
+		width: 100px;
 		height: auto;
 	}
 

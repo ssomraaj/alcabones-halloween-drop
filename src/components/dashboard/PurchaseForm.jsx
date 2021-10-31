@@ -133,8 +133,8 @@ class PurchaseForm extends React.Component {
 						.mint(selected, newFamily, newAmount)
 						.then((tx) => {
 							this.setState({ status: "waiting", hash: tx.hash });
-							this.fetchBalance();
 							tx.wait(2).then((res) => {
+								this.fetchBalance();
 								this.setState({ status: "success" });
 							});
 						})
