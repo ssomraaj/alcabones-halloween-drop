@@ -5,7 +5,7 @@ import { ETH, POLYGON } from "../../utils/icons";
 import Metamask from "../../assets/images/connect-modal/icn-metamask.svg";
 import Coinbase from "../../assets/images/connect-modal/icn-coinbase-wallet.svg";
 import WalletConnect from "../../assets/images/connect-modal/icn-wallet-connect.svg";
-import { getNativeBalance, getTokenBalance } from "../../utils/contractHelpers";
+import { getNativeBalance } from "../../utils/contractHelpers";
 
 export default class Account extends React.Component {
 	constructor(props) {
@@ -40,16 +40,6 @@ export default class Account extends React.Component {
 		const { asset, address, currentChain } = this.props;
 		if (asset === "ETH" || asset === "POLYGON") {
 			getNativeBalance(address, currentChain)
-				.then((res) => {
-					if (res.balance) {
-						this.setState({ balance: res.balance, fetchingBalance: false });
-					}
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		} else {
-			getTokenBalance(asset, address, currentChain)
 				.then((res) => {
 					if (res.balance) {
 						this.setState({ balance: res.balance, fetchingBalance: false });
@@ -129,14 +119,14 @@ export default class Account extends React.Component {
 							</p>
 						)}
 						<p className="help-guide">
-							For help purchasing BollyCoin,{" "}
+							Checkout our collection On Opensea,{" "}
 							<span>
 								<a
-									href="https://drive.google.com/file/d/1hEkd5T9aV2WfcVYt581HL2wLEK1ELZEC/view?usp=sharing"
+									href="https://opensea.io/collection/two-faced-alcabones"
 									target="_blank"
 									rel="noreferrer noopener"
 								>
-									Read here
+									Check Here
 								</a>
 							</span>
 						</p>
@@ -145,14 +135,14 @@ export default class Account extends React.Component {
 					<div className="no-connection">
 						<p>Connect your wallet</p>
 						<p className="help-guide">
-							For help purchasing BollyCoin,{" "}
+							Checkout our collection On Opensea,{" "}
 							<span>
 								<a
-									href="https://drive.google.com/file/d/1hEkd5T9aV2WfcVYt581HL2wLEK1ELZEC/view?usp=sharing"
+									href="https://opensea.io/collection/two-faced-alcabones"
 									target="_blank"
 									rel="noreferrer noopener"
 								>
-									Read here
+									Check Here
 								</a>
 							</span>
 						</p>

@@ -1,174 +1,202 @@
 import React from "react";
-import { CircularProgress, MenuItem, Select } from "@material-ui/core";
-import { Skeleton } from "antd";
-import { FormInput } from ".";
-import { BUSD, USDC, ETH, USDT, POLYGON, WETH, BOLLY } from "../../utils/icons";
+import { CircularProgress } from "@material-ui/core";
+import { Skeleton, notification } from "antd";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { getFamily } from "../../utils/familyHelpers";
+import CaboneCard from "./CaboneCard";
+import { DROP_ABI, DROP_ADDRESS } from "../../utils/contracts";
+import { ConfirmModal } from "../modals";
+const ethers = require("ethers");
 
-const PurchaseForm = ({
-	loading,
-	asset,
-	allowance,
-	amount,
-	error,
-	onAmountUpdate,
-	formDisabled,
-	onAssetChange,
-	onPurchase,
-	walletConnected,
-	onModalOpen,
-	fetchingPrice,
-	price,
-	tokenPrice,
-	fetchingTokenPrice,
-	balance,
-	fetchingAvailableBolly,
-	availableBolly,
-	onApprove,
-	currentChain,
-	approving,
-}) => {
-	return (
-		<div className="purchase-form-container">
-			<div className="purchase-form-wrapper">
-				<div className="heading">Buy BollyCoin</div>
-				<div className="purchase-form-control">
-					<FormInput
-						label={`Amount (${asset})`}
-						placeholder={`Enter the ${asset} amount`}
-						value={amount}
-						error={error}
-						onChange={onAmountUpdate}
-						onEnter={() => {
-							if (!formDisabled) {
-								onPurchase();
-							}
-						}}
-					/>
-					{currentChain === "ETH" ? (
-						<Select variant="outlined" value={asset} onChange={onAssetChange}>
-							<MenuItem value="ETH">
-								<img className="dropdown-icon" src={ETH} alt="eth" />
-								ETH
-							</MenuItem>
-							<MenuItem value="USDC">
-								<img className="dropdown-icon" src={USDC} alt="usdc" />
-								USDC
-							</MenuItem>
-							<MenuItem value="BUSD">
-								<img className="dropdown-icon" src={BUSD} alt="busd" />
-								BUSD
-							</MenuItem>
-						</Select>
-					) : (
-						<Select variant="outlined" value={asset} onChange={onAssetChange}>
-							<MenuItem value="POLYGON">
-								<img className="dropdown-icon" src={POLYGON} alt="polygon" />
-								POLYGON
-							</MenuItem>
-							<MenuItem value="USDT">
-								<img className="dropdown-icon" src={USDT} alt="usdt" />
-								USDT
-							</MenuItem>
-							<MenuItem value="WETH">
-								<img className="dropdown-icon" src={WETH} alt="weth" />
-								WETH
-							</MenuItem>
-						</Select>
-					)}
-				</div>
-				{fetchingPrice || fetchingTokenPrice ? (
-					<div className="exchange-price">
-						BollyCoin Price: $ <Skeleton.Button size="small" /> USD
-					</div>
-				) : (
-					<div className="exchange-price">
-						BollyCoin Price: $ {parseFloat(price).toFixed(2)} USD
-					</div>
-				)}
-				<div className="purchase-form-control">
-					<FormInput
-						label={`Amount (BOLLY)`}
-						value={
-							!amount
-								? 0
-								: tokenPrice && parseFloat(tokenPrice) > 0
-								? parseFloat(
-										(parseFloat(amount) * parseFloat(tokenPrice)) / parseFloat(price)
-								  ).toFixed(4)
-								: parseFloat(parseFloat(amount) / parseFloat(price)).toFixed(4)
-						}
-						disabled
-					/>
-					<Select variant="outlined" value="BOLLY">
-						<MenuItem value="BOLLY">
-							<img className="dropdown-icon" src={BOLLY} alt="bolly" />
-							BOLLY
-						</MenuItem>
-					</Select>
-				</div>
-				{!fetchingAvailableBolly && (
-					<div className="exchange-price">
-						<b>{Number(parseFloat(availableBolly).toFixed(4)).toLocaleString()} BOLLY </b> remains
-						available to purchase in this <br /> round of the 100,000,000 total supply.
-					</div>
-				)}
-				{/* <div style={{ marginTop: "0.5rem" }}>Minimum purchase: 2500 BOLLY</div> */}
-				{walletConnected ? (
-					loading ? (
-						<Skeleton.Button size="large" />
-					) : asset !== "ETH" && asset !== "POLYGON" ? (
-						<div className="buy-row">
-							<button
-								onClick={onApprove}
-								disabled={
-									approving ||
-									!amount ||
-									parseFloat(amount) === 0 ||
-									parseFloat(allowance) >= parseFloat(amount)
-								}
-							>
-								{approving ? (
-									<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
-								) : (
-									`Approve ${asset}`
-								)}
-							</button>
-							<button
-								onClick={onPurchase}
-								disabled={
-									!amount ||
-									parseFloat(amount) === 0 ||
-									parseFloat(amount) > parseFloat(balance) ||
-									parseFloat(allowance) < parseFloat(amount)
-								}
-							>
-								{parseFloat(amount) === 0 || !amount
-									? "Enter amount"
-									: parseFloat(amount) > parseFloat(balance)
-									? `Insufficient ${asset}`
-									: `Purchase now`}
-							</button>
-						</div>
-					) : (
-						<button
-							onClick={onPurchase}
-							disabled={
-								!amount || parseFloat(amount) === 0 || parseFloat(amount) > parseFloat(balance)
-							}
-						>
-							{parseFloat(amount) === 0 || !amount
-								? "Enter amount"
-								: parseFloat(amount) > parseFloat(balance)
-								? `Insufficient ${asset}`
-								: `Purchase Now`}
-						</button>
-					)
-				) : (
-					<button onClick={onModalOpen}>connect wallet</button>
-				)}
-			</div>
-		</div>
-	);
+const APIURL = "https://api.thegraph.com/subgraphs/name/sujithsomraaj/alcabones";
+const defaultOptions = {
+	watchQuery: {
+		fetchPolicy: "no-cache",
+		errorPolicy: "ignore",
+	},
+	query: {
+		fetchPolicy: "no-cache",
+		errorPolicy: "all",
+	},
 };
+
+const client = new ApolloClient({
+	uri: APIURL,
+	cache: new InMemoryCache(),
+	defaultOptions: defaultOptions,
+});
+
+class PurchaseForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			cabones: null,
+			fetching: true,
+			status: "",
+			selected: [],
+			amount: [0, 0, 0, 0, 0, 0, 0],
+			hash: "",
+			visible: false,
+		};
+		this.select = this.select.bind(this);
+		this.close = this.close.bind(this);
+	}
+
+	componentDidMount() {
+		const { walletConnected } = this.props;
+		if (walletConnected) {
+			this.fetchBalance();
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (
+			prevProps.walletConnected !== this.props.walletConnected ||
+			prevProps.refresh !== this.props.refresh
+		) {
+			this.setState({ fetching: true }, () => {
+				this.fetchBalance();
+			});
+		}
+	}
+
+	fetchBalance = () => {
+		const { address } = this.props;
+		this.setState({ fetching: true }, async () => {
+			try {
+				client
+					.query({
+						query: gql(`{
+					  owners (where: {owner: "${address}"}) {
+						  id
+					  }
+				  }`),
+					})
+					.then((data) => {
+						this.setState({
+							fetching: false,
+							cabones: data.data.owners,
+						});
+					})
+					.catch((err) => {
+						console.log("Error fetching data: ", err);
+					});
+			} catch (err) {
+				console.log(err);
+			}
+		});
+	};
+
+	select = (cabone) => {
+		const { selected, amount } = this.state;
+		if (selected.includes(cabone)) {
+			let family = getFamily(cabone) - 1;
+			amount[family] -= 1;
+			let filtered = selected.filter(function (value, index, arr) {
+				return cabone !== value;
+			});
+			this.setState({ selected: filtered });
+		} else {
+			let family = getFamily(cabone) - 1;
+			amount[family] += 1;
+			selected.push(cabone);
+			this.setState({ selected, amount });
+		}
+	};
+
+	handleClaim = async () => {
+		const { selected, amount, cabones } = this.state;
+		const { signer } = this.props;
+		if (cabones.length === 0) {
+			notification["error"]({
+				message: "You don't own any AlCabone to claim your Halloween Drop",
+			});
+			this.setState({ purchasing: false });
+		} else if (selected.length === 0) {
+			notification["error"]({
+				message: "Please select your AlCabones to mint your Halloween Edition NFT",
+			});
+			this.setState({ purchasing: false });
+		} else {
+			this.setState({ status: "initializing", visible: true }, async () => {
+				try {
+					const contract = new ethers.Contract(DROP_ADDRESS, DROP_ABI, signer);
+					let newAmount = [];
+					let newFamily = [];
+					for (let i = 0; i < amount.length; i++) {
+						if (amount[i] > 0) {
+							newAmount.push(amount[i]);
+							newFamily.push(i + 1);
+						}
+					}
+					contract
+						.mint(selected, newFamily, newAmount)
+						.then((tx) => {
+							this.setState({ status: "waiting", hash: tx.hash });
+							this.fetchBalance();
+							tx.wait(2).then((res) => {
+								this.setState({ status: "success" });
+							});
+						})
+						.catch((err) => {
+							this.setState({ visible: false, purchasing: false });
+							notification["error"]({
+								message: err.message,
+							});
+						});
+				} catch (e) {
+					this.setState({ visible: false, purchasing: false });
+					notification["error"]({
+						message: e.message,
+					});
+				}
+			});
+		}
+	};
+
+	close = () => {
+		this.setState({ visible: false, hash: "", status: "" });
+	};
+
+	render() {
+		const { cabones, fetching, selected, status, hash, visible } = this.state;
+		return (
+			<div className="purchase-form-container">
+				<div className="purchase-form-wrapper">
+					<div className="heading">Claim Your Special Halloween Collection</div>
+					<p style={{ width: "60%", marginTop: "-1rem" }}>
+						You can claim the tokens of your choice. The Claim will run for 7-Days. So there is no
+						rush in claiming your tokens.
+					</p>
+					<div>
+						{fetching ? (
+							<div style={{ paddingTop: "1rem" }}>
+								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
+								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
+								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
+								<Skeleton.Button size="large" style={{ marginRight: "1rem" }} />
+							</div>
+						) : (
+							<div className="cabone-select">
+								{cabones !== null &&
+									cabones.map((bone) => {
+										return <CaboneCard bone={bone} selected={selected} select={this.select} />;
+									})}
+							</div>
+						)}
+					</div>
+					<button onClick={() => this.handleClaim()} style={{ marginTop: "2rem" }}>
+						{status === "initializing" || status === "waiting" || status === "success" ? (
+							<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
+						) : (
+							"Claim Now"
+						)}
+					</button>
+				</div>
+				<ConfirmModal status={status} hash={hash} visible={visible} close={this.close} />
+			</div>
+		);
+	}
+}
 
 export default PurchaseForm;

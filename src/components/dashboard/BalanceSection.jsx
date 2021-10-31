@@ -1,7 +1,25 @@
 import React from "react";
 import { CircularProgress } from "@material-ui/core";
 import { IoMdRefresh } from "react-icons/io";
-import { getBollyBalance } from "../../utils/contractHelpers";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+
+const APIURL = "https://api.thegraph.com/subgraphs/name/sujithsomraaj/alcabones";
+const defaultOptions = {
+	watchQuery: {
+		fetchPolicy: "no-cache",
+		errorPolicy: "ignore",
+	},
+	query: {
+		fetchPolicy: "no-cache",
+		errorPolicy: "all",
+	},
+};
+
+const client = new ApolloClient({
+	uri: APIURL,
+	cache: new InMemoryCache(),
+	defaultOptions: defaultOptions,
+});
 
 export default class BalanceSection extends React.Component {
 	constructor(props) {
@@ -10,14 +28,15 @@ export default class BalanceSection extends React.Component {
 			bollyBalance: 0.0,
 			fetchingBollyBalance: false,
 			walletConnected: false,
+			cabones: null,
 		};
-		this.fetchBollyBalance = this.fetchBollyBalance.bind(this);
+		this.fetchBalance = this.fetchBalance.bind(this);
 	}
 
 	componentDidMount() {
 		const { walletConnected } = this.props;
 		if (walletConnected) {
-			this.fetchBollyBalance();
+			this.fetchBalance();
 			this.setState({
 				walletConnected: walletConnected,
 			});
@@ -29,37 +48,47 @@ export default class BalanceSection extends React.Component {
 			prevProps.walletConnected !== this.props.walletConnected ||
 			prevProps.refresh !== this.props.refresh
 		) {
-			this.setState({ bollyBalance: 0.0 }, () => {
-				this.fetchBollyBalance();
+			this.setState({ bollyBalance: 0 }, () => {
+				this.fetchBalance();
 			});
 		}
 	}
 
-	fetchBollyBalance = () => {
+	fetchBalance = () => {
 		const { address } = this.props;
 		this.setState({ fetchingBollyBalance: true }, async () => {
 			try {
-				const { currentChain } = this.props;
-				const data = await getBollyBalance(address, currentChain);
-				this.setState({
-					bollyBalance: data.balance,
-					fetchingBollyBalance: false,
-				});
+				client
+					.query({
+						query: gql(`{
+					  owners (where: {owner: "${address}"}) {
+						  id
+					  }
+				  }`),
+					})
+					.then((data) => {
+						this.setState({
+							bollyBalance: data.data.owners.length,
+							fetchingBollyBalance: false,
+							cabones: data.data.owners,
+						});
+					})
+					.catch((err) => {
+						console.log("Error fetching data: ", err);
+					});
 			} catch (err) {
-				this.setState({ fetchingBollyBalance: false }, () => {
-					console.log(err);
-				});
+				console.log(err);
 			}
 		});
 	};
 
 	render() {
-		const { walletConnected, price } = this.props;
-		const { fetchingBollyBalance, bollyBalance } = this.state;
+		const { walletConnected } = this.props;
+		const { fetchingBollyBalance, bollyBalance, cabones } = this.state;
 		return (
 			<div className="purchase-section-header">
 				<div className="heading">
-					BollyCoin Balance{" "}
+					Al Cabones Balance{" "}
 					{fetchingBollyBalance ? (
 						<CircularProgress size={15} thickness={6} style={{ color: "#000" }} />
 					) : (
@@ -72,7 +101,7 @@ export default class BalanceSection extends React.Component {
 									position: "relative",
 									top: "2px",
 								}}
-								onClick={() => this.fetchBollyBalance()}
+								onClick={() => this.fetchBalance()}
 							/>
 						)
 					)}
@@ -80,19 +109,26 @@ export default class BalanceSection extends React.Component {
 				<div className="balance-section">
 					<div>
 						<p>
-							{walletConnected
-								? parseFloat(bollyBalance) > 0
-									? parseFloat(bollyBalance).toFixed(2)
-									: "0.00"
-								: "0.00"}{" "}
-							<span>BOLLY</span>
+							{walletConnected ? (parseInt(bollyBalance) > 0 ? parseInt(bollyBalance) : "0") : "0"}{" "}
 						</p>
-						{/* <span>* Whitelist to purchase</span> */}
+						{cabones !== null && (
+							<spam>
+								Token IDs:{" "}
+								{cabones !== null &&
+									cabones.map((bone) => {
+										return (
+											<span>
+												#{parseInt(bone.id, 16)} {", "}
+											</span>
+										);
+									})}
+							</spam>
+						)}
 					</div>
 					<div>
-						{walletConnected && parseFloat(price) > 0
-							? `Eq. Value: $ ${(parseFloat(price) * parseFloat(bollyBalance)).toFixed(3)}`
-							: `Eq. Value: $ 0.000`}
+						{walletConnected && parseFloat("0.02") > 0
+							? `Floor Value ~ ${(parseFloat("0.02") * parseFloat(bollyBalance)).toFixed(3)} ETH`
+							: `Floor Value ~ 0.000`}
 					</div>
 				</div>
 			</div>

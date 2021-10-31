@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { GoPrimitiveDot } from "react-icons/go";
-import Logo from "../../../assets/images/logo-pink.svg";
+import Logo from "../../../assets/images/Logo(AC).png";
 import { MenuItem, Select } from "@material-ui/core";
-import { ETH, POLYGON } from "../../../utils/icons";
+import { ETH } from "../../../utils/icons";
 import "./Navbar.css";
 
 export default class Navbar extends Component {
@@ -28,10 +28,6 @@ export default class Navbar extends Component {
 							onNetworkUpdate(e.target.value);
 						}}
 					>
-						<MenuItem value="POLYGON">
-							<img className="dropdown-icon" src={POLYGON} alt="polygon" />
-							POLYGON
-						</MenuItem>
 						<MenuItem value="ETH">
 							<img className="dropdown-icon" src={ETH} alt="weth" />
 							ETH

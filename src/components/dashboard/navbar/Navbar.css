@@ -11,7 +11,8 @@
 }
 
 .logo {
-	width: 173.13px;
+	width: 250px;
+	padding-top: 1rem;
 	height: 64px;
 	transition: 0.3s all ease;
 }

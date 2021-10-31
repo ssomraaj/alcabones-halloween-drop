@@ -72,7 +72,7 @@ export default class ConnectModal extends React.PureComponent {
 				) : !connecting ? (
 					<div className="modal-container">
 						<h3>Connect Wallet</h3>
-						<p style={{ textAlign: "center" }}>To start using BollyCoin</p>
+						<p style={{ textAlign: "center" }}>To start using AlCabones</p>
 						<div className="connect-container">
 							<div
 								role="button"

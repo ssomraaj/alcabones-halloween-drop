@@ -9,12 +9,7 @@ import { SuspenseWithChunkError } from "../components";
 import { AppLoader } from "../components/loaders";
 import { ConnectModal } from "../components/modals";
 
-// const Login = lazy(() => import("../pages/login/Login"));
-const ComingSoon = lazy(() => import("../pages/coming-soon/ComingSoon"));
 const Home = lazy(() => import("../pages/dashboard/home/Home"));
-const ContactUs = lazy(() => import("../pages/contact/ContactUs"));
-// const APILogin = lazy(() => import("../pages/api-login/Login"));
-// const LoginWithToken = lazy(() => import("../pages/api-login/LoginWithToken"));
 
 const walletLink = new WalletLink({
 	appName: "Bollycoin",
@@ -318,10 +313,9 @@ class Routes extends Component {
 		return (
 			<SuspenseWithChunkError fallback={<AppLoader />}>
 				<Switch>
-					<Route exact path="/" component={ComingSoon} />
 					<Route
 						exact
-						path="/buy-bollycoin"
+						path="/"
 						render={(props) => (
 							<Home
 								walletConnected={connected}
@@ -337,8 +331,6 @@ class Routes extends Component {
 							/>
 						)}
 					/>
-					<Route exact path="/contact-us" component={ContactUs} />
-					<Route exact path="/coming-soon" component={ComingSoon} />
 				</Switch>
 				<ConnectModal
 					modal={modal}
