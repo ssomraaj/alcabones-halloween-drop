@@ -129,6 +129,24 @@ class PurchaseForm extends React.Component {
 							newFamily.push(i + 1);
 						}
 					}
+					if (newFamily.length !== selected.length) {
+						newAmount.push(0);
+						if (!newFamily.includes(1)) {
+							newFamily.push(1);
+						} else if (!newFamily.includes(2)) {
+							newFamily.push(2);
+						} else if (!newFamily.includes(3)) {
+							newFamily.push(3);
+						} else if (!newFamily.includes(4)) {
+							newFamily.push(4);
+						} else if (!newFamily.includes(5)) {
+							newFamily.push(5);
+						} else if (!newFamily.includes(6)) {
+							newFamily.push(6);
+						} else if (!newFamily.includes(7)) {
+							newFamily.push(7);
+						}
+					}
 					contract
 						.mint(selected, newFamily, newAmount)
 						.then((tx) => {
