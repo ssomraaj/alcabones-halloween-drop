@@ -117,15 +117,14 @@ class PurchaseForm extends React.Component {
 				message: "Please select your AlCabones to mint your Halloween Edition NFT",
 			});
 			this.setState({ purchasing: false });
+		} else if (selected.length > 7) {
+			notification["error"]({
+				message: "You can claim a maximum of 7 alcabones per transaction for safe gas limit.",
+			});
 		} else {
 			this.setState({ status: "initializing", visible: true }, async () => {
 				try {
 					const contract = new ethers.Contract(DROP_ADDRESS, DROP_ABI, signer);
-					// 10 tokens
-					// [1,2,3,4,5,6,7,8,9,10]
-					// [10]
-					// [1]
-					// [10]
 					let newAmount = [];
 					let newFamily = [];
 					for (let i = 0; i < amount.length; i++) {
