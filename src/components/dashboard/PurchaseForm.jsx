@@ -121,6 +121,11 @@ class PurchaseForm extends React.Component {
 			this.setState({ status: "initializing", visible: true }, async () => {
 				try {
 					const contract = new ethers.Contract(DROP_ADDRESS, DROP_ABI, signer);
+					// 10 tokens
+					// [1,2,3,4,5,6,7,8,9,10]
+					// [10]
+					// [1]
+					// [10]
 					let newAmount = [];
 					let newFamily = [];
 					for (let i = 0; i < amount.length; i++) {
@@ -130,7 +135,7 @@ class PurchaseForm extends React.Component {
 						}
 					}
 					for (let j = 0; j < 7; j++) {
-						if (newFamily.length !== selected.length) {
+						if (newFamily.length !== selected.length && newFamily.length < 7) {
 							newAmount.push(0);
 							if (!newFamily.includes(1)) {
 								newFamily.push(1);
