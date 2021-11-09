@@ -230,12 +230,15 @@ class PurchaseForm extends React.Component {
 							</div>
 						)}
 					</div>
-					<button onClick={() => this.handleClaim()} style={{ marginTop: "2rem" }}>
+					{/* <button onClick={() => this.handleClaim()} style={{ marginTop: "2rem" }}>
 						{status === "initializing" || status === "waiting" || status === "success" ? (
 							<CircularProgress size={15} style={{ color: "#FFF", margin: "0 5rem" }} />
 						) : (
 							"Claim Now"
 						)}
+					</button> */}
+					<button disabled style={{ marginTop: "2rem" }}>
+						Claim Ended
 					</button>
 				</div>
 				<ConfirmModal status={status} hash={hash} visible={visible} close={this.close} />
